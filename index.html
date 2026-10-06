@@ -1296,6 +1296,8 @@ section.blk{padding-block:clamp(64px,9vw,120px)}
 .perso-list code{color:var(--brand)}
 .perso-list b{color:var(--ink)}
 .perso-list p{color:var(--ink-2)}
+
+.central-list a{padding-block:30px}
 </style>
 </head>
 <body>
@@ -2477,16 +2479,18 @@ $('#c-rolesel').onchange=e=>setRole(e.target.value);
 })();
 
 
-/* parcours personnalisé : déclenche l'animation à l'entrée dans l'écran */
-(function(){
+/* parcours personnalisé : déclenche l'animation à l'entrée dans l'écran (à chaque affichage de la home) */
+function armPerso(){
  const sec=document.getElementById('parcours-personnalise');
  if(!sec||!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
- if(sec.getBoundingClientRect().top<innerHeight*0.8)return;
- sec.classList.add('anim');
- const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){sec.classList.add('go');io.disconnect()}},{threshold:.3});
+ if(armPerso.io)armPerso.io.disconnect();
+ const r=sec.getBoundingClientRect();
+ if(r.height===0||r.top<innerHeight*0.8){sec.classList.remove('anim');return}
+ sec.classList.remove('go');sec.classList.add('anim');
+ const io=armPerso.io=new IntersectionObserver(es=>{if(es[0].isIntersecting){sec.classList.add('go');io.disconnect()}},{threshold:.3});
  io.observe(sec);
- setTimeout(()=>{if(!sec.classList.contains('go')&&sec.getBoundingClientRect().top<innerHeight)sec.classList.add('go')},4000);
-})();
+}
+addEventListener('hashchange',()=>setTimeout(armPerso,80));
 
 
 /* produits : apparition au défilement */
@@ -2538,14 +2542,14 @@ $('#c-rolesel').onchange=e=>setRole(e.target.value);
 (function(){
  const ul=$('.central-list');if(!ul||!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
  ul.classList.add('anim');
- const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -18% 0px'});
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -42% 0px'});
  [...ul.children].forEach(li=>io.observe(li));
- setTimeout(()=>[...ul.children].forEach(li=>{if(li.getBoundingClientRect().top<innerHeight)li.classList.add('in')}),4000);
+ setTimeout(()=>[...ul.children].forEach(li=>{if(li.getBoundingClientRect().top<innerHeight*0.6)li.classList.add('in')}),6000);
 })();
 
 /* boot */
 setRole(role,true);
-route();hdrTone();
+route();hdrTone();setTimeout(armPerso,80);
 })();
 </script>
 
