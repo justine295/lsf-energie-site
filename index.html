@@ -1268,6 +1268,15 @@ section.blk{padding-block:clamp(64px,9vw,120px)}
 .p2-step p{color:var(--on-deep-2);font-size:18px;max-width:40ch}
 @media (max-width:900px){.p2-grid{grid-template-columns:1fr}.p2-stick{position:static}.p2-prog{display:none}.p2-step{min-height:0;opacity:1;transform:none;padding-block:28px}}
 @media (prefers-reduced-motion:reduce){.p2-step{opacity:1;transform:none;transition:none}}
+
+/* acteur central : parcours, apparition une à une */
+.central-list a{grid-template-columns:128px 1fr auto}
+.central-list .cl-go{grid-area:i;font-style:normal;font:600 13px var(--sans);color:var(--brand);white-space:nowrap;align-self:center;transition:transform .2s var(--ease)}
+.central-list a:hover .cl-go{transform:translateX(4px)}
+.central-list.anim li{opacity:0;transform:translateY(28px)}
+.central-list.anim li.in{opacity:1;transform:none;transition:opacity .6s var(--ease),transform .6s var(--ease)}
+@media (max-width:560px){.central-list a{grid-template-columns:1fr auto}.central-list .cl-go{font-size:0}.central-list .cl-go::after{content:"→";font-size:16px}}
+@media (prefers-reduced-motion:reduce){.central-list.anim li{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -1364,11 +1373,11 @@ section.blk{padding-block:clamp(64px,9vw,120px)}
     <div class="wrap central">
       <div class="central-h">
         <span class="eyebrow">L'acteur central des CEE</span>
-        <h2>Huit métiers. <em>Une preuve pour chacun.</em></h2>
-        <p class="lead">Fabricants, bureaux d'études, obligés, bénéficiaires privés ou publics : chacun vient avec son besoin. LSF Énergie répond avec un chiffre, pas avec une promesse.</p>
+        <h2>Un parcours sur mesure. <em>Pour chaque interlocuteur.</em></h2>
+        <p class="lead">Artisan, bailleur, industriel, obligé… chacun a son parcours, ses outils et son ingénieur d'affaires dédié. Voici ce que nous apportons à chacun.</p>
         <a class="btn btn-cta" href="#contact" style="justify-self:start">Parler à un ingénieur <span class="arr">→</span></a>
       </div>
-      <ul class="central-list"><li><a href="#artisans-rge"><em class="pf">J+5</em><span class="pn"><code>RGE</code><b>Artisans et réseaux RGE</b></span><span class="pt">Votre prime versée 5 jours après validation, pas 90. Le dossier se monte en 12 clics.</span><i aria-hidden="true">→</i></a></li><li><a href="#bailleurs-coproprietes"><em class="pf">Avant le vote</em><span class="pn"><code>BAI</code><b>Bailleurs et copropriétés</b></span><span class="pt">Le montant CEE figure dans les devis présentés en AG ou en comité. Aucune surprise après.</span><i aria-hidden="true">→</i></a></li><li><a href="#tertiaire"><em class="pf">48 h</em><span class="pn"><code>TER</code><b>Tertiaire privé et public</b></span><span class="pt">Une étude d'éligibilité chiffrée, bâtiment par bâtiment, fiche par fiche.</span><i aria-hidden="true">→</i></a></li><li><a href="#industriels"><em class="pf">Fiche par fiche</em><span class="pn"><code>IND</code><b>Industriels</b></span><span class="pt">Nos ingénieurs vérifient puissances, usages et mesures exigés. Les CEE entrent dans votre calcul de ROI.</span><i aria-hidden="true">→</i></a></li><li><a href="#transport"><em class="pf">Fiches TRA</em><span class="pn"><code>TRA</code><b>Transport et logistique</b></span><span class="pt">Conduite économe, équipements des véhicules : les opérations finançables repérées pour votre flotte.</span><i aria-hidden="true">→</i></a></li><li><a href="#fabricants"><em class="pf">0 facture à refaire</em><span class="pn"><code>FAB</code><b>Fabricants de matériel</b></span><span class="pt">Vos références et performances intégrées à Pipeline : vos installateurs facturent avec les bonnes mentions.</span><i aria-hidden="true">→</i></a></li><li><a href="#bureaux-etudes"><em class="pf">48 h</em><span class="pn"><code>BET</code><b>Bureaux d'études et auditeurs</b></span><span class="pt">Une étude d'éligibilité à votre nom. Votre client voit son reste à charge réel.</span><i aria-hidden="true">→</i></a></li><li><a href="#obliges"><em class="pf">300+</em><span class="pn"><code>OBL</code><b>Obligés</b></span><span class="pt">Points contrôlés par IA sur chaque dossier, puis une relecture d'ingénieur. Des volumes défendables devant le PNCEE.</span><i aria-hidden="true">→</i></a></li></ul>
+      <ul class="central-list"><li><a href="#artisans-rge"><em class="pf">J+5</em><span class="pn"><code>RGE</code><b>Artisans et réseaux RGE</b></span><span class="pt">Votre prime versée 5 jours après validation, pas 90. Le dossier se monte en 12 clics.</span><i class="cl-go">Votre parcours →</i></a></li><li><a href="#bailleurs-coproprietes"><em class="pf">Avant le vote</em><span class="pn"><code>BAI</code><b>Bailleurs et copropriétés</b></span><span class="pt">Le montant CEE figure dans les devis présentés en AG ou en comité. Aucune surprise après.</span><i class="cl-go">Votre parcours →</i></a></li><li><a href="#tertiaire"><em class="pf">48 h</em><span class="pn"><code>TER</code><b>Tertiaire privé et public</b></span><span class="pt">Une étude d'éligibilité chiffrée, bâtiment par bâtiment, fiche par fiche.</span><i class="cl-go">Votre parcours →</i></a></li><li><a href="#industriels"><em class="pf">Fiche par fiche</em><span class="pn"><code>IND</code><b>Industriels</b></span><span class="pt">Nos ingénieurs vérifient puissances, usages et mesures exigés. Les CEE entrent dans votre calcul de ROI.</span><i class="cl-go">Votre parcours →</i></a></li><li><a href="#transport"><em class="pf">Fiches TRA</em><span class="pn"><code>TRA</code><b>Transport et logistique</b></span><span class="pt">Conduite économe, équipements des véhicules : les opérations finançables repérées pour votre flotte.</span><i class="cl-go">Votre parcours →</i></a></li><li><a href="#fabricants"><em class="pf">0 facture à refaire</em><span class="pn"><code>FAB</code><b>Fabricants de matériel</b></span><span class="pt">Vos références et performances intégrées à Pipeline : vos installateurs facturent avec les bonnes mentions.</span><i class="cl-go">Votre parcours →</i></a></li><li><a href="#bureaux-etudes"><em class="pf">48 h</em><span class="pn"><code>BET</code><b>Bureaux d'études et auditeurs</b></span><span class="pt">Une étude d'éligibilité à votre nom. Votre client voit son reste à charge réel.</span><i class="cl-go">Votre parcours →</i></a></li><li><a href="#obliges"><em class="pf">300+</em><span class="pn"><code>OBL</code><b>Obligés</b></span><span class="pt">Points contrôlés par IA sur chaque dossier, puis une relecture d'ingénieur. Des volumes défendables devant le PNCEE.</span><i class="cl-go">Votre parcours →</i></a></li></ul>
     </div>
   </section>
 
@@ -2517,6 +2526,16 @@ $('#c-rolesel').onchange=e=>setRole(e.target.value);
  const req=()=>{if(!tick){tick=true;requestAnimationFrame(upd)}};
  addEventListener('scroll',req,{passive:true});addEventListener('resize',req);addEventListener('hashchange',()=>setTimeout(req,120));
  setTimeout(req,200);
+})();
+
+
+/* acteur central : les métiers apparaissent un à un au défilement */
+(function(){
+ const ul=$('.central-list');if(!ul||!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ ul.classList.add('anim');
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -18% 0px'});
+ [...ul.children].forEach(li=>io.observe(li));
+ setTimeout(()=>[...ul.children].forEach(li=>{if(li.getBoundingClientRect().top<innerHeight)li.classList.add('in')}),4000);
 })();
 
 /* boot */
