@@ -1322,7 +1322,7 @@ section.blk{padding-block:clamp(64px,9vw,120px)}
   <section class="cmd" id="top">
     <canvas id="flux" aria-hidden="true"></canvas>
     <div class="wrap">
-      <div class="meta-row"><span id="hero-crumb">Mandataire CEE · bureau d'ingénierie · <b>+1 000 pros</b> · partout en France</span><span>Des CEE qui tiennent <b>au contrôle</b></span></div>
+      <div class="meta-row"><span id="hero-crumb">Financement de la rénovation énergétique · <b>+1 000 pros</b> · partout en France</span><span>Des CEE qui tiennent <b>au contrôle</b></span></div>
       <h1 class="say" aria-live="polite">
         <span class="fixed">Je suis</span>
         <span class="pick"><button id="pk-role" aria-haspopup="listbox" aria-expanded="false"><span class="v"></span></button><div class="menu" id="mn-role" role="listbox" hidden></div></span>
@@ -1330,7 +1330,7 @@ section.blk{padding-block:clamp(64px,9vw,120px)}
         <span class="pick"><button id="pk-goal" aria-haspopup="listbox" aria-expanded="false"><span class="v"></span></button><div class="menu" id="mn-goal" role="listbox" hidden></div></span></span>
       </h1>
       <div class="home-sub" id="home-sub" hidden>
-        <p><b>+1 000 professionnels</b> nous confient leurs dossiers CEE. <b>300+</b> points de contrôle automatisés par IA, <b>100 %</b> des dossiers relus par un ingénieur, prime versée à <b>J+5</b>. Dites-nous qui vous êtes.</p>
+        <p><b>LSF Énergie finance la rénovation énergétique</b> grâce aux CEE, pour chaque acteur du chantier : artisans, obligés, bureaux d'études, fabricants, bailleurs, entreprises, industriels, transporteurs. <b>+1 000 professionnels</b> nous font déjà confiance. Dites-nous qui vous êtes.</p>
         <div class="row"><a class="btn btn-cta" id="home-go" href="#artisans-rge">Voir ma solution <span class="arr">→</span></a><a class="btn btn-ghost" href="#acteur-central" id="eco-link">Les preuves</a></div>
       </div>
       <div class="answer" id="answer"></div>
@@ -2392,7 +2392,7 @@ function route(){
  curView=view;
  const heroEl=document.getElementById('top');
  if(view==='solution'){$('#sol-hero-slot').appendChild(heroEl);renderSolution(h);if(role!==SOLKEY[h])setRole(SOLKEY[h]);else renderAnswer();$('#scrollhint').hidden=true}
- else if(view==='accueil'){$('#home-hero-slot').appendChild(heroEl);$('#hero-crumb').innerHTML="Mandataire CEE · bureau d'ingénierie · <b>+1 000 pros</b> · partout en France";renderAnswer();$('#scrollhint').hidden=false}
+ else if(view==='accueil'){$('#home-hero-slot').appendChild(heroEl);$('#hero-crumb').innerHTML="Financement de la rénovation énergétique · <b>+1 000 pros</b> · partout en France";renderAnswer();$('#scrollhint').hidden=false}
  $$('.view').forEach(v=>v.hidden=v.dataset.view!==view);
  $$('[data-page]').forEach(a=>{a.dataset.page===h?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current')});
  closeDD();$$('.dd-btn')[0].classList.toggle('cur',view==='solution');$$('.dd-btn')[1].classList.toggle('cur',view==='fiches'||view==='fiche'||view==='journal'||view==='article');
