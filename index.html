@@ -1282,6 +1282,20 @@ section.blk{padding-block:clamp(64px,9vw,120px)}
 .tb-track{padding-block:6px}
 .tb-track li{width:140px;height:60px;display:flex;align-items:center;justify-content:center}
 .tb-track img{width:auto;height:auto;max-width:120px;max-height:44px;object-fit:contain}
+
+/* "1 interlocuteur" sur fond clair pour rompre avec le bandeau pétrole précédent */
+.perso{background:var(--bg);color:var(--ink);border-top:1px solid var(--line)}
+.perso::before{background-image:linear-gradient(rgba(18,59,58,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(18,59,58,.05) 1px,transparent 1px)}
+.perso .eyebrow{color:var(--brand)}
+.perso-one b{color:var(--brand)}
+.perso-one span{color:var(--ink)}
+.perso-copy h2{color:var(--ink)}
+.perso-copy h2 em{color:var(--brand)}
+.perso-list{border-top-color:var(--ink)}
+.perso-list li::after{background:var(--line-2)}
+.perso-list code{color:var(--brand)}
+.perso-list b{color:var(--ink)}
+.perso-list p{color:var(--ink-2)}
 </style>
 </head>
 <body>
