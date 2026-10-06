@@ -2290,6 +2290,20 @@ const FAQ_COMMON=[
  ["Combien ça coûte ?","<b class=\"faq-big\">0 abonnement. 0 engagement.</b>Vous démarrez sur un premier dossier, accompagné par votre ingénieur d'affaires. Vous continuez si le résultat vous convient."],
  ["Qui sera mon interlocuteur ?","Un ingénieur d'affaires dédié, du premier appel au versement de la prime. Il connaît votre activité et suit chacun de vos dossiers."],
  ["Comment suivre mes dossiers ?","Dans votre dashboard de suivi : statut de chaque dossier, pièces, interlocuteur, en temps réel jusqu'au versement."]];
+const FLOW={
+ obl:{eb:"Comment ça se passe",h:"4 étapes. <em>Des volumes défendables.</em>",lead:"On commence par un lot témoin à auditer. Vous jugez la qualité avant de vous engager.",tags:["Cadrage","Lot témoin","Livraison","Dashboard"],steps:[["Cadrage de vos besoins","Volumes, secteurs, calendrier de dépôt : votre ingénieur d'affaires dédié construit le plan avec vous."],["Un lot témoin à auditer","Un échantillon de dossiers, contrôlés par IA et relus par un ingénieur. Vous auditez avant tout engagement."],["Livraison continue","Les dossiers et les volumes arrivent au fil de l'eau, documentés pour le contrôle du PNCEE."],["Dashboard de suivi","GWh cumac, conformité par secteur et par installateur, en temps réel."]],cta2:["Voir nos produits","#produits"]},
+ pre:{eb:"Comment ça se passe",h:"4 étapes. <em>Votre projet financé.</em>",lead:"Vous envoyez le projet, nous revenons sous 48 h avec les fiches et le montant. À votre nom.",tags:["Envoi","48 h","Intégration","Suivi"],steps:[["Envoyez le projet","Plans, CCTP, gammes ou simple descriptif : votre ingénieur d'affaires dédié prend le relais."],["Étude d'éligibilité sous 48 h","Fiche par fiche : conditions techniques et montant CEE estimé."],["Le financement dans votre offre","Vous intégrez le montant à votre étude ou à votre argumentaire. Votre client voit son vrai reste à charge."],["Suivi jusqu'au versement","Chaque projet suivi dans votre dashboard, dossier monté dans Pipeline et relu par un ingénieur."]],cta2:["Voir nos produits","#produits"]},
+ ben:{eb:"Comment ça se passe",h:"4 étapes. <em>Vos travaux financés.</em>",lead:"Vous connaissez le montant CEE avant de signer. Puis on suit tout jusqu'au versement.",tags:["Votre projet","48 h","Avant signature","Versement"],steps:[["Présentez votre projet","Bâtiments, travaux envisagés : votre ingénieur d'affaires dédié vous rappelle."],["Étude chiffrée sous 48 h","Les fiches qui s'appliquent et le montant CEE estimé, avant toute décision."],["L'offre CEE avant la signature","Des installateurs RGE du réseau, l'offre CEE remise avant votre engagement : la condition pour que la prime soit versée."],["Versement suivi en temps réel","Chaque dossier dans votre dashboard, contrôlé par IA et relu par un ingénieur, jusqu'au versement."]],cta2:["Voir nos produits","#produits"]}
+};
+function flowHTML(f){return `<section class="partner2" id="devenir-partenaire"><div class="wrap p2-grid">
+ <div class="p2-left"><div class="p2-stick">
+  <span class="eyebrow">${f.eb}</span><h2>${f.h}</h2><p class="p2-lead">${f.lead}</p>
+  <div class="p2-prog" aria-hidden="true"><b id="p2-cur">01</b><span>/ 04</span><div class="p2-bar"><i id="p2-bar"></i></div></div>
+  <p class="p2-zero">0 abonnement · 0 engagement</p>
+  <div class="p-cta-b"><a class="btn btn-cta" href="#contact">Parler à un ingénieur <span class="arr">→</span></a><a class="btn btn-ghost" href="${f.cta2[1]}">${f.cta2[0]}</a></div>
+ </div></div>
+ <ol class="p2-steps">${f.steps.map((x,k)=>`<li class="p2-step" data-i="${k}"><span class="p2-n">0${k+1}</span><span class="p2-t">${f.tags[k]}</span><h3>${x[0]}</h3><p>${x[1]}</p></li>`).join('')}</ol>
+</div></section>`}
 const FSTEPS={
  ben:[["Votre projet","Bâtiments et travaux envisagés."],["Étude sous 48 h","Fiches applicables et montant estimé."],["Mise en relation","Installateurs RGE du réseau, offre CEE avant signature."],["Versement","Suivi en temps réel dans votre dashboard, jusqu'au versement."]],
  pre:[["Envoi du projet","Plans, CCTP, gammes ou descriptif."],["Étude sous 48 h","Fiches, conditions, montant estimé."],["Intégration","Le financement entre dans votre offre ou votre étude."],["Suivi","Chaque projet suivi dans votre dashboard, jusqu'au versement."]],
@@ -2305,8 +2319,7 @@ function renderSolution(page){
  <div class="pb-grid">${p.pains.map(x=>`<div class="pb"><span class="pb-l">Avant</span><s class="pb-was">${x[0]}</s><b class="pb-now">${x[1]}</b><p>${x[2]}</p></div>`).join('')}</div></div></section>
  <section class="qstrip"><div class="wrap"><span class="qs-b"><b>300+</b> points contrôlés par IA</span><span class="qs-plus">+</span><span class="qs-b"><b>100 %</b> relus par un ingénieur</span><span class="qs-plus">+</span><span class="qs-b"><b>1</b> interlocuteur dédié</span><span class="qs-plus">+</span><span class="qs-b"><b>1</b> dashboard de suivi en temps réel</span><span class="qs-t">Un parcours construit pour votre métier. Des ingénieurs formés à chaque nouvel arrêté.</span></div></section>
  ${FEX[k]?fexHTML(k):subs}
-${k==='rge'?PIPEBAND+PARTNER:`<section class="blk deep steps4" id="steps4"><div class="wrap"><div class="pb-head"><span class="eyebrow">Comment ça se passe</span><h2>4 étapes. <em>1 interlocuteur.</em></h2></div>
- <ol class="s4">${(p.steps||FSTEPS[p.fam]).map((s,i)=>`<li style="--i:${i}"><span class="s4-n">0${i+1}</span><b>${s[0]}</b><p>${s[1]}</p></li>`).join('')}</ol></div></section>`}
+${k==='rge'?PIPEBAND+PARTNER:flowHTML(FLOW[p.fam])}
  <section class="blk sol-faq"><div class="wrap sf-grid"><div class="blk-head"><span class="eyebrow">Questions fréquentes</span><h2>Ce qu'on <em>nous demande.</em></h2></div>
  <div class="faq">${FAQ_COMMON.concat(p.faq).map((f,i)=>`<details${i?'':' open'}><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join('')}</div></div></section>
  ${rel.length?`<section class="blk"><div class="wrap"><div class="blk-head"><span class="eyebrow">À lire</span><h2>Dans le Journal.</h2></div><div class="posts">${rel.map(card).join('')}</div></div></section>`:''}
