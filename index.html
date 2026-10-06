@@ -1239,6 +1239,35 @@ section.blk{padding-block:clamp(64px,9vw,120px)}
 .rw-on .rw{opacity:.16}
 .rw-on .rw.lit{opacity:1}
 @media (prefers-reduced-motion:reduce){.rw-on .rw{opacity:1}}
+
+/* devenir partenaire : scrollytelling façon Drapo */
+.partner2{background:#0A2423;color:var(--on-deep);padding-block:clamp(80px,10vw,140px)}
+.p2-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,6vw,96px);align-items:start}
+.p2-left{align-self:stretch}
+.p2-stick{position:sticky;top:calc(var(--hdr-h,73px) + 48px);display:grid;gap:20px}
+.p2-stick .eyebrow{color:var(--sable)}
+.p2-stick h2{font-size:clamp(40px,5.4vw,76px);font-weight:900;letter-spacing:-.055em;line-height:.95}
+.p2-stick h2 em{font-style:normal;color:var(--sable)}
+.p2-lead{color:var(--on-deep-2);font-size:18px;max-width:36ch}
+.p2-prog{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:8px}
+.p2-prog b{font-size:clamp(64px,7vw,104px);font-weight:900;letter-spacing:-.06em;line-height:.85;color:var(--brand);font-variant-numeric:tabular-nums}
+.p2-prog span{font:600 16px var(--mono);color:var(--on-deep-2)}
+.p2-bar{flex-basis:100%;height:3px;background:rgba(240,238,233,.12);border-radius:3px;overflow:hidden}
+.p2-bar i{display:block;height:100%;width:25%;background:var(--brand);transition:width .5s var(--ease)}
+.p2-zero{font:600 13px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--sable)}
+.partner2 .btn-ghost{color:var(--on-deep);box-shadow:inset 0 0 0 1.5px rgba(240,238,233,.3)}
+.p2-steps{list-style:none;margin:0;padding:0}
+.p2-step{min-height:62vh;display:grid;align-content:center;gap:14px;padding-block:32px;border-top:1px solid rgba(240,238,233,.1);opacity:.22;transform:translateX(12px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.p2-step:first-child{border-top:0}
+.p2-step.on{opacity:1;transform:none}
+.p2-step.past{opacity:.4;transform:none}
+.p2-n{font-size:clamp(48px,5vw,72px);font-weight:900;letter-spacing:-.05em;line-height:.9;color:var(--on-deep)}
+.p2-step.on .p2-n{color:var(--sable)}
+.p2-t{font:600 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--brand)}
+.p2-step h3{font-size:clamp(28px,3vw,42px);font-weight:800;letter-spacing:-.04em;line-height:1.05}
+.p2-step p{color:var(--on-deep-2);font-size:18px;max-width:40ch}
+@media (max-width:900px){.p2-grid{grid-template-columns:1fr}.p2-stick{position:static}.p2-prog{display:none}.p2-step{min-height:0;opacity:1;transform:none;padding-block:28px}}
+@media (prefers-reduced-motion:reduce){.p2-step{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
@@ -2249,22 +2278,26 @@ ${k==='rge'?PIPEBAND+PARTNER:`<section class="blk deep steps4" id="steps4"><div 
  ${rel.length?`<section class="blk"><div class="wrap"><div class="blk-head"><span class="eyebrow">À lire</span><h2>Dans le Journal.</h2></div><div class="posts">${rel.map(card).join('')}</div></div></section>`:''}
  <section class="blk deep"><div class="wrap cta-band"><h2>Un dossier en cours ? Faites-le relire.</h2><a class="btn btn-cta" href="#contact">Parler à un ingénieur <span class="arr">→</span></a></div></section>`;
  $('#hero-crumb').innerHTML=`<a href="#accueil">Accueil</a> / Vous êtes / ${p.eb.split(',')[0]}`;
- armSteps();
+ armSteps();armPartner();
 }
+function armPartner(){const sec=document.getElementById('devenir-partenaire');if(!sec)return;const items=[...sec.querySelectorAll('.p2-step')];
+ const set=i=>{items.forEach((x,k)=>{x.classList.toggle('on',k===i);x.classList.toggle('past',k<i)});const c=document.getElementById('p2-cur');if(c)c.textContent='0'+(i+1);const b=document.getElementById('p2-bar');if(b)b.style.width=((i+1)/items.length*100)+'%'};
+ set(0);if(!('IntersectionObserver' in window))return;
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)set(+e.target.dataset.i)}),{rootMargin:'-45% 0px -45% 0px'});items.forEach(x=>io.observe(x))}
 function armSteps(){const sec=document.getElementById('steps4');if(!sec||!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches)return;sec.classList.add('anim');const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){sec.classList.add('go');io.disconnect()}},{threshold:.35});io.observe(sec);setTimeout(()=>{if(sec.getBoundingClientRect().top<innerHeight)sec.classList.add('go')},5000)}
 
 /* ================= devenir partenaire (page installateurs) ================= */
 const LIVE=["Devis","Offre CEE","Signature","Travaux","Facture","Attestation","Relecture ingénieur"];
-const PARTNER=`<section class="blk partner" id="devenir-partenaire"><div class="wrap">
- <div class="blk-head"><span class="eyebrow">Devenir partenaire</span><h2>4 étapes. <em>Payé à J+5.</em></h2><p class="lead">Le premier dossier, on le monte ensemble. Dès le deuxième, vous êtes autonome.</p></div>
- <ol class="psteps">
-  <li><span class="pn">1</span><div><b>Remplissez le formulaire</b><p>Votre ingénieur d'affaires dédié vous rappelle sous 24 h.</p><span class="pt">J0</span></div></li>
-  <li><span class="pn">2</span><div><b>On monte un premier dossier ensemble</b><p>C'est votre formation. Autonome dès le 2e dossier.</p><span class="pt">Dossier 1</span></div></li>
-  <li><span class="pn">3</span><div><b>Simulez et envoyez vos premiers devis</b><p>Prime calculée et engagée dès la signature. Votre client sait ce qu'il paie.</p><span class="pt">Dossier 2</span></div></li>
-  <li class="hl"><span class="pn">4</span><div><b>Paiement express à J+5</b><p>Contrôles automatisés par IA à chaque étape : 300+ points, puis relecture ingénieur. Le dossier arrive complet, la prime part 5 jours après validation.</p><span class="pt">J+5</span></div></li>
- </ol>
-
- <div class="p-cta"><div><b>Prêt à monter votre premier dossier avec nous ?</b><span>0 abonnement · 0 engagement. Votre ingénieur d'affaires dédié vous rappelle sous 24 h.</span></div><div class="p-cta-b"><a class="btn btn-cta" href="#contact">Devenir partenaire <span class="arr">→</span></a><a class="btn btn-ghost" href="https://financer-mes-cee.pipeline.lsf-energie.fr/" target="_blank" rel="noopener">Découvrir Pipeline</a></div></div>
+const PARTNER=`<section class="partner2" id="devenir-partenaire"><div class="wrap p2-grid">
+ <div class="p2-left"><div class="p2-stick">
+  <span class="eyebrow">Devenir partenaire</span>
+  <h2>4 étapes. <em>Payé à J+5.</em></h2>
+  <p class="p2-lead">Le premier dossier, on le monte ensemble. Dès le deuxième, vous êtes autonome.</p>
+  <div class="p2-prog" aria-hidden="true"><b id="p2-cur">01</b><span>/ 04</span><div class="p2-bar"><i id="p2-bar"></i></div></div>
+  <p class="p2-zero">0 abonnement · 0 engagement</p>
+  <div class="p-cta-b"><a class="btn btn-cta" href="#contact">Devenir partenaire <span class="arr">→</span></a><a class="btn btn-ghost" href="https://financer-mes-cee.pipeline.lsf-energie.fr/" target="_blank" rel="noopener">Découvrir Pipeline</a></div>
+ </div></div>
+ <ol class="p2-steps"><li class="p2-step" data-i="0"><span class="p2-n">01</span><span class="p2-t">J0</span><h3>Remplissez le formulaire</h3><p>Votre ingénieur d'affaires dédié vous rappelle sous 24 h. Il prend le temps de comprendre vos chantiers types.</p></li><li class="p2-step" data-i="1"><span class="p2-n">02</span><span class="p2-t">Dossier 1</span><h3>On monte un premier dossier ensemble</h3><p>C'est votre formation, sur un vrai chantier. Dès le deuxième dossier, vous êtes autonome.</p></li><li class="p2-step" data-i="2"><span class="p2-n">03</span><span class="p2-t">Dossier 2</span><h3>Simulez et envoyez vos premiers devis</h3><p>La prime est calculée dans Pipeline et engagée dès la signature. Votre client sait ce qu'il paie.</p></li><li class="p2-step" data-i="3"><span class="p2-n">04</span><span class="p2-t">J+5</span><h3>Paiement express à J+5</h3><p>300+ points contrôlés par IA à chaque étape, puis relecture ingénieur. Le dossier arrive complet, la prime part 5 jours après validation.</p></li></ol>
 </div></section>`;
 
 /* ================= fiche thumbnails (schematic, generated) ================= */
