@@ -1498,7 +1498,7 @@ section.blk{padding-block:clamp(64px,9vw,120px)}
   </section>
 
 
-  <section class="blk deep"><div class="wrap cta-band"><h2>Un dossier en cours ? Faites-le relire par un ingénieur.</h2><a class="btn btn-cta" href="#contact">Parler à un ingénieur <span class="arr">→</span></a></div></section>
+  <section class="blk deep"><div class="wrap cta-band"><h2>Un projet, un dossier, des volumes ? Parlons-en.</h2><a class="btn btn-cta" href="#contact">Parler à un ingénieur <span class="arr">→</span></a></div></section>
 </div>
 
 <!-- ======================= SOLUTION (4 pages, un gabarit) ======================= -->
@@ -2292,7 +2292,7 @@ ${k==='rge'?PIPEBAND+PARTNER:`<section class="blk deep steps4" id="steps4"><div 
  <section class="blk sol-faq"><div class="wrap sf-grid"><div class="blk-head"><span class="eyebrow">Questions fréquentes</span><h2>Ce qu'on <em>nous demande.</em></h2></div>
  <div class="faq">${FAQ_COMMON.concat(p.faq).map((f,i)=>`<details${i?'':' open'}><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join('')}</div></div></section>
  ${rel.length?`<section class="blk"><div class="wrap"><div class="blk-head"><span class="eyebrow">À lire</span><h2>Dans le Journal.</h2></div><div class="posts">${rel.map(card).join('')}</div></div></section>`:''}
- <section class="blk deep"><div class="wrap cta-band"><h2>Un dossier en cours ? Faites-le relire.</h2><a class="btn btn-cta" href="#contact">Parler à un ingénieur <span class="arr">→</span></a></div></section>`;
+ <section class="blk deep"><div class="wrap cta-band"><h2>${({ins:"Un dossier en cours ? Faites-le relire par un ingénieur.",obl:"Des volumes à sécuriser ? Parlons de votre objectif.",pre:"Un projet à financer ? Envoyez-le-nous.",ben:"Des travaux en vue ? Chiffrons vos CEE."})[p.fam]}</h2><a class="btn btn-cta" href="#contact">Parler à un ingénieur <span class="arr">→</span></a></div></section>`;
  $('#hero-crumb').innerHTML=`<a href="#accueil">Accueil</a> / Vous êtes / ${p.eb.split(',')[0]}`;
  armSteps();armPartner();
 }
