@@ -1308,6 +1308,14 @@ section.blk{padding-block:clamp(64px,9vw,120px)}
 .cta-end .btn-cta:hover{background:#0A2423}
 .cta-end .rw-on .rw{opacity:.35}
 .cta-end .rw-on .rw.lit{opacity:1}
+
+/* bandeau de fin : version claire (validée) */
+.cta-end{background:var(--bg);color:var(--ink);border-top:1px solid var(--line)}
+.cta-end::before{background-image:linear-gradient(rgba(18,59,58,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(18,59,58,.05) 1px,transparent 1px)}
+.cta-end h2{color:var(--ink)}
+.cta-end .btn-cta{background:var(--cta);color:#fff}
+.cta-end .btn-cta:hover{background:var(--cta-h)}
+.cta-end .rw-on .rw{opacity:.16}
 </style>
 </head>
 <body>
