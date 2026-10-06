@@ -20,3 +20,12 @@ git add index.html
 git commit -m "Description du changement"
 git push
 ```
+
+## Non indexé
+
+Le site de maquette n'est pas indexé par les moteurs de recherche :
+- balise `<meta name="robots" content="noindex, nofollow">` dans `index.html`
+- `robots.txt` qui interdit l'exploration
+- en-tête `X-Robots-Tag: noindex, nofollow` posé par Cloudflare Pages via `_headers`
+
+À retirer au moment de la mise en production sur lsf-energie.fr.
