@@ -1233,6 +1233,12 @@ section.blk{padding-block:clamp(64px,9vw,120px)}
 .fiche .soon{font-style:normal;color:var(--brand)}
 .aside .box div.f{display:flex;justify-content:space-between;gap:8px;font-size:14px;padding:8px 0;border-top:1px solid var(--line)}
 .aside .box div.f code{font:700 12px var(--mono);color:var(--brand)}
+
+/* titres qui se révèlent mot par mot au défilement */
+.rw{transition:opacity .35s ease,color .35s ease}
+.rw-on .rw{opacity:.16}
+.rw-on .rw.lit{opacity:1}
+@media (prefers-reduced-motion:reduce){.rw-on .rw{opacity:1}}
 </style>
 </head>
 <body>
@@ -2454,6 +2460,30 @@ $('#c-rolesel').onchange=e=>setRole(e.target.value);
  const imgs=$$('.pr-row .pr-shot img');let tick=false;
  function par(){tick=false;if(curView!=='produits')return;const vh=innerHeight;imgs.forEach(im=>{const r=im.parentElement.getBoundingClientRect();if(r.bottom<0||r.top>vh)return;const k=(r.top+r.height/2-vh/2)/vh;im.style.setProperty('--py',(k*-28).toFixed(1)+'px')})}
  addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(par)}},{passive:true});par();
+})();
+
+
+/* titres qui se révèlent mot par mot (style Apple) */
+(function(){
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ const SEL='.view:not([hidden]) :is(.blk-head h2,.qb-head h2,.pb-head h2,.central-h h2,.perso-copy h2,.tb-head h2,.tst-head h2,.cta-band h2,.pr-head h1,.why-sub,.sim-l h2,.pr-info h2)';
+ function split(el){
+  if(el.dataset.rw)return;el.dataset.rw=1;
+  const walk=node=>{[...node.childNodes].forEach(n=>{
+   if(n.nodeType===3){const parts=n.textContent.split(/(\s+)/);const f=document.createDocumentFragment();
+    parts.forEach(t=>{if(!t)return;if(/^\s+$/.test(t))f.appendChild(document.createTextNode(t));else{const sp=document.createElement('span');sp.className='rw';sp.textContent=t;f.appendChild(sp)}});
+    n.replaceWith(f)}
+   else if(n.nodeType===1&&!n.classList.contains('rw'))walk(n)})};
+  walk(el);el.classList.add('rw-on');
+ }
+ let tick=false;
+ function upd(){tick=false;const vh=innerHeight;
+  $$(SEL).forEach(el=>{split(el);const r=el.getBoundingClientRect();if(r.bottom<-50||r.top>vh+50)return;
+   const p=Math.max(0,Math.min(1,(vh*0.9-r.top)/(vh*0.45)));const w=el.querySelectorAll('.rw');const n=Math.round(p*w.length);
+   w.forEach((x,i)=>x.classList.toggle('lit',i<n))})}
+ const req=()=>{if(!tick){tick=true;requestAnimationFrame(upd)}};
+ addEventListener('scroll',req,{passive:true});addEventListener('resize',req);addEventListener('hashchange',()=>setTimeout(req,120));
+ setTimeout(req,200);
 })();
 
 /* boot */
