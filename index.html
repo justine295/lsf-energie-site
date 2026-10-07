@@ -1381,6 +1381,25 @@ section.blk{padding-block:clamp(64px,9vw,120px)}
 .intro-stage{position:relative}
 #intro+#home-hero-slot>.cmd.in-intro{margin-top:0;min-height:100vh;padding-top:calc(var(--hdr-h,73px) + 40px);justify-content:center}
 .cmd.in-intro::before{display:block}
+
+/* ===== intro sur le même écran que le hero ===== */
+.intro{position:absolute;top:0;left:0;right:0;height:100vh;margin-top:0;z-index:30;pointer-events:none;background:transparent}
+.intro .intro-stage{position:absolute;inset:0;height:100vh;background:rgba(12,42,40,var(--bgo,1))}
+.intro .intro-stage::before{opacity:var(--bgo,1)}
+.intro.done{display:none}
+[data-view="accueil"]{position:relative}
+#intro+#home-hero-slot>.cmd.in-intro{margin-top:calc(-1 * var(--hdr-h,73px))}
+html.intro-playing .cmd.in-intro .wrap>*{opacity:0;transform:translateY(18px)}
+.cmd.in-intro.go .wrap>*{opacity:1;transform:none;transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.cmd.in-intro.go .wrap>*:nth-child(2){transition-delay:.08s}
+.cmd.in-intro.go .wrap>*:nth-child(3){transition-delay:.18s}
+.cmd.in-intro.go .wrap>*:nth-child(4){transition-delay:.28s}
+.cmd.in-intro.go .wrap>*:nth-child(5){transition-delay:.38s}
+.cmd.in-intro.go .home-sub>*{animation:subin .7s var(--ease) both}
+.cmd.in-intro.go .home-sub>*:nth-child(1){animation-delay:.3s}.cmd.in-intro.go .home-sub>*:nth-child(2){animation-delay:.42s}.cmd.in-intro.go .home-sub>*:nth-child(3){animation-delay:.52s}
+@keyframes subin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.intro-tag{white-space:normal;width:min(90vw,640px);text-align:center;line-height:1.4}
 </style>
 </head>
 <body>
@@ -2654,31 +2673,38 @@ addEventListener('hashchange',()=>setTimeout(armPerso,80));
 })();
 
 
-/* ===== intro : logo animé au chargement, puis le hero ===== */
+/* ===== intro : le logo s'anime, puis « Je suis… » apparaît sur le même écran ===== */
 function introOn(){const sec=document.getElementById('intro');return !!sec&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&getComputedStyle(sec).display!=='none'}
 (function(){
- const sec=document.getElementById('intro');if(!sec||!introOn())return;
+ const sec=document.getElementById('intro'),hero=()=>document.getElementById('top');
+ if(!sec)return;
+ const firstHome=(location.hash===''||location.hash==='#accueil');
+ if(!introOn()||!firstHome){sec.classList.add('done');return}
  const sq=document.getElementById('intro-sq'),wm=document.getElementById('intro-wm'),tag=document.getElementById('intro-tag'),hint=document.getElementById('intro-hint');
+ if(hint)hint.style.display='none';
  const bars=[...sec.querySelectorAll('.ib')];
  const cl=(x,a,b)=>Math.max(0,Math.min(1,(x-a)/(b-a)));
  const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
- let tick=false,auto=0,t0=0;
- function upd(){tick=false;if(curView!=='accueil')return;
-  const out=cl(-sec.getBoundingClientRect().top,0,innerHeight*.7);   // sortie douce au défilement
-  bars.forEach((b,i)=>{const t=ease(cl(auto,.05+i*.1,.45+i*.1));b.style.transform=`scaleY(${.18+.82*t})`});
-  const w=ease(cl(auto,.45,.95));
+ const D=2700;let t0=0,ended=false;
+ document.documentElement.classList.add('intro-playing');
+ function frame(){
+  const a=Math.min(1,(performance.now()-t0)/D);         // 0 → 1 sur 2,7 s
+  const k=a*D/1700;                                      // phase logo (0 → 1 sur 1,7 s)
+  bars.forEach((b,i)=>{const t=ease(cl(k,.05+i*.1,.45+i*.1));b.style.transform=`scaleY(${.18+.82*t})`});
+  const w=ease(cl(k,.45,.95)),out=ease(cl(a,.72,.92));
   const sqW=sq.offsetWidth,wmW=wm.offsetWidth,gap=sqW*.32,total=sqW+gap+wmW;
-  sq.style.transform=`translate(calc(-50% + ${(-(total/2)+sqW/2)*w}px),calc(-50% - ${out*40}px)) scale(${1-out*.08})`;
-  wm.style.opacity=w*(1-out);
-  wm.style.transform=`translate(${-(total/2)+sqW+gap+(1-w)*24}px,calc(-50% - ${out*40}px))`;
-  sq.style.opacity=1-out;
-  tag.style.opacity=ease(cl(auto,.7,1))*(1-out);
-  hint.style.opacity=ease(cl(auto,.85,1))*(1-cl(out,0,.3));
+  sq.style.transform=`translate(calc(-50% + ${(-(total/2)+sqW/2)*w}px),calc(-50% - ${out*60}px)) scale(${1-out*.25})`;
+  wm.style.transform=`translate(${-(total/2)+sqW+gap+(1-w)*24}px,calc(-50% - ${out*60}px)) scale(${1-out*.25})`;
+  wm.style.opacity=w*(1-out);sq.style.opacity=1-out;
+  tag.style.opacity=ease(cl(k,.7,1))*(1-out);
+  sec.style.setProperty('--bgo',(1-ease(cl(a,.8,1))).toFixed(3));
+  if(a>=.82&&!hero().classList.contains('go'))hero().classList.add('go');
+  if(a<1&&!ended)requestAnimationFrame(frame);else finish();
  }
- const req=()=>{if(!tick){tick=true;requestAnimationFrame(upd)}};
- addEventListener('scroll',req,{passive:true});addEventListener('resize',req);
- addEventListener('hashchange',()=>{if(location.hash==='#accueil'||location.hash===''){t0=performance.now();auto=0;(function loop(){auto=Math.min(1,(performance.now()-t0)/1700);upd();if(auto<1)requestAnimationFrame(loop)})()}});
- setTimeout(()=>{t0=performance.now();(function loop(){auto=Math.min(1,(performance.now()-t0)/1700);upd();if(auto<1)requestAnimationFrame(loop)})()},0);
+ function finish(){if(ended)return;ended=true;const h=hero();if(h)h.classList.add('go');sec.classList.add('done');document.documentElement.classList.remove('intro-playing');removeEventListener('wheel',skip);removeEventListener('touchmove',skip);removeEventListener('keydown',skip)}
+ function skip(){finish()}
+ addEventListener('wheel',skip,{passive:true});addEventListener('touchmove',skip,{passive:true});addEventListener('keydown',skip);
+ setTimeout(()=>{t0=performance.now();requestAnimationFrame(frame)},60);
 })();
 
 /* boot */
