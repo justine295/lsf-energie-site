@@ -1433,6 +1433,109 @@ html.intro-playing,html.intro-playing body{overflow:hidden;height:100%}
 .intro-hint i{order:2;width:22px;height:36px;border:1.5px solid rgba(240,238,233,.55);border-radius:12px;background:none;position:relative;animation:none}
 .intro-hint i::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;border-radius:2px;background:var(--sable);transform:translateX(-50%);animation:wheel 1.6s var(--ease) infinite}
 @keyframes wheel{0%{opacity:0;transform:translate(-50%,0)}30%{opacity:1}100%{opacity:0;transform:translate(-50%,12px)}}
+
+/* tableau de bord Pipeline (visuel HTML) */
+/* Visuel type Pipeline (interface réelle, données fictives), mis à l'échelle par container queries */
+.mk{position:relative;width:100%;aspect-ratio:16/9;container-type:inline-size;overflow:hidden;background:#0C2A28;border-radius:inherit;font-family:"Inter",system-ui,sans-serif;color:#1B2B2E}
+.mk::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(240,238,233,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(240,238,233,.05) 1px,transparent 1px);background-size:2.6cqw 2.6cqw}
+.mk-win{position:absolute;left:6%;top:8%;width:88%;height:86%;background:#fff;border-radius:1.1cqw;overflow:hidden;box-shadow:0 3cqw 7cqw -2cqw rgba(0,0,0,.6);transform:perspective(200cqw) rotateX(4deg);transform-origin:center bottom}
+.mk-bar{height:4.4%;background:#ECEAE5;display:flex;align-items:center;gap:.45cqw;padding:0 1cqw}
+.mk-bar i{width:.7cqw;height:.7cqw;border-radius:50%;background:#D3CFC7}
+.mk-bar span{margin-left:1.2cqw;font-size:.72cqw;color:#67635C;background:#fff;border-radius:.4cqw;padding:.2cqw .9cqw}
+.mk-app{display:grid;grid-template-columns:15% 1fr;height:95.6%}
+.mk-side{background:#14303A;color:rgba(240,238,233,.75);padding:1.2cqw .9cqw;display:flex;flex-direction:column;gap:.35cqw;font-size:.8cqw}
+.mk-brand{display:grid;margin-bottom:.8cqw;padding-bottom:.8cqw;border-bottom:2px solid #2B5A8C}
+.mk-brand b{font:800 2cqw/1 "Space Grotesk",Inter,sans-serif;color:#F3DCC4;letter-spacing:-.03em}
+.mk-brand small{font-size:.5cqw;letter-spacing:.2em;color:rgba(243,220,196,.7);margin-top:.3cqw;text-align:right}
+.mk-search{border:1px solid rgba(240,238,233,.15);border-radius:.5cqw;padding:.45cqw .7cqw;font-size:.7cqw;color:rgba(240,238,233,.5);margin-bottom:.6cqw}
+.mk-side span{display:grid;padding:.45cqw .7cqw;border-radius:.5cqw}
+.mk-side span b{font-weight:500;color:#F0EEE9;font-size:.78cqw}
+.mk-side span small{font-size:.58cqw;color:rgba(240,238,233,.5)}
+.mk-side span.on{background:#2C5B55}
+.mk-side em{font-style:normal;font-size:.55cqw;letter-spacing:.12em;color:rgba(240,238,233,.45);margin:.7cqw 0 .2cqw .7cqw}
+.mk-main{padding:1.1cqw 1.4cqw;display:grid;gap:.8cqw;align-content:start;background:#FAFAF8}
+.mk-head{display:grid;grid-template-columns:auto 1fr auto;gap:1cqw;align-items:center}
+.mk-head b{display:block;font-size:1.15cqw;letter-spacing:-.02em}
+.mk-head small{font-size:.65cqw;color:#8E8A81}
+.mk-search2{justify-self:end;width:60%;border:1px solid #E6E3DD;background:#fff;border-radius:.5cqw;padding:.5cqw .8cqw;font-size:.68cqw;color:#9A968E}
+.mk-btn{background:#C25B34;color:#fff;font-size:.72cqw;font-weight:600;padding:.6cqw 1cqw;border-radius:.5cqw}
+.mk-filters{display:flex;gap:.6cqw}
+.mk-filters span{border:1px solid #E6E3DD;background:#fff;border-radius:.45cqw;padding:.4cqw .8cqw;font-size:.62cqw;color:#3D4A4C}
+.mk-table{background:#fff;border:1px solid #ECEAE5;border-radius:.7cqw;overflow:hidden}
+.mk-table>div{display:grid;grid-template-columns:.85fr 1.05fr 1.35fr 1.05fr 1fr .75fr .9fr 1fr;gap:.6cqw;align-items:center;padding:.85cqw 1cqw;border-top:1px solid #F1EFEB;font-size:.7cqw}
+.mk-table .th{border-top:0;font-weight:700;color:#3D4A4C;font-size:.68cqw;background:#FCFBFA}
+.mk-table .ref{font-weight:600;color:#3D4A4C}
+.mk-table span b{display:block;font-weight:600}
+.mk-table span small{display:inline-block;font-size:.52cqw;background:#F0EEE9;color:#67635C;padding:.05cqw .35cqw;border-radius:.2cqw;margin-top:.15cqw}
+.mk-table i{font-style:normal;font-weight:700;font-size:.58cqw;border:1px solid #E6E3DD;border-radius:.25cqw;padding:.05cqw .3cqw;margin-right:.4cqw}
+.mk-table .ty{justify-self:start;font-size:.6cqw;color:#C25B34;background:#FBEFE8;border:1px solid #F3D5C6;border-radius:5cqw;padding:.15cqw .55cqw}
+.mk-table .pr{color:#1F7A5A;font-weight:600}
+.mk-table .st{display:flex;gap:.3cqw;align-items:center;flex-wrap:wrap}
+.mk-table .st u{text-decoration:none;font-size:.58cqw;border-radius:.25cqw;padding:.1cqw .4cqw;background:#DEF0E7;color:#1F9E6B;font-weight:600}
+.mk-table .st u.a{background:#E7F3EC;color:#2E8A62}
+.mk-table .st u.r{background:#FBEFE8;color:#C25B34}
+.mk-table .st em{font-style:normal;font-size:.56cqw;color:#67635C;border:1px solid #E6E3DD;border-radius:.25cqw;padding:.1cqw .35cqw}
+.mk-table .st em.done{color:#1F9E6B;border-color:#BFE3D0}
+.mk-ex{position:absolute;left:1.6cqw;bottom:1.2cqw;font:600 .75cqw "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(233,199,168,.7)}
+
+/* ===== tableau de bord ===== */
+.mk-main.db{gap:.9cqw}
+.db-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:.8cqw}
+.db-kpis>div{background:#fff;border:1px solid #ECEAE5;border-radius:.7cqw;padding:.9cqw 1cqw;display:grid;gap:.15cqw}
+.db-kpis small{font-size:.65cqw;color:#8E8A81}
+.db-kpis b{font-size:1.75cqw;font-weight:800;letter-spacing:-.04em;color:#1B2B2E}
+.db-kpis b.g{color:#1F7A5A}
+.db-kpis em{font-style:normal;font-size:.6cqw;color:#67635C}
+.db-kpis em.up{color:#2E8A62;font-weight:600}
+.db-kpis .hl{background:#14303A;border-color:#14303A}
+.db-kpis .hl small,.db-kpis .hl em{color:rgba(240,238,233,.7)}
+.db-kpis .hl b{color:#F3DCC4}
+.db-grid{display:grid;grid-template-columns:1.25fr 1fr .95fr;grid-template-rows:auto auto;gap:.8cqw}
+.db-card{background:#fff;border:1px solid #ECEAE5;border-radius:.7cqw;padding:.9cqw 1cqw;display:grid;gap:.45cqw;align-content:start}
+.db-ch{display:flex;justify-content:space-between;align-items:center;margin-bottom:.2cqw}
+.db-ch b{font-size:.78cqw}
+.db-ch span{font-size:.58cqw;color:#8E8A81}
+.db-bars{height:10.6cqw;display:flex;align-items:flex-end;gap:.7cqw;border-bottom:1px solid #ECEAE5;padding-top:1cqw}
+.db-bars i{flex:1;height:var(--h);background:#F3D5C6;border-radius:.3cqw .3cqw 0 0;position:relative}
+.db-bars i.on{background:#C25B34}
+.db-bars em{position:absolute;top:-1cqw;left:50%;transform:translateX(-50%);font-style:normal;font-size:.55cqw;color:#67635C;white-space:nowrap}
+.db-bars i.on em{color:#C25B34;font-weight:700}
+.db-months{display:flex;gap:.7cqw}.db-months span{flex:1;text-align:center;font-size:.55cqw;color:#8E8A81}
+.db-st{display:grid;grid-template-columns:7.6cqw 1fr 1.4cqw;gap:.6cqw;padding:.32cqw 0;align-items:center;font-size:.64cqw;color:#3D4A4C}
+.db-st i{display:block;height:.55cqw;border-radius:.3cqw;background:linear-gradient(90deg,#14303A var(--w),#F0EEE9 var(--w))}
+.db-st i.t{background:linear-gradient(90deg,#C25B34 var(--w),#F0EEE9 var(--w))}
+.db-st i.g{background:linear-gradient(90deg,#2E8A62 var(--w),#F0EEE9 var(--w))}
+.db-st b{text-align:right;font-size:.66cqw}
+.db-dn{display:grid;grid-template-columns:auto 1fr;gap:1cqw;align-items:center}
+.db-ring{width:7.2cqw;height:7.2cqw;border-radius:50%;background:conic-gradient(#14303A 0 58%,#C25B34 58% 89%,#E9C7A8 89% 100%);display:grid;place-items:center;position:relative;text-align:center}
+.db-ring::before{content:"";position:absolute;inset:1.1cqw;border-radius:50%;background:#fff}
+.db-ring b,.db-ring small{position:relative;display:block;line-height:1.1}
+.db-ring b{font-size:.95cqw;font-weight:800;align-self:end}
+.db-ring small{font-size:.52cqw;color:#8E8A81;align-self:start}
+.db-ring{grid-template-rows:1fr 1fr}
+.db-dn ul{list-style:none;margin:0;padding:0;display:grid;gap:.55cqw}
+.db-dn li{display:grid;grid-template-columns:auto 1fr auto;gap:.45cqw;align-items:center;font-size:.62cqw;color:#3D4A4C}
+.db-dn li i{width:.6cqw;height:.6cqw;border-radius:.15cqw}
+.db-dn li b{font-size:.66cqw}
+.db-feed{grid-column:1/span 2}
+.db-feed>div{display:grid;grid-template-columns:auto 1fr auto;gap:.6cqw;align-items:center;padding:.45cqw 0;border-top:1px solid #F1EFEB;font-size:.66cqw;color:#3D4A4C}
+.db-feed i{width:.55cqw;height:.55cqw;border-radius:50%}
+.db-feed i.g{background:#2E8A62}.db-feed i.t{background:#C25B34}.db-feed i.b{background:#14303A}.db-feed i.s{background:#E9C7A8}
+.db-feed b{font-weight:600;margin-right:.4cqw;color:#1B2B2E}
+.db-feed em{font-style:normal;font-size:.58cqw;color:#8E8A81}
+.db-todo>div{display:grid;grid-template-columns:1fr auto;gap:.5cqw;align-items:center;padding:.45cqw 0;border-top:1px solid #F1EFEB}
+.db-todo span{font-size:.6cqw;color:#67635C}
+.db-todo span b{display:block;font-size:.64cqw;color:#1B2B2E}
+.db-todo u{text-decoration:none;font-size:.58cqw;font-weight:600;color:#C25B34;border:1px solid #F3D5C6;background:#FBEFE8;border-radius:.3cqw;padding:.15cqw .5cqw}
+.db-badge{background:#C25B34;color:#fff!important;font-weight:700;border-radius:5cqw;padding:.05cqw .45cqw}
+
+.pipe2-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(28px,4vw,64px);align-items:center}
+.pipe2-copy h2{font-size:clamp(36px,4.6vw,64px);font-weight:900;letter-spacing:-.05em;margin-block:16px 20px}
+.pipe2-copy h2 s{color:var(--on-deep-2);text-decoration-thickness:4px;text-decoration-color:var(--brand)}
+.pipe2-copy .pipe-trio{margin-top:28px}
+.pipe2-shot{border-radius:var(--r-lg);overflow:hidden;box-shadow:0 40px 80px -40px rgba(0,0,0,.7)}
+.pipe2-shot .mk{border-radius:var(--r-lg)}
+@media (max-width:960px){.pipe2-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -2439,7 +2542,65 @@ const FSTEPS={
  ben:[["Votre projet","Bâtiments et travaux envisagés."],["Étude sous 48 h","Fiches applicables et montant estimé."],["Mise en relation","Installateurs RGE du réseau, offre CEE avant signature."],["Versement","Suivi en temps réel dans votre dashboard, jusqu'au versement."]],
  pre:[["Envoi du projet","Plans, CCTP, gammes ou descriptif."],["Étude sous 48 h","Fiches, conditions, montant estimé."],["Intégration","Le financement entre dans votre offre ou votre étude."],["Suivi","Chaque projet suivi dans votre dashboard, jusqu'au versement."]],
  obl:[["Cadrage","Volumes, secteurs, calendrier."],["Lot témoin","Un échantillon à auditer."],["Livraison continue","Dossiers et volumes au fil de l'eau."],["Dashboard","Volumes et conformité suivis en temps réel."]]};
-const PIPEBAND=`<section class="blk deep"><div class="wrap pipe-grid"><div><span class="eyebrow">Pipeline · votre outil</span><h2 style="margin-block:18px 22px">Prime payée à J+5. <s>Pas à J+90.</s></h2><p class="lead">Le dossier se monte en 12 clics, chaque pièce est contrôlée pendant la saisie, la prime est versée cinq jours après validation.</p><div style="margin-top:28px"><a class="btn btn-cta" href="https://financer-mes-cee.pipeline.lsf-energie.fr/" target="_blank" rel="noopener">Découvrir Pipeline <span class="arr">→</span></a></div></div><div class="pipe-trio" style="margin-top:0"><div><b>12 clics</b><span>pour monter un dossier</span></div><div><b>300+</b><span>contrôles IA</span></div><div><b>J+5</b><span>versement après validation</span></div></div></div></section>`;
+const PIPEBAND=`<section class="blk deep pipe2"><div class="wrap"><div class="pipe2-grid"><div class="pipe2-copy"><span class="eyebrow">Pipeline · votre outil</span><h2>Prime payée à J+5. <s>Pas à J+90.</s></h2><p class="lead">Le dossier se monte en 12 clics, chaque pièce est contrôlée par IA pendant la saisie, et tout se suit dans votre tableau de bord jusqu'au versement.</p><div class="pipe-trio"><div><b>12 clics</b><span>pour monter un dossier</span></div><div><b>300+</b><span>contrôles IA</span></div><div><b>J+5</b><span>versement après validation</span></div></div><div style="margin-top:28px"><a class="btn btn-cta" href="https://financer-mes-cee.pipeline.lsf-energie.fr/" target="_blank" rel="noopener">Découvrir Pipeline <span class="arr">→</span></a></div></div><div class="pipe2-shot"><div class="mk" role="img" aria-label="Exemple illustratif du tableau de bord Pipeline : dossiers actifs, primes engagées et versées, délai de versement J+5, primes par mois, avancement des dossiers, répartition par secteur et activité récente.">
+  <div class="mk-win">
+    <div class="mk-bar"><i></i><i></i><i></i><span>app.pipeline.lsf-energie.fr/tableau-de-bord</span></div>
+    <div class="mk-app">
+      <aside class="mk-side">
+        <div class="mk-brand"><b>Pipeline.</b><small>BY LSF ÉNERGIE</small></div>
+        <div class="mk-search">Rechercher…</div>
+        <span class="on"><b>Tableau de bord</b><small>Vue d'ensemble</small></span>
+        <span><b>Dossiers</b><small>Tous les dossiers</small></span>
+        <em>ADMINISTRATION</em>
+        <span><b>Suivi commandes</b><small>VT &amp; COFRAC</small></span>
+        <span><b>Suivi des crédits</b><small>Demandes de financement</small></span>
+        <span><b>Journal d'activité</b></span>
+        <span><b>Paramètres</b></span>
+      </aside>
+      <main class="mk-main db">
+        <div class="mk-head"><div><b>Tableau de bord</b><small>Thermi'Sud · octobre 2026</small></div><div class="mk-search2">Référence, bénéficiaire, ville, code fiche…</div><span class="mk-btn">+ Créer un dossier</span></div>
+        <div class="db-kpis">
+          <div><small>Dossiers actifs</small><b>48</b><em class="up">+6 ce mois</em></div>
+          <div><small>Primes engagées</small><b class="g">1 284 300 €</b><em>dès la signature du devis</em></div>
+          <div><small>Primes versées · octobre</small><b class="g">214 310 €</b><em class="up">+18 % vs septembre</em></div>
+          <div class="hl"><small>Délai de versement</small><b>J+5</b><em>après validation</em></div>
+        </div>
+        <div class="db-grid">
+          <div class="db-card db-chart"><div class="db-ch"><b>Primes versées par mois</b><span>2026</span></div>
+            <div class="db-bars"><i style="--h:34%"><em>98 k</em></i><i style="--h:46%"><em>131 k</em></i><i style="--h:41%"><em>118 k</em></i><i style="--h:58%"><em>166 k</em></i><i style="--h:63%"><em>181 k</em></i><i class="on" style="--h:75%"><em>214 k</em></i></div>
+            <div class="db-months"><span>mai</span><span>juin</span><span>juil.</span><span>août</span><span>sept.</span><span>oct.</span></div>
+          </div>
+          <div class="db-card db-steps"><div class="db-ch"><b>Avancement des dossiers</b><span>48 actifs</span></div>
+            <div class="db-st"><span>Qualification</span><i style="--w:21%"></i><b>10</b></div>
+            <div class="db-st"><span>Préparation</span><i style="--w:27%"></i><b>13</b></div>
+            <div class="db-st"><span>Chantier</span><i style="--w:19%"></i><b>9</b></div>
+            <div class="db-st"><span>Clôture</span><i style="--w:15%"></i><b>7</b></div>
+            <div class="db-st"><span>Relecture ingénieur</span><i class="t" style="--w:10%"></i><b>5</b></div>
+            <div class="db-st"><span>Prime versée</span><i class="g" style="--w:8%"></i><b>4</b></div>
+          </div>
+          <div class="db-card db-donut"><div class="db-ch"><b>Par secteur</b><span>primes engagées</span></div>
+            <div class="db-dn"><div class="db-ring"><b>1,28 M€</b><small>engagés</small></div>
+              <ul><li><i style="background:#14303A"></i>Résidentiel · BAR<b>58 %</b></li><li><i style="background:#C25B34"></i>Tertiaire · BAT<b>31 %</b></li><li><i style="background:#E9C7A8"></i>Industrie · IND<b>11 %</b></li></ul></div>
+          </div>
+          <div class="db-card db-feed"><div class="db-ch"><b>Activité récente</b><span>temps réel</span></div>
+            <div><i class="g"></i><span><b>OP-2026-129</b> Prime versée · 4 820,00 €</span><em>2 min</em></div>
+            <div><i class="t"></i><span><b>OP-2026-121</b> Relecture ingénieur · Claire M.</span><em>18 min</em></div>
+            <div><i class="b"></i><span><b>OP-2026-117</b> Contrôle IA · 312/312 conformes</span><em>1 h</em></div>
+            <div><i class="s"></i><span><b>OP-2026-131</b> Dossier créé · BAR-TH-171</span><em>2 h</em></div>
+            <div><i class="g"></i><span><b>OP-2026-109</b> Prime versée · 1 210,00 €</span><em>hier</em></div>
+          </div>
+          <div class="db-card db-todo"><div class="db-ch"><b>À traiter</b><span class="db-badge">4</span></div>
+            <div><span><b>OP-2026-114</b>Photos après travaux manquantes</span><u>Ajouter</u></div>
+            <div><span><b>OP-2026-112</b>Attestation sur l'honneur à signer</span><u>Relancer</u></div>
+            <div><span><b>OP-2026-105</b>Facture : référence produit absente</span><u>Corriger</u></div>
+            <div><span><b>OP-2026-128</b>Visite technique à planifier</span><u>Planifier</u></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <span class="mk-ex">Exemple illustratif · données fictives</span>
+</div></div></div></div></section>`;
 function renderSolution(page){
  const p=PAGES[page],k=SOLKEY[page];
  const subs=p.sub?`<section class="blk" style="padding-bottom:0"><div class="wrap"><div class="blk-head"><span class="eyebrow">Trois profils</span><h2>Votre situation, <em>vos fiches.</em></h2></div><div class="subseg">${p.sub.map(s=>`<article><span class="eyebrow">${s[1]}</span><h3>${s[0]}</h3><ul>${s[2].map(x=>`<li>${x}</li>`).join('')}</ul><code>${s[3]}</code></article>`).join('')}</div></div></section>`:'';
