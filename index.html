@@ -2947,6 +2947,8 @@ $('#c-rolesel').onchange=e=>setRole(e.target.value);
  function go(n){i=(n+slides.length)%slides.length;slides.forEach((s,k)=>s.classList.toggle('is-on',k===i));dots.forEach((d,k)=>{d.setAttribute('aria-selected',k===i);const b=d.querySelector('i');b.style.animation='none';void b.offsetWidth;b.style.animation=''});arm()}
  function arm(){clearTimeout(t);if(!reduce&&!sec.classList.contains('paused'))t=setTimeout(()=>go(i+1),7000)}
  dots.forEach((d,k)=>d.onclick=()=>go(k));$('#tst-prev').onclick=()=>go(i-1);$('#tst-next').onclick=()=>go(i+1);
+ /* glisser du doigt vers la gauche ou la droite pour changer de témoignage */
+ {const st=$('.tst-stage');let x0=null,y0=null;if(st){st.addEventListener('touchstart',e=>{x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});st.addEventListener('touchend',e=>{if(x0==null)return;const dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;x0=null;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.2)go(dx<0?i+1:i-1)},{passive:true});st.style.touchAction='pan-y'}}
  sec.addEventListener('mouseenter',()=>{sec.classList.add('paused');clearTimeout(t)});sec.addEventListener('mouseleave',()=>{sec.classList.remove('paused');arm()});
  arm();
 })();
