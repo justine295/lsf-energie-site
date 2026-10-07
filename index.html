@@ -1431,10 +1431,10 @@ html.intro-playing body{background:#0C2A28}
 /* ===== intro pilotée au défilement : grande phrase, appel au scroll, écran bloqué ===== */
 html.intro-playing,html.intro-playing body{overflow:hidden;height:100%}
 .intro-tag{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);width:min(92vw,1100px);margin:0;text-align:center;white-space:normal;
-  font:900 clamp(34px,5.2vw,82px)/1 var(--sans);letter-spacing:-.05em;color:#fff;z-index:3;opacity:0}
+  font:900 clamp(46px,7.2vw,118px)/.98 var(--sans);letter-spacing:-.055em;color:#fff;z-index:3;opacity:0}
 .intro-tag .iw{opacity:.14;transition:opacity .35s ease}
 .intro-tag .iw.lit{opacity:1}
-.intro-tag .iw:nth-last-child(-n+3){color:var(--sable)}
+.intro-tag .iw:first-child{color:var(--sable)}
 .intro-hint{bottom:44px;gap:14px;font:600 13px var(--mono);letter-spacing:.14em;color:#F0EEE9;display:flex!important;flex-direction:column;align-items:center}
 .intro-hint i{order:2;width:22px;height:36px;border:1.5px solid rgba(240,238,233,.55);border-radius:12px;background:none;position:relative;animation:none}
 .intro-hint i::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;border-radius:2px;background:var(--sable);transform:translateX(-50%);animation:wheel 1.6s var(--ease) infinite}
@@ -1827,7 +1827,7 @@ html.cal-on,html.cal-on body{overflow:hidden}
         <svg viewBox="0 0 72 72" aria-hidden="true"><path id="intro-fill" d="M36 3 C61 3 69 11 69 36 C69 61 61 69 36 69 C11 69 3 61 3 36 C3 11 11 3 36 3 Z" fill="#B0542F"/><g fill="#fff"><rect class="ib ib1" x="21" y="41" width="9" height="13" rx="3"/><rect class="ib ib2" x="31.5" y="31" width="9" height="23" rx="3"/><rect class="ib ib3" x="42" y="21" width="9" height="33" rx="3"/></g></svg>
       </div>
       <div class="intro-wm" id="intro-wm"><b>LSF</b><small>ÉNERGIE</small></div>
-      <p class="intro-tag" id="intro-tag">Le partenaire financier des acteurs de la rénovation énergétique.</p>
+      <p class="intro-tag" id="intro-tag">L'ingénierie au service des CEE.</p>
       <div class="intro-hint" id="intro-hint"><i></i>Faites défiler</div>
     </div>
   </section>
@@ -2841,7 +2841,7 @@ function route(){
  document.body.dataset.view=view;
  const heroEl=document.getElementById('top');
  if(view==='solution'){heroEl.classList.remove('in-intro');heroEl.style.opacity='';heroEl.style.transform='';heroEl.style.pointerEvents='';$('#sol-hero-slot').appendChild(heroEl);renderSolution(h);if(role!==SOLKEY[h])setRole(SOLKEY[h]);else renderAnswer();$('#scrollhint').hidden=true}
- else if(view==='accueil'){$('#home-hero-slot').appendChild(heroEl);heroEl.classList.add('in-intro');heroEl.style.opacity='';heroEl.style.transform='';heroEl.style.pointerEvents='';$('#hero-crumb').innerHTML="Le partenaire financier des acteurs de la rénovation énergétique";renderAnswer();$('#scrollhint').hidden=false}
+ else if(view==='accueil'){$('#home-hero-slot').appendChild(heroEl);heroEl.classList.add('in-intro');heroEl.style.opacity='';heroEl.style.transform='';heroEl.style.pointerEvents='';$('#hero-crumb').innerHTML="L'ingénierie au service des CEE";renderAnswer();$('#scrollhint').hidden=false}
  $$('.view').forEach(v=>v.hidden=v.dataset.view!==view);
  $$('[data-page]').forEach(a=>{a.dataset.page===h?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current')});
  closeDD();$$('.dd-btn')[0].classList.toggle('cur',view==='solution');$$('.dd-btn')[1].classList.toggle('cur',view==='fiches'||view==='fiche'||view==='journal'||view==='article');
