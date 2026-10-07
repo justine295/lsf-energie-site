@@ -1749,6 +1749,16 @@ html.cal-on,html.cal-on body{overflow:hidden}
  .qstrip{display:none}
  .pb-grid>.pb{border:1px solid rgba(240,238,233,.14)!important;border-radius:18px;padding:22px 20px!important;background:rgba(240,238,233,.04)}
 }
+@media (max-width:760px){
+ .p2-left,.p2-stick{display:contents}
+ .p2-grid{gap:0}
+ .p2-stick .eyebrow{order:1}.p2-stick h2{order:2;margin-top:12px}.p2-lead{order:3;margin-top:14px}
+ .p2-prog{display:flex!important;order:4;margin:26px 0 14px}.p2-prog b{font-size:56px}
+ .p2-steps{order:5}.partner2 .m-dots{order:6;color:var(--on-deep)}
+ .p2-zero{order:7;margin-top:22px}.partner2 .p-cta-b{order:8;margin-top:14px}
+ .p2-steps>.p2-step{min-height:0;align-content:start;padding:24px 20px!important;border:1px solid rgba(240,238,233,.14)!important;border-radius:18px;background:rgba(240,238,233,.04);opacity:.45!important;transform:scale(.97)!important;transition:opacity .35s,transform .35s,background .35s}
+ .p2-steps>.p2-step.on{opacity:1!important;transform:none!important;background:rgba(240,238,233,.07)}
+}
 </style>
 </head>
 <body>
@@ -2806,7 +2816,7 @@ ${k==='rge'?PIPEBAND+PARTNER:flowHTML(FLOW[p.fam])}
 }
 function armPartner(){const sec=document.getElementById('devenir-partenaire');if(!sec)return;const items=[...sec.querySelectorAll('.p2-step')];
  const set=i=>{items.forEach((x,k)=>{x.classList.toggle('on',k===i);x.classList.toggle('past',k<i)});const c=document.getElementById('p2-cur');if(c)c.textContent='0'+(i+1);const b=document.getElementById('p2-bar');if(b)b.style.width=((i+1)/items.length*100)+'%'};
- set(0);if(!('IntersectionObserver' in window))return;
+ set(0);sec.__set=set;if(matchMedia('(max-width:760px)').matches){window.__mswipe&&setTimeout(window.__mswipe,60);return}if(!('IntersectionObserver' in window))return;
  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)set(+e.target.dataset.i)}),{rootMargin:'-45% 0px -45% 0px'});items.forEach(x=>io.observe(x))}
 function armSteps(){const sec=document.getElementById('steps4');if(!sec||!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches)return;sec.classList.add('anim');const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){sec.classList.add('go');io.disconnect()}},{threshold:.35});io.observe(sec);setTimeout(()=>{if(sec.getBoundingClientRect().top<innerHeight)sec.classList.add('go')},5000)}
 
@@ -3149,7 +3159,7 @@ route();hdrTone();setTimeout(armPerso,80);
 <script>
 /* mobile : cartes horizontales + points de position */
 (function(){
- const mq=matchMedia('(max-width:760px)');const SEL=['#stages','.qb-grid','.tb-counters','.pb-grid'];
+ const mq=matchMedia('(max-width:760px)');const SEL=['#stages','.qb-grid','.tb-counters','.pb-grid','.p2-steps'];
  function setup(){document.querySelectorAll(SEL.join(',')).forEach(el=>{
   if(!mq.matches){el.classList.remove('m-swipe');el.nextElementSibling&&el.nextElementSibling.classList.contains('m-dots')&&el.nextElementSibling.remove();return}
   el.classList.add('m-swipe');
@@ -3158,7 +3168,8 @@ route();hdrTone();setTimeout(armPerso,80);
   const n=kids().length;if(dots.children.length!==n)dots.innerHTML='<i></i>'.repeat(n);
   const upd=()=>{const ks=kids();const x=el.scrollLeft;let best=0,bd=1e9;ks.forEach((k,i)=>{const d=Math.abs(k.offsetLeft-el.offsetLeft-x-20);if(d<bd){bd=d;best=i}});
    [...dots.children].forEach((d,i)=>d.classList.toggle('on',i===best));
-   if(el.id==='stages'&&typeof window.__setStage==='function')window.__setStage(+ks[best].dataset.i)};
+   if(el.id==='stages'&&typeof window.__setStage==='function')window.__setStage(+ks[best].dataset.i);
+   if(el.classList.contains('p2-steps')){const sc=el.closest('section');sc&&sc.__set&&sc.__set(best)}};
   if(!el.__sw){el.__sw=1;el.addEventListener('scroll',()=>{cancelAnimationFrame(el.__r);el.__r=requestAnimationFrame(upd)},{passive:true})}
   upd()})}
  mq.addEventListener?mq.addEventListener('change',setup):mq.addListener(setup);
