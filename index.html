@@ -1732,8 +1732,6 @@ html.cal-on,html.cal-on body{overflow:hidden}
  /* une IA vérifie / un ingénieur valide */
  .qb-grid .qb-plus{display:none}
  .qb-grid>.qb-col{border:1px solid rgba(240,238,233,.14);border-radius:18px;padding:22px 20px;background:rgba(240,238,233,.04)}
- /* ils nous font confiance */
- .tb-counters>.tb-c{border:1px solid var(--line);border-radius:18px;padding:22px 20px;background:#fff}
 }
 .cmd.in-intro .meta-row span:last-child{display:inline-block!important;text-align:left}
 .cmd.in-intro .meta-row span:last-child::before{display:inline-block;vertical-align:-6px;margin-right:10px}
@@ -3159,7 +3157,7 @@ route();hdrTone();setTimeout(armPerso,80);
 <script>
 /* mobile : cartes horizontales + points de position */
 (function(){
- const mq=matchMedia('(max-width:760px)');const SEL=['#stages','.qb-grid','.tb-counters','.pb-grid','.p2-steps'];
+ const mq=matchMedia('(max-width:760px)');const SEL=['#stages','.qb-grid','.pb-grid','.p2-steps'];
  function setup(){document.querySelectorAll(SEL.join(',')).forEach(el=>{
   if(!mq.matches){el.classList.remove('m-swipe');el.nextElementSibling&&el.nextElementSibling.classList.contains('m-dots')&&el.nextElementSibling.remove();return}
   el.classList.add('m-swipe');
