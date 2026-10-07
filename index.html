@@ -1400,6 +1400,12 @@ html.intro-playing .cmd.in-intro .wrap>*{opacity:0;transform:translateY(18px)}
 @keyframes subin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
 .intro-tag{white-space:normal;width:min(90vw,640px);text-align:center;line-height:1.4}
+
+/* header masqué pendant l'animation du logo, il arrive avec « Je suis… » */
+.hdr,.proto{transition:opacity .6s var(--ease),transform .6s var(--ease)}
+html.hdr-wait .hdr,html.hdr-wait .proto{opacity:0;transform:translateY(-14px);pointer-events:none}
+
+html.intro-playing .intro{position:fixed;inset:0;height:100vh;z-index:45}
 </style>
 </head>
 <body>
@@ -2686,7 +2692,7 @@ function introOn(){const sec=document.getElementById('intro');return !!sec&&!mat
  const cl=(x,a,b)=>Math.max(0,Math.min(1,(x-a)/(b-a)));
  const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
  const D=2700;let t0=0,ended=false;
- document.documentElement.classList.add('intro-playing');
+ document.documentElement.classList.add('intro-playing','hdr-wait');
  function frame(){
   const a=Math.min(1,(performance.now()-t0)/D);         // 0 → 1 sur 2,7 s
   const k=a*D/1700;                                      // phase logo (0 → 1 sur 1,7 s)
@@ -2698,10 +2704,10 @@ function introOn(){const sec=document.getElementById('intro');return !!sec&&!mat
   wm.style.opacity=w*(1-out);sq.style.opacity=1-out;
   tag.style.opacity=ease(cl(k,.7,1))*(1-out);
   sec.style.setProperty('--bgo',(1-ease(cl(a,.8,1))).toFixed(3));
-  if(a>=.82&&!hero().classList.contains('go'))hero().classList.add('go');
+  if(a>=.82&&!hero().classList.contains('go')){hero().classList.add('go');document.documentElement.classList.remove('hdr-wait')}
   if(a<1&&!ended)requestAnimationFrame(frame);else finish();
  }
- function finish(){if(ended)return;ended=true;const h=hero();if(h)h.classList.add('go');sec.classList.add('done');document.documentElement.classList.remove('intro-playing');removeEventListener('wheel',skip);removeEventListener('touchmove',skip);removeEventListener('keydown',skip)}
+ function finish(){if(ended)return;ended=true;const h=hero();if(h)h.classList.add('go');sec.classList.add('done');document.documentElement.classList.remove('intro-playing','hdr-wait');removeEventListener('wheel',skip);removeEventListener('touchmove',skip);removeEventListener('keydown',skip)}
  function skip(){finish()}
  addEventListener('wheel',skip,{passive:true});addEventListener('touchmove',skip,{passive:true});addEventListener('keydown',skip);
  setTimeout(()=>{t0=performance.now();requestAnimationFrame(frame)},60);
