@@ -3035,7 +3035,7 @@ function introOn(){const sec=document.getElementById('intro');return !!sec&&!mat
  }
  function loop(){if(ended)return;cur+=(target-cur)*.12;if(Math.abs(target-cur)<.0015)cur=target;render(cur);requestAnimationFrame(loop)}
  function push(d){if(ended)return;lastInput=performance.now();target=Math.max(0,Math.min(1,target+d));armAuto()}
- function armAuto(){clearTimeout(autoT);autoT=setTimeout(()=>{if(ended)return;const from=target,t0=performance.now(),D=1800*(1-from)+400;(function a(){const k=Math.min(1,(performance.now()-t0)/D);target=from+(1-from)*ease(k);if(k<1&&!ended)requestAnimationFrame(a)})()},3000)}
+ function armAuto(){clearTimeout(autoT);autoT=setTimeout(()=>{if(ended)return;const from=target,t0=performance.now(),D=1800*(1-from)+400;(function a(){const k=Math.min(1,(performance.now()-t0)/D);target=from+(1-from)*ease(k);if(k<1&&!ended)requestAnimationFrame(a)})()},6000)}
  function onWheel(e){e.preventDefault();push(e.deltaY/1300)}
  let ty=null;
  function onTS(e){ty=e.touches[0].clientY}
