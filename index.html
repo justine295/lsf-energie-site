@@ -1375,6 +1375,12 @@ section.blk{padding-block:clamp(64px,9vw,120px)}
 .home-sub .home-proof{margin:0;color:var(--on-deep-2);font-size:15px}
 .home-proof b{color:#fff}
 .cmd:not(.in-intro) .role-pills{justify-content:flex-start}
+
+/* ===== intro simple : un écran, le logo animé ===== */
+.intro{height:100vh}
+.intro-stage{position:relative}
+#intro+#home-hero-slot>.cmd.in-intro{margin-top:0;min-height:100vh;padding-top:calc(var(--hdr-h,73px) + 40px);justify-content:center}
+.cmd.in-intro::before{display:block}
 </style>
 </head>
 <body>
@@ -1418,15 +1424,13 @@ section.blk{padding-block:clamp(64px,9vw,120px)}
 <div class="view" data-view="accueil">
   <section class="intro" id="intro" aria-label="LSF Énergie">
     <div class="intro-stage">
-      <div class="intro-dim" id="intro-dim" aria-hidden="true"></div>
-      <div class="intro-img" id="intro-img" aria-hidden="true"><picture><source media="(max-width:700px)" srcset="visuels/intro-grille-mobile.webp"><img src="visuels/intro-grille.webp" alt="" decoding="async"></picture></div>
+      
       <div class="intro-sq" id="intro-sq">
         <svg viewBox="0 0 72 72" aria-hidden="true"><path id="intro-fill" d="M36 3 C61 3 69 11 69 36 C69 61 61 69 36 69 C11 69 3 61 3 36 C3 11 11 3 36 3 Z" fill="#B0542F"/><g fill="#fff"><rect class="ib ib1" x="21" y="41" width="9" height="13" rx="3"/><rect class="ib ib2" x="31.5" y="31" width="9" height="23" rx="3"/><rect class="ib ib3" x="42" y="21" width="9" height="33" rx="3"/></g></svg>
       </div>
       <div class="intro-wm" id="intro-wm"><b>LSF</b><small>ÉNERGIE</small></div>
       <p class="intro-tag" id="intro-tag">Le partenaire financier des acteurs de la rénovation énergétique</p>
       <div class="intro-hint" id="intro-hint"><i></i>Faites défiler</div>
-      <a class="intro-skip" id="intro-skip" href="#top">Passer l'intro ↓</a>
     </div>
   </section>
   
@@ -2505,7 +2509,7 @@ function route(){
  curView=view;
  const heroEl=document.getElementById('top');
  if(view==='solution'){heroEl.classList.remove('in-intro');heroEl.style.opacity='';heroEl.style.transform='';heroEl.style.pointerEvents='';$('#sol-hero-slot').appendChild(heroEl);renderSolution(h);if(role!==SOLKEY[h])setRole(SOLKEY[h]);else renderAnswer();$('#scrollhint').hidden=true}
- else if(view==='accueil'){if(introOn()){$('#intro .intro-stage').appendChild(heroEl);heroEl.classList.add('in-intro')}else{$('#home-hero-slot').appendChild(heroEl)}$('#hero-crumb').innerHTML="Le partenaire financier des acteurs de la rénovation énergétique";renderAnswer();$('#scrollhint').hidden=false}
+ else if(view==='accueil'){$('#home-hero-slot').appendChild(heroEl);heroEl.classList.add('in-intro');heroEl.style.opacity='';heroEl.style.transform='';heroEl.style.pointerEvents='';$('#hero-crumb').innerHTML="Le partenaire financier des acteurs de la rénovation énergétique";renderAnswer();$('#scrollhint').hidden=false}
  $$('.view').forEach(v=>v.hidden=v.dataset.view!==view);
  $$('[data-page]').forEach(a=>{a.dataset.page===h?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current')});
  closeDD();$$('.dd-btn')[0].classList.toggle('cur',view==='solution');$$('.dd-btn')[1].classList.toggle('cur',view==='fiches'||view==='fiche'||view==='journal'||view==='article');
@@ -2650,54 +2654,31 @@ addEventListener('hashchange',()=>setTimeout(armPerso,80));
 })();
 
 
-/* ===== intro : ouverture automatique, puis zoom piloté par le défilement jusqu'au hero ===== */
+/* ===== intro : logo animé au chargement, puis le hero ===== */
 function introOn(){const sec=document.getElementById('intro');return !!sec&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&getComputedStyle(sec).display!=='none'}
 (function(){
  const sec=document.getElementById('intro');if(!sec||!introOn())return;
- const sq=document.getElementById('intro-sq'),wm=document.getElementById('intro-wm'),tag=document.getElementById('intro-tag'),hint=document.getElementById('intro-hint'),fill=document.getElementById('intro-fill'),skip=document.getElementById('intro-skip'),img=document.getElementById('intro-img'),dim=document.getElementById('intro-dim');
+ const sq=document.getElementById('intro-sq'),wm=document.getElementById('intro-wm'),tag=document.getElementById('intro-tag'),hint=document.getElementById('intro-hint');
  const bars=[...sec.querySelectorAll('.ib')];
  const cl=(x,a,b)=>Math.max(0,Math.min(1,(x-a)/(b-a)));
  const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
  let tick=false,auto=0,t0=0;
- setTimeout(()=>{t0=performance.now();(function loop(){auto=Math.min(1,(performance.now()-t0)/1700);upd();if(auto<1)requestAnimationFrame(loop)})()},0);
  function upd(){tick=false;if(curView!=='accueil')return;
-  const r=sec.getBoundingClientRect(),range=sec.offsetHeight-innerHeight;const P=Math.max(0,Math.min(1,-r.top/range));
-  const p=Math.min(1,P/0.68),hold=cl(P,.72,.97);
-  // ouverture automatique : jauge puis mot-symbole
-  bars.forEach((b,i)=>{const t=ease(cl(auto,.05+i*.1,.45+i*.1));b.style.transform=`scaleY(${.18+.82*t})`;b.style.opacity=1-cl(p,.05,.095)});
+  const out=cl(-sec.getBoundingClientRect().top,0,innerHeight*.7);   // sortie douce au défilement
+  bars.forEach((b,i)=>{const t=ease(cl(auto,.05+i*.1,.45+i*.1));b.style.transform=`scaleY(${.18+.82*t})`});
   const w=ease(cl(auto,.45,.95));
-  const z=ease(cl(p,.04,.5));
   const sqW=sq.offsetWidth,wmW=wm.offsetWidth,gap=sqW*.32,total=sqW+gap+wmW;
-  const shift=(-(total/2)+sqW/2)*w*(1-z);
-  sq.style.transform=`translate(calc(-50% + ${shift}px),-50%) scale(${1+z*z*55})`;
-  wm.style.opacity=w*(1-cl(p,.03,.1));
-  wm.style.transform=`translate(${-(total/2)+sqW+gap+(1-w)*24}px,-50%)`;
-  tag.style.opacity=ease(cl(auto,.7,1))*(1-cl(p,.03,.1));
-  hint.style.opacity=ease(cl(auto,.85,1))*(1-cl(p,.02,.08));
-  // le carré s'ouvre franchement sur l'image
-  const b=sq.getBoundingClientRect(),W=innerWidth,H=innerHeight,open=p>.1?1:0;
-  fill.style.opacity=open?0:1;
-  const rad=Math.max(0,b.width*0.28*(1-cl(p,.38,.5)));
-  img.style.clipPath=open?`inset(${Math.max(0,b.top)}px ${Math.max(0,W-b.right)}px ${Math.max(0,H-b.bottom)}px ${Math.max(0,b.left)}px round ${rad}px)`:'inset(50% 50% 50% 50%)';
-  // mise au point : l'image s'efface derrière le hero
-  const ho=ease(cl(p,.5,.75));
-  img.style.setProperty('--ki',(1.22-0.14*cl(p,.1,1)).toFixed(3));
-  img.style.filter=`blur(${(ho*7).toFixed(1)}px)`;
-  dim.style.opacity=(.78*ho).toFixed(3);
-  const hero=document.getElementById('top');
-  if(hero&&hero.parentElement&&hero.parentElement.classList.contains('intro-stage')){hero.style.opacity=ho.toFixed(3);hero.style.transform=`translateY(${(1-ho)*24}px)`;hero.style.pointerEvents=ho>.6?'auto':'none'}
-  skip.style.opacity=ease(cl(auto,.85,1))*(1-cl(p,.4,.55));skip.style.pointerEvents=p>.5?'none':'auto';
-  // temps d'arrêt : les profils défilent, les pastilles s'allument
-  if(!window.__pickTouched){
-   const start=ROLE_ORDER.indexOf(role);const seq=ROLE_ORDER.slice(start+1).concat(ROLE_ORDER.slice(0,start+1));
-   const k=hold<=0||hold>=1?role:seq[Math.min(seq.length-1,Math.floor(hold*seq.length))];
-   if(k!==upd.last){upd.last=k;swapText($('#pk-role .v'),ROLES[k].label);$('#home-go').href='#'+PAGEOF[k];renderPills(k)}
-  }
+  sq.style.transform=`translate(calc(-50% + ${(-(total/2)+sqW/2)*w}px),calc(-50% - ${out*40}px)) scale(${1-out*.08})`;
+  wm.style.opacity=w*(1-out);
+  wm.style.transform=`translate(${-(total/2)+sqW+gap+(1-w)*24}px,calc(-50% - ${out*40}px))`;
+  sq.style.opacity=1-out;
+  tag.style.opacity=ease(cl(auto,.7,1))*(1-out);
+  hint.style.opacity=ease(cl(auto,.85,1))*(1-cl(out,0,.3));
  }
  const req=()=>{if(!tick){tick=true;requestAnimationFrame(upd)}};
- window.__introReq=req;
- addEventListener('scroll',req,{passive:true});addEventListener('resize',req);addEventListener('hashchange',()=>setTimeout(req,60));
- skip.addEventListener('click',e=>{e.preventDefault();window.scrollTo({top:sec.offsetTop+(sec.offsetHeight-innerHeight)*0.7,behavior:'smooth'})});
+ addEventListener('scroll',req,{passive:true});addEventListener('resize',req);
+ addEventListener('hashchange',()=>{if(location.hash==='#accueil'||location.hash===''){t0=performance.now();auto=0;(function loop(){auto=Math.min(1,(performance.now()-t0)/1700);upd();if(auto<1)requestAnimationFrame(loop)})()}});
+ setTimeout(()=>{t0=performance.now();(function loop(){auto=Math.min(1,(performance.now()-t0)/1700);upd();if(auto<1)requestAnimationFrame(loop)})()},0);
 })();
 
 /* boot */
