@@ -1765,6 +1765,27 @@ html.cal-on,html.cal-on body{overflow:hidden}
  .perso.m-seq.go .perso-list li.in,.perso.m-seq.go .perso-list li.in::after,.perso.m-seq.go .perso-list li.in code{transition-delay:.05s!important}
  .perso.m-seq:not(.go) .perso-list li.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
 }
+/* footer mobile : contact en carte, liens en pastilles */
+@media (max-width:760px){
+ .ftr{padding-block:44px 28px}
+ .ftr .cols{display:flex;flex-direction:column;gap:30px}
+ .ftr .cols>div:nth-child(1){order:1}
+ .ftr .cols>div:nth-child(5){order:2;background:rgba(240,238,233,.05);border:1px solid rgba(240,238,233,.12);border-radius:18px;padding:20px}
+ .ftr .cols>div:nth-child(2){order:3}.ftr .cols>div:nth-child(3){order:4}.ftr .cols>div:nth-child(4){order:5}
+ .ftr .cols>div:nth-child(1) p{font-size:18px;font-weight:700;color:var(--on-deep);letter-spacing:-.02em;margin:4px 0 0}
+ .ftr .cols>div:nth-child(2) ul,.ftr .cols>div:nth-child(3) ul,.ftr .cols>div:nth-child(4) ul{display:flex;flex-wrap:wrap;gap:8px}
+ .ftr .cols>div:nth-child(2) a,.ftr .cols>div:nth-child(3) a,.ftr .cols>div:nth-child(4) a{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;border:1px solid rgba(240,238,233,.16);color:var(--on-deep);font-size:14px}
+ .ftr .cols>div:nth-child(5) ul{gap:0}
+ .ftr .cols>div:nth-child(5) li{border-top:1px solid rgba(240,238,233,.1)}
+ .ftr .cols>div:nth-child(5) li:first-child{border-top:0}
+ .ftr .cols>div:nth-child(5) li>a,.ftr .cols>div:nth-child(5) li>span{display:flex;align-items:center;min-height:48px;padding:10px 0;color:var(--on-deep);font-size:15px}
+ .ftr .cols>div:nth-child(5) li>a[href^="tel"]{font:700 20px var(--sans);letter-spacing:-.01em}
+ .ftr .cols>div:nth-child(5) li:last-child{order:-1;border-top:0}
+ .ftr .cols>div:nth-child(5) ul{display:flex;flex-direction:column}
+ .ftr .cols>div:nth-child(5) li:last-child>a{justify-content:center;min-height:50px;margin-bottom:6px;border-radius:999px;background:var(--cta);color:#fff;font-weight:600}
+ .ftr .cols>div:nth-child(5) li:nth-child(1){border-top:0}
+ .ftr .base{margin-top:32px;flex-direction:column;gap:6px}
+}
 </style>
 </head>
 <body>
