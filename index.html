@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="fr">
 <head>
+<link rel="preconnect" href="https://calendly.com"><link rel="preconnect" href="https://assets.calendly.com" crossorigin>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="LSF Énergie, mandataire CEE et bureau d'ingénierie. 300+ contrôles automatisés par IA, 100 % des dossiers relus par un ingénieur, prime versée à J+5.">
@@ -1695,6 +1696,19 @@ html.intro-playing,html.intro-playing body{overflow:hidden;height:100%}
 .ct-btn{margin-top:auto;text-align:center;background:#26304E;color:#fff;font-size:.75cqw;font-weight:600;border-radius:.8cqw;padding:.9cqw}
 body[data-view="contact"] .ftr{display:none}
 #parcours{background:#F0EEE9}
+
+/* fenêtre Calendly */
+.cal-modal{position:fixed;inset:0;z-index:200;background:rgba(8,28,27,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:grid;place-items:center;padding:24px 16px}
+.cal-modal{opacity:0;pointer-events:none;z-index:-1;transition:opacity .2s}.cal-modal.open{opacity:1;pointer-events:auto;z-index:200}
+.cal-box{position:relative;width:min(1040px,100%);height:min(760px,calc(100vh - 48px));background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 40px 90px -30px rgba(0,0,0,.7)}
+.cal-box iframe{position:absolute;inset:0;width:100%;height:100%;border:0;opacity:0;transition:opacity .3s}
+.cal-modal.ready iframe{opacity:1}.cal-modal.ready .cal-load{display:none}
+.cal-load{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:14px;color:#123B3A;font:500 14px var(--sans)}
+.cal-load i{width:34px;height:34px;border-radius:50%;border:3px solid #E6E3DD;border-top-color:var(--cta);animation:calspin .8s linear infinite}
+@keyframes calspin{to{transform:rotate(360deg)}}
+.cal-x{position:absolute;top:10px;right:12px;z-index:2;width:38px;height:38px;border-radius:50%;border:0;background:#123B3A;color:#fff;font-size:22px;line-height:1;cursor:pointer}
+html.cal-on,html.cal-on body{overflow:hidden}
+@media (max-width:600px){.cal-modal{padding:0}.cal-box{height:100%;border-radius:0}}
 </style>
 </head>
 <body>
@@ -3006,7 +3020,7 @@ addEventListener('hashchange',()=>setTimeout(armPerso,80));
 })();
 
 
-/* ===== intro pilotée par le défilement (écran fixe), fin automatique après 3 s sans action ===== */
+/* ===== intro pilotée par le défilement (écran fixe), fin automatique après 6 s sans action ===== */
 function introOn(){const sec=document.getElementById('intro');return !!sec&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&getComputedStyle(sec).display!=='none'}
 (function(){
  const sec=document.getElementById('intro'),hero=()=>document.getElementById('top');
@@ -3063,20 +3077,30 @@ route();hdrTone();setTimeout(armPerso,80);
 </script>
 
 <script>
-/* Calendly en fenêtre sur le site (pas de sortie) + événements de suivi poussés dans dataLayer */
+/* Calendly : fenêtre du site avec l'agenda préchargé (dès qu'on approche d'un lien), événements de suivi dans dataLayer */
 (function(){
  const URL_CAL='https://calendly.com/equipe_partenaires_lsf_energie/parler-a-un-ingenieur';
  window.dataLayer=window.dataLayer||[];
- let loading=null;
- function load(){if(window.Calendly)return Promise.resolve();if(loading)return loading;
-  const l=document.createElement('link');l.rel='stylesheet';l.href='https://assets.calendly.com/assets/external/widget.css';document.head.appendChild(l);
-  loading=new Promise((ok,ko)=>{const sc=document.createElement('script');sc.src='https://assets.calendly.com/assets/external/widget.js';sc.async=true;sc.onload=ok;sc.onerror=ko;document.head.appendChild(sc)});return loading}
- function open(src){const u=new URL(URL_CAL);u.searchParams.set('hide_gdpr_banner','1');u.searchParams.set('utm_source','site');u.searchParams.set('utm_content',src||'');
-  window.dataLayer.push({event:'calendly_open',source:src||''});
-  load().then(()=>Calendly.initPopupWidget({url:u.toString()})).catch(()=>{location.href=URL_CAL})}
+ let modal=null,frame=null,ready=false,src='';
+ function build(){if(modal)return;
+  const u=new URL(URL_CAL);u.searchParams.set('embed_domain',location.host||'lsf-energie.pages.dev');u.searchParams.set('embed_type','Inline');u.searchParams.set('hide_gdpr_banner','1');u.searchParams.set('utm_source','site');
+  modal=document.createElement('div');modal.className='cal-modal';modal.setAttribute('aria-hidden','true');modal.setAttribute('role','dialog');modal.setAttribute('aria-modal','true');modal.setAttribute('aria-label','Prendre rendez-vous avec un ingénieur');
+  modal.innerHTML='<div class="cal-box"><button type="button" class="cal-x" aria-label="Fermer">×</button><div class="cal-load"><i></i><span>Chargement de l\'agenda…</span></div></div>';
+  frame=document.createElement('iframe');frame.title='Agenda Calendly';frame.src=u.toString();frame.loading='eager';
+  frame.addEventListener('load',()=>{ready=true;modal.classList.add('ready')});
+  modal.querySelector('.cal-box').appendChild(frame);document.body.appendChild(modal);
+  modal.addEventListener('click',e=>{if(e.target===modal||e.target.closest('.cal-x'))close()});}
+ function open(from){build();src=from||'';window.dataLayer.push({event:'calendly_open',source:src});modal.classList.add('open');modal.removeAttribute('aria-hidden');document.documentElement.classList.add('cal-on');modal.querySelector('.cal-x').focus()}
+ function close(){if(!modal)return;modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.documentElement.classList.remove('cal-on');window.dataLayer.push({event:'calendly_close',source:src})}
+ addEventListener('keydown',e=>{if(e.key==='Escape'&&modal&&modal.classList.contains('open'))close()});
+ /* préchargement : survol, focus, ou lien bientôt visible */
+ document.addEventListener('pointerover',e=>{if(e.target.closest&&e.target.closest('[data-calendly]'))build()},{passive:true});
+ document.addEventListener('focusin',e=>{if(e.target.closest&&e.target.closest('[data-calendly]'))build()});
+ if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>{if(es.some(x=>x.isIntersecting)){build();io.disconnect()}},{rootMargin:'0px 0px 900px 0px'});document.querySelectorAll('[data-calendly]').forEach(a=>io.observe(a))}
  document.addEventListener('click',e=>{const a=e.target.closest('[data-calendly]');if(!a)return;e.preventDefault();open(a.dataset.calendly||(a.closest('footer')?'footer':(location.hash||'#accueil').slice(1)))});
  window.addEventListener('message',e=>{if(e.origin!=='https://calendly.com'||!e.data||typeof e.data.event!=='string'||e.data.event.indexOf('calendly.')!==0)return;
-  window.dataLayer.push({event:e.data.event.replace('.','_'),calendly:e.data.payload||{}})});
+  if(!modal||!modal.classList.contains('open')||e.data.event==='calendly.page_height')return;
+  window.dataLayer.push({event:e.data.event.replace('.','_'),source:src,calendly:e.data.payload||{}})});
  window.openCalendly=open;
 })();
 </script>
