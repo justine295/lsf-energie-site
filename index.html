@@ -1406,6 +1406,16 @@ html.intro-playing .cmd.in-intro .wrap>*{opacity:0;transform:translateY(18px)}
 html.hdr-wait .hdr,html.hdr-wait .proto{opacity:0;transform:translateY(-14px);pointer-events:none}
 
 html.intro-playing .intro{position:fixed;inset:0;height:100vh;z-index:45}
+
+/* intro : verrouillage officiel du logo (proportions du design system) */
+.intro{--L:clamp(110px,12vw,170px)}
+.intro-sq{width:var(--L)}
+.intro-wm{height:var(--L);display:flex;flex-direction:column;justify-content:space-between;padding-block:calc(var(--L)*.04)}
+.intro-wm b{font-size:calc(var(--L)*.52);line-height:1;letter-spacing:-.02em;margin-top:calc(var(--L)*-.02)}
+.intro-wm small{font-size:calc(var(--L)*.305);line-height:1;letter-spacing:.15em;margin-top:0}
+
+/* hero de la home : même quadrillage que l'intro, sur toute la hauteur */
+.cmd.in-intro::before{background-image:linear-gradient(rgba(240,238,233,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(240,238,233,.045) 1px,transparent 1px);background-size:32px 32px;-webkit-mask-image:none;mask-image:none}
 </style>
 </head>
 <body>
@@ -2698,7 +2708,7 @@ function introOn(){const sec=document.getElementById('intro');return !!sec&&!mat
   const k=a*D/1700;                                      // phase logo (0 → 1 sur 1,7 s)
   bars.forEach((b,i)=>{const t=ease(cl(k,.05+i*.1,.45+i*.1));b.style.transform=`scaleY(${.18+.82*t})`});
   const w=ease(cl(k,.45,.95)),out=ease(cl(a,.72,.92));
-  const sqW=sq.offsetWidth,wmW=wm.offsetWidth,gap=sqW*.32,total=sqW+gap+wmW;
+  const sqW=sq.offsetWidth,wmW=wm.offsetWidth,gap=sqW*.42,total=sqW+gap+wmW;
   sq.style.transform=`translate(calc(-50% + ${(-(total/2)+sqW/2)*w}px),calc(-50% - ${out*60}px)) scale(${1-out*.25})`;
   wm.style.transform=`translate(${-(total/2)+sqW+gap+(1-w)*24}px,calc(-50% - ${out*60}px)) scale(${1-out*.25})`;
   wm.style.opacity=w*(1-out);sq.style.opacity=1-out;
