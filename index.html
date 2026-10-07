@@ -1805,6 +1805,11 @@ html.cal-on,html.cal-on body{overflow:hidden}
 .cmd.in-intro .meta-row .msep{display:none}
 .cmd.in-intro .meta-row b.mcee{font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--sable)}
 @media (max-width:760px){.cmd.in-intro .meta-row b.mcee{font-size:9.5px!important;letter-spacing:.06em!important;white-space:nowrap}}
+/* badge : une seule ligne */
+.cmd.in-intro .meta-row span:last-child{display:inline-flex!important;align-items:center;border-radius:999px}
+.cmd.in-intro .meta-row span:last-child::before{grid-row:auto}
+.cmd.in-intro .meta-row b.mcee{font:600 clamp(16px,1.4vw,20px)/1.2 var(--sans)!important;letter-spacing:-.01em!important;text-transform:none!important;color:var(--on-deep)!important;white-space:nowrap}
+@media (max-width:760px){.cmd.in-intro .meta-row b.mcee{font-size:13.5px!important}.cmd.in-intro .meta-row span:last-child{padding:9px 14px 9px 10px}}
 </style>
 </head>
 <body>
@@ -1861,7 +1866,7 @@ html.cal-on,html.cal-on body{overflow:hidden}
   <section class="cmd" id="top">
     <canvas id="flux" aria-hidden="true"></canvas>
     <div class="wrap">
-      <div class="meta-row"><span id="hero-crumb">Financement de la rénovation énergétique · <b>+1 000 pros</b> · partout en France</span><span><b class="mcee">Mandataire CEE piloté par des ingénieurs</b><i class="msep"> · </i><em class="mtxt">Des CEE qui tiennent <b>au contrôle</b></em></span></div>
+      <div class="meta-row"><span id="hero-crumb">Financement de la rénovation énergétique · <b>+1 000 pros</b> · partout en France</span><span><b class="mcee">Mandataire CEE piloté par des ingénieurs</b></span></div>
       <h1 class="say" aria-live="polite">
         <span class="fixed">Je suis</span>
         <span class="pick"><button id="pk-role" aria-haspopup="listbox" aria-expanded="false"><span class="v"></span></button><div class="menu" id="mn-role" role="listbox" hidden></div></span>
