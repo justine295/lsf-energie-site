@@ -1416,6 +1416,11 @@ html.intro-playing .intro{position:fixed;inset:0;height:100vh;z-index:45}
 
 /* hero de la home : même quadrillage que l'intro, sur toute la hauteur */
 .cmd.in-intro::before{background-image:linear-gradient(rgba(240,238,233,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(240,238,233,.045) 1px,transparent 1px);background-size:32px 32px;-webkit-mask-image:none;mask-image:none}
+
+/* un seul fond : le logo s'anime sur le fond du hero (pétrole, quadrillage, particules) */
+.intro .intro-stage{background:transparent!important}
+.intro .intro-stage::before{display:none}
+html.intro-playing body{background:#0C2A28}
 </style>
 </head>
 <body>
