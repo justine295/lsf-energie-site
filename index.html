@@ -1347,6 +1347,14 @@ section.blk{padding-block:clamp(64px,9vw,120px)}
 .intro-dim{position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(12,42,40,.55),rgba(12,42,40,.85));opacity:0;pointer-events:none}
 .intro-stage>.cmd.in-intro{position:absolute;inset:0;z-index:5;margin:0!important;min-height:0;background:transparent;padding-top:calc(var(--hdr-h,73px) + 20px);padding-bottom:40px;opacity:0;pointer-events:none;justify-content:center}
 .cmd.in-intro::before,.cmd.in-intro #flux,.cmd.in-intro .scrollhint{display:none}
+
+/* hero : on montre que le profil se change */
+.intro{height:300vh}
+.pick-hint{margin:16px 0 0;font:600 13px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--sable)}
+#pk-role .car{animation:carbob 1.6s ease-in-out infinite}
+@keyframes carbob{0%,100%{transform:translateY(0)}50%{transform:translateY(.12em)}}
+#pk-role .v.swap{animation:swapi .35s var(--ease)}
+@media (prefers-reduced-motion:reduce){#pk-role .car{animation:none}}
 </style>
 </head>
 <body>
@@ -1396,7 +1404,7 @@ section.blk{padding-block:clamp(64px,9vw,120px)}
         <svg viewBox="0 0 72 72" aria-hidden="true"><path id="intro-fill" d="M36 3 C61 3 69 11 69 36 C69 61 61 69 36 69 C11 69 3 61 3 36 C3 11 11 3 36 3 Z" fill="#B0542F"/><g fill="#fff"><rect class="ib ib1" x="21" y="41" width="9" height="13" rx="3"/><rect class="ib ib2" x="31.5" y="31" width="9" height="23" rx="3"/><rect class="ib ib3" x="42" y="21" width="9" height="33" rx="3"/></g></svg>
       </div>
       <div class="intro-wm" id="intro-wm"><b>LSF</b><small>ÉNERGIE</small></div>
-      <p class="intro-tag" id="intro-tag">Le financement de la rénovation énergétique</p>
+      <p class="intro-tag" id="intro-tag">Le partenaire financier des acteurs de la rénovation énergétique</p>
       <div class="intro-hint" id="intro-hint"><i></i>Faites défiler</div>
       <a class="intro-skip" id="intro-skip" href="#top">Passer l'intro ↓</a>
     </div>
@@ -1413,6 +1421,7 @@ section.blk{padding-block:clamp(64px,9vw,120px)}
         <span id="goalpart"><span class="fixed">et je veux</span>
         <span class="pick"><button id="pk-goal" aria-haspopup="listbox" aria-expanded="false"><span class="v"></span></button><div class="menu" id="mn-goal" role="listbox" hidden></div></span></span>
       </h1>
+      <p class="pick-hint" id="pick-hint">↑ Cliquez sur votre profil pour le changer</p>
       <div class="home-sub" id="home-sub" hidden>
         <p><b>LSF Énergie finance la rénovation énergétique</b> grâce aux CEE, pour tous les acteurs de la filière : artisans, obligés, bureaux d'études, fabricants, bailleurs, entreprises, industriels, transporteurs. <b>+1 000 professionnels</b> nous font déjà confiance. Dites-nous qui vous êtes.</p>
         <div class="row"><a class="btn btn-cta" id="home-go" href="#artisans-rge">Voir ma solution <span class="arr">→</span></a><a class="btn btn-ghost" href="#acteur-central" id="eco-link">Les preuves</a></div>
@@ -2141,7 +2150,7 @@ function renderMenus(){
 function swapText(el,t){const w=t.split(' '),last=w.pop();el.innerHTML=(w.length?w.join(' ')+' ':'')+'<span class="nw">'+last+'<span class="car" aria-hidden="true">▼</span></span>';el.classList.remove('swap');void el.offsetWidth;el.classList.add('swap')}
 function renderAnswer(){
  const home=typeof curView==='undefined'||curView!=='solution';
- $('#goalpart').hidden=home;$('#answer').hidden=home;$('#home-sub').hidden=!home;$('#home-go').href='#'+PAGEOF[role];
+ $('#goalpart').hidden=home;const ph=document.getElementById('pick-hint');if(ph)ph.hidden=!home;$('#answer').hidden=home;$('#home-sub').hidden=!home;$('#home-go').href='#'+PAGEOF[role];
  if(home){swapText($('#pk-role .v'),ROLES[role].label);renderMenus();return}
  const r=ROLES[role],g=r.goals[goal],T=getTool(g.tool);
  swapText($('#pk-role .v'),r.label);swapText($('#pk-goal .v'),g.ph+'.');
@@ -2173,7 +2182,7 @@ function syncContact(){
 /* menus */
 function closeMenus(){$$('.menu').forEach(m=>m.hidden=true);$$('.pick>button').forEach(b=>b.setAttribute('aria-expanded','false'))}
 function toggle(btn,menu){const open=menu.hidden;closeMenus();if(open){menu.hidden=false;btn.setAttribute('aria-expanded','true');(menu.querySelector('[aria-selected="true"]')||menu.querySelector('button')).focus()}}
-$('#pk-role').onclick=e=>{e.stopPropagation();toggle($('#pk-role'),$('#mn-role'))};
+$('#pk-role').onclick=e=>{window.__pickTouched=true;e.stopPropagation();toggle($('#pk-role'),$('#mn-role'))};
 $('#pk-goal').onclick=e=>{e.stopPropagation();toggle($('#pk-goal'),$('#mn-goal'))};
 document.addEventListener('click',e=>{if(!e.target.closest('.menu'))closeMenus()});
 document.addEventListener('keydown',e=>{
@@ -2626,7 +2635,8 @@ function introOn(){const sec=document.getElementById('intro');return !!sec&&!mat
  const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
  let tick=false;
  function upd(){tick=false;if(curView!=='accueil')return;
-  const r=sec.getBoundingClientRect(),range=sec.offsetHeight-innerHeight;const p=Math.max(0,Math.min(1,-r.top/range));
+  const r=sec.getBoundingClientRect(),range=sec.offsetHeight-innerHeight;const P=Math.max(0,Math.min(1,-r.top/range));
+  const p=Math.min(1,P/0.68),hold=cl(P,.7,.97);
   // 1. jauge : les barres montent
   bars.forEach((b,i)=>{const t=ease(cl(p,i*.04,.13+i*.04));b.style.transform=`scaleY(${.18+.82*t})`;b.style.opacity=1-cl(p,.34,.42)});
   // 2. le mot-symbole se déploie
@@ -2650,6 +2660,13 @@ function introOn(){const sec=document.getElementById('intro');return !!sec&&!mat
   const hero=document.getElementById('top');
   if(hero&&hero.parentElement&&hero.parentElement.classList.contains('intro-stage')){hero.style.opacity=ho.toFixed(3);hero.style.transform=`translateY(${(1-ho)*28}px)`;hero.style.pointerEvents=ho>.6?'auto':'none'}
   skip.style.opacity=1-cl(p,.6,.72);skip.style.pointerEvents=p>.7?'none':'auto';
+  // 5. le hero reste à l'écran et le profil défile pour montrer qu'on peut le changer
+  const phint=document.getElementById('pick-hint');if(phint)phint.style.opacity=ho.toFixed(3);
+  if(!window.__pickTouched){
+   const start=ROLE_ORDER.indexOf(role);const seq=ROLE_ORDER.slice(start+1).concat(ROLE_ORDER.slice(0,start+1));
+   const k=hold<=0||hold>=1?role:seq[Math.min(seq.length-1,Math.floor(hold*seq.length))];
+   if(k!==upd.last){upd.last=k;swapText($('#pk-role .v'),ROLES[k].label);$('#home-go').href='#'+PAGEOF[k]}
+  }
  }
  const req=()=>{if(!tick){tick=true;requestAnimationFrame(upd)}};
  window.__introReq=req;
