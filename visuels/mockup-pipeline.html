@@ -1,0 +1,79 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Visuel Pipeline</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@700;800&family=JetBrains+Mono:wght@600;700&display=swap">
+<style>html,body{margin:0;background:#0C2A28}.frame{width:1600px}/* Visuel type Pipeline (interface réelle, données fictives), mis à l'échelle par container queries */
+.mk{position:relative;width:100%;aspect-ratio:16/9;container-type:inline-size;overflow:hidden;background:#0C2A28;border-radius:inherit;font-family:"Inter",system-ui,sans-serif;color:#1B2B2E}
+.mk::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(240,238,233,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(240,238,233,.05) 1px,transparent 1px);background-size:2.6cqw 2.6cqw}
+.mk-win{position:absolute;left:6%;top:8%;width:88%;height:86%;background:#fff;border-radius:1.1cqw;overflow:hidden;box-shadow:0 3cqw 7cqw -2cqw rgba(0,0,0,.6);transform:perspective(200cqw) rotateX(4deg);transform-origin:center bottom}
+.mk-bar{height:4.4%;background:#ECEAE5;display:flex;align-items:center;gap:.45cqw;padding:0 1cqw}
+.mk-bar i{width:.7cqw;height:.7cqw;border-radius:50%;background:#D3CFC7}
+.mk-bar span{margin-left:1.2cqw;font-size:.72cqw;color:#67635C;background:#fff;border-radius:.4cqw;padding:.2cqw .9cqw}
+.mk-app{display:grid;grid-template-columns:15% 1fr;height:95.6%}
+.mk-side{background:#14303A;color:rgba(240,238,233,.75);padding:1.2cqw .9cqw;display:flex;flex-direction:column;gap:.35cqw;font-size:.8cqw}
+.mk-brand{display:grid;margin-bottom:.8cqw;padding-bottom:.8cqw;border-bottom:2px solid #2B5A8C}
+.mk-brand b{font:800 2cqw/1 "Space Grotesk",Inter,sans-serif;color:#F3DCC4;letter-spacing:-.03em}
+.mk-brand small{font-size:.5cqw;letter-spacing:.2em;color:rgba(243,220,196,.7);margin-top:.3cqw;text-align:right}
+.mk-search{border:1px solid rgba(240,238,233,.15);border-radius:.5cqw;padding:.45cqw .7cqw;font-size:.7cqw;color:rgba(240,238,233,.5);margin-bottom:.6cqw}
+.mk-side span{display:grid;padding:.45cqw .7cqw;border-radius:.5cqw}
+.mk-side span b{font-weight:500;color:#F0EEE9;font-size:.78cqw}
+.mk-side span small{font-size:.58cqw;color:rgba(240,238,233,.5)}
+.mk-side span.on{background:#2C5B55}
+.mk-side em{font-style:normal;font-size:.55cqw;letter-spacing:.12em;color:rgba(240,238,233,.45);margin:.7cqw 0 .2cqw .7cqw}
+.mk-main{padding:1.1cqw 1.4cqw;display:grid;gap:.8cqw;align-content:start;background:#FAFAF8}
+.mk-head{display:grid;grid-template-columns:auto 1fr auto;gap:1cqw;align-items:center}
+.mk-head b{display:block;font-size:1.15cqw;letter-spacing:-.02em}
+.mk-head small{font-size:.65cqw;color:#8E8A81}
+.mk-search2{justify-self:end;width:60%;border:1px solid #E6E3DD;background:#fff;border-radius:.5cqw;padding:.5cqw .8cqw;font-size:.68cqw;color:#9A968E}
+.mk-btn{background:#C25B34;color:#fff;font-size:.72cqw;font-weight:600;padding:.6cqw 1cqw;border-radius:.5cqw}
+.mk-filters{display:flex;gap:.6cqw}
+.mk-filters span{border:1px solid #E6E3DD;background:#fff;border-radius:.45cqw;padding:.4cqw .8cqw;font-size:.62cqw;color:#3D4A4C}
+.mk-table{background:#fff;border:1px solid #ECEAE5;border-radius:.7cqw;overflow:hidden}
+.mk-table>div{display:grid;grid-template-columns:.85fr 1.05fr 1.35fr 1.05fr 1fr .75fr .9fr 1fr;gap:.6cqw;align-items:center;padding:.85cqw 1cqw;border-top:1px solid #F1EFEB;font-size:.7cqw}
+.mk-table .th{border-top:0;font-weight:700;color:#3D4A4C;font-size:.68cqw;background:#FCFBFA}
+.mk-table .ref{font-weight:600;color:#3D4A4C}
+.mk-table span b{display:block;font-weight:600}
+.mk-table span small{display:inline-block;font-size:.52cqw;background:#F0EEE9;color:#67635C;padding:.05cqw .35cqw;border-radius:.2cqw;margin-top:.15cqw}
+.mk-table i{font-style:normal;font-weight:700;font-size:.58cqw;border:1px solid #E6E3DD;border-radius:.25cqw;padding:.05cqw .3cqw;margin-right:.4cqw}
+.mk-table .ty{justify-self:start;font-size:.6cqw;color:#C25B34;background:#FBEFE8;border:1px solid #F3D5C6;border-radius:5cqw;padding:.15cqw .55cqw}
+.mk-table .pr{color:#1F7A5A;font-weight:600}
+.mk-table .st{display:flex;gap:.3cqw;align-items:center;flex-wrap:wrap}
+.mk-table .st u{text-decoration:none;font-size:.58cqw;border-radius:.25cqw;padding:.1cqw .4cqw;background:#DEF0E7;color:#1F9E6B;font-weight:600}
+.mk-table .st u.a{background:#E7F3EC;color:#2E8A62}
+.mk-table .st u.r{background:#FBEFE8;color:#C25B34}
+.mk-table .st em{font-style:normal;font-size:.56cqw;color:#67635C;border:1px solid #E6E3DD;border-radius:.25cqw;padding:.1cqw .35cqw}
+.mk-table .st em.done{color:#1F9E6B;border-color:#BFE3D0}
+.mk-ex{position:absolute;left:1.6cqw;bottom:1.2cqw;font:600 .75cqw "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(233,199,168,.7)}
+</style></head><body><div class="frame"><div class="mk" role="img" aria-label="Exemple illustratif de l'interface Pipeline : liste des dossiers CEE avec installateur, bénéficiaire, fiche, prime et avancement.">
+  <div class="mk-win">
+    <div class="mk-bar"><i></i><i></i><i></i><span>app.pipeline.lsf-energie.fr/dossiers</span></div>
+    <div class="mk-app">
+      <aside class="mk-side">
+        <div class="mk-brand"><b>Pipeline.</b><small>BY LSF ÉNERGIE</small></div>
+        <div class="mk-search">Rechercher…</div>
+        <span class="on"><b>Dossiers</b><small>Tous les dossiers</small></span>
+        <em>ADMINISTRATION</em>
+        <span><b>Suivi commandes</b><small>VT &amp; COFRAC</small></span>
+        <span><b>Suivi des crédits</b><small>Demandes de financement</small></span>
+        <span><b>Journal d'activité</b></span>
+        <span><b>Paramètres</b></span>
+      </aside>
+      <main class="mk-main">
+        <div class="mk-head"><div><b>Dossiers</b><small>48 dossiers · toutes sociétés</small></div><div class="mk-search2">Référence, bénéficiaire, ville, code fiche…</div><span class="mk-btn">+ Créer un dossier</span></div>
+        <div class="mk-filters"><span>Tous les installateurs</span><span>Tous statuts</span><span>Toutes fiches</span><span>Dossiers actifs</span><span>Tous les avancements</span></div>
+        <div class="mk-table">
+          <div class="th"><span>Référence</span><span>Installateur</span><span>Bénéficiaire</span><span>Site</span><span>Fiche CEE</span><span>Type</span><span>Prime</span><span>Statut</span></div>
+          <div><span class="ref">OP-2026-129</span><span>THERMI'SUD</span><span><b>Résidence Les Tilleuls</b><small>Copropriété</small></span><span>31000 Toulouse</span><span><i>BAR</i>BAR-TH-171</span><span class="ty">Chauffage</span><span class="pr">4 820,00 €</span><span class="st"><u>Versée</u><em class="done">12/12</em></span></div>
+          <div><span class="ref">OP-2026-128</span><span>ISOL'EST</span><span><b>Mairie de Thionville</b><small>Personne morale</small></span><span>57100 Thionville</span><span><i>BAT</i>BAT-EN-101</span><span class="ty">Isolation</span><span class="pr">18 240,00 €</span><span class="st"><u class="a">Actif</u><em>En cours · 9/12</em></span></div>
+          <div><span class="ref">OP-2026-126</span><span>CLIMA PROVENCE</span><span><b>Clinique du Parc</b><small>Personne morale</small></span><span>13008 Marseille</span><span><i>BAT</i>BAT-TH-116</span><span class="ty">GTB</span><span class="pr">62 310,50 €</span><span class="st"><u class="a">Actif</u><em>En cours · 6/12</em></span></div>
+          <div><span class="ref">OP-2026-121</span><span>RÉNO BRETAGNE</span><span><b>M. Martin</b><small>Personne physique</small></span><span>35000 Rennes</span><span><i>BAR</i>BAR-EN-101</span><span class="ty">Isolation</span><span class="pr">1 980,00 €</span><span class="st"><u class="r">Relecture</u><em>Ingénieur · 11/12</em></span></div>
+          <div><span class="ref">OP-2026-117</span><span>FROID 44</span><span><b>Laiterie de l'Erdre</b><small>Personne morale</small></span><span>44000 Nantes</span><span><i>IND</i>IND-UT-117</span><span class="ty">Process</span><span class="pr">41 760,00 €</span><span class="st"><u class="a">Actif</u><em>Contrôle IA · 4/12</em></span></div>
+          <div><span class="ref">OP-2026-114</span><span>THERMI'SUD</span><span><b>Les Jardins d'Occitanie</b><small>Copropriété</small></span><span>34000 Montpellier</span><span><i>BAR</i>BAR-SE-104</span><span class="ty">Chauffage</span><span class="pr">9 412,80 €</span><span class="st"><u class="a">Actif</u><em>En cours · 2/12</em></span></div>
+          <div><span class="ref">OP-2026-112</span><span>ÉNERGIE GRAND EST</span><span><b>Collège Jean Moulin</b><small>Personne morale</small></span><span>67000 Strasbourg</span><span><i>BAT</i>BAT-EQ-127</span><span class="ty">Éclairage</span><span class="pr">23 905,00 €</span><span class="st"><u class="a">Actif</u><em>En cours · 7/12</em></span></div>
+          <div><span class="ref">OP-2026-109</span><span>CLIMA PROVENCE</span><span><b>Mme Durand</b><small>Personne physique</small></span><span>06000 Nice</span><span><i>BAR</i>BAR-TH-148</span><span class="ty">Eau chaude</span><span class="pr">1 210,00 €</span><span class="st"><u>Versée</u><em class="done">12/12</em></span></div>
+          <div><span class="ref">OP-2026-105</span><span>ISOL'EST</span><span><b>Résidence du Lac</b><small>Copropriété</small></span><span>74000 Annecy</span><span><i>BAR</i>BAR-EN-107</span><span class="ty">Isolation</span><span class="pr">27 640,00 €</span><span class="st"><u class="a">Actif</u><em>En cours · 5/12</em></span></div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <span class="mk-ex">Exemple illustratif · données fictives</span>
+</div>
+</div></body></html>
