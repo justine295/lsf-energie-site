@@ -2992,10 +2992,17 @@ addEventListener('hashchange',()=>setTimeout(armPerso,80));
 /* acteur central : les métiers apparaissent un à un au défilement */
 (function(){
  const ul=$('.central-list');if(!ul||!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
- ul.classList.add('anim');
- const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -42% 0px'});
- [...ul.children].forEach(li=>io.observe(li));
- setTimeout(()=>[...ul.children].forEach(li=>{if(li.getBoundingClientRect().top<innerHeight*0.6)li.classList.add('in')}),6000);
+ let io=null,q=[],busy=false;
+ /* file d'attente : même après un défilement rapide, les métiers arrivent l'un après l'autre */
+ function next(){if(!q.length){busy=false;return}busy=true;q.shift().classList.add('in');setTimeout(next,160)}
+ function arm(){if(io)io.disconnect();q=[];const items=[...ul.children];
+  const r=ul.getBoundingClientRect();if(r.height===0)return;
+  if(r.top<innerHeight*0.5){items.forEach(li=>li.classList.add('in'));return}
+  ul.classList.add('anim');items.forEach(li=>li.classList.remove('in'));
+  io=new IntersectionObserver(es=>es.filter(e=>e.isIntersecting).sort((x,y)=>items.indexOf(x.target)-items.indexOf(y.target)).forEach(e=>{io.unobserve(e.target);q.push(e.target);if(!busy)next()}),{rootMargin:'0px 0px -42% 0px'});
+  items.forEach(li=>io.observe(li))}
+ addEventListener('hashchange',()=>setTimeout(()=>{if(curView==='accueil')arm()},120));
+ setTimeout(arm,100);
 })();
 
 
