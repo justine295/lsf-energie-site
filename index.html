@@ -1781,6 +1781,24 @@ html.cal-on,html.cal-on body{overflow:hidden}
  .ftr .base{margin-top:32px;flex-direction:column;gap:6px}
 }
 .cmd .meta-row b.mcee{color:var(--on-deep);font-weight:700}
+/* ingénierie : 4 engagements */
+.tb-eng{margin-top:56px;padding-top:28px;border-top:2px solid var(--ink)}
+.tb-eng-k{margin:0 0 22px;font:600 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--brand)}
+.tb-eng ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.tb-eng li{display:grid;gap:8px;align-content:start}
+.tb-eng code{font:700 12px var(--mono);color:var(--brand)}
+.tb-eng b{font-size:21px;letter-spacing:-.03em;font-weight:800;color:var(--ink)}
+.tb-eng span{font-size:15px;line-height:1.5;color:var(--ink-2)}
+@media (max-width:900px){.tb-eng ol{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.tb-eng{margin-top:36px}.tb-eng ol{grid-template-columns:1fr;gap:0}.tb-eng li{grid-template-columns:34px 1fr;column-gap:8px;padding:14px 0;border-bottom:1px solid var(--line)}.tb-eng li code{grid-row:1/3;padding-top:5px}.tb-eng b{font-size:18px}}
+.cmd .meta-row .msep,.cmd .meta-row .mtxt{font-style:normal}
+@media (max-width:760px){
+ .cmd.in-intro .meta-row span:last-child{display:inline-grid!important;grid-template-columns:auto auto;column-gap:10px;align-items:center;text-align:left;border-radius:16px;padding:9px 16px 9px 11px}
+ .cmd.in-intro .meta-row span:last-child::before{grid-row:1/3;margin:0!important;vertical-align:0}
+ .cmd.in-intro .meta-row .msep{display:none}
+ .cmd.in-intro .meta-row b.mcee{font:600 10.5px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--sable)}
+ .cmd.in-intro .meta-row .mtxt{font-size:15px;line-height:1.25}
+}
 </style>
 </head>
 <body>
@@ -1837,7 +1855,7 @@ html.cal-on,html.cal-on body{overflow:hidden}
   <section class="cmd" id="top">
     <canvas id="flux" aria-hidden="true"></canvas>
     <div class="wrap">
-      <div class="meta-row"><span id="hero-crumb">Financement de la rénovation énergétique · <b>+1 000 pros</b> · partout en France</span><span><b class="mcee">Mandataire CEE</b> · Des CEE qui tiennent <b>au contrôle</b></span></div>
+      <div class="meta-row"><span id="hero-crumb">Financement de la rénovation énergétique · <b>+1 000 pros</b> · partout en France</span><span><b class="mcee">Mandataire CEE</b><i class="msep"> · </i><em class="mtxt">Des CEE qui tiennent <b>au contrôle</b></em></span></div>
       <h1 class="say" aria-live="polite">
         <span class="fixed">Je suis</span>
         <span class="pick"><button id="pk-role" aria-haspopup="listbox" aria-expanded="false"><span class="v"></span></button><div class="menu" id="mn-role" role="listbox" hidden></div></span>
@@ -1875,6 +1893,15 @@ html.cal-on,html.cal-on body{overflow:hidden}
           <p class="tb-lead">d'expertise CEE, chaque dossier relu par un ingénieur</p>
           <dl class="tb-mini"><div><dt>Contrôles IA</dt><dd class="num">300+</dd></div><div><dt>Versement</dt><dd class="num">J+5</dd></div></dl>
         </div>
+      </div>
+      <div class="tb-eng" aria-label="Ce que fait l'ingénierie LSF Énergie">
+        <p class="tb-eng-k">Ce que fait notre ingénierie, sur chaque dossier</p>
+        <ol>
+          <li><code>01</code><b>Audit et gisements</b><span>Les gisements identifiés, chaque opération qualifiée avant le premier devis.</span></li>
+          <li><code>02</code><b>Dimensionnement</b><span>Équipements et matériels choisis pour tenir la fiche et valoriser l'opération au juste niveau.</span></li>
+          <li><code>03</code><b>Volumes tracés</b><span>Chaque volume documenté, tracé et défendable au contrôle.</span></li>
+          <li><code>04</code><b>Veille quotidienne</b><span>Nos ingénieurs suivent chaque arrêté : la fiche appliquée est toujours la bonne.</span></li>
+        </ol>
       </div>
       <div class="tb-logos" aria-label="Partenaires et labels">
         <span class="tb-ll">Partenaires et labels</span>
