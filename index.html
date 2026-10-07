@@ -1341,6 +1341,12 @@ section.blk{padding-block:clamp(64px,9vw,120px)}
 .intro-img img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(var(--ki,1.25));will-change:transform}
 .intro-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,42,40,.15) 0%,rgba(12,42,40,0) 35%,rgba(12,42,40,.35) 80%,#0C2A28 100%);pointer-events:none}
 .intro-sq{z-index:3}.intro-wm,.intro-tag{z-index:3}
+
+/* intro + hero fusionnés */
+.intro{height:220vh}
+.intro-dim{position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(12,42,40,.55),rgba(12,42,40,.85));opacity:0;pointer-events:none}
+.intro-stage>.cmd.in-intro{position:absolute;inset:0;z-index:5;margin:0!important;min-height:0;background:transparent;padding-top:calc(var(--hdr-h,73px) + 20px);padding-bottom:40px;opacity:0;pointer-events:none;justify-content:center}
+.cmd.in-intro::before,.cmd.in-intro #flux,.cmd.in-intro .scrollhint{display:none}
 </style>
 </head>
 <body>
@@ -1384,6 +1390,7 @@ section.blk{padding-block:clamp(64px,9vw,120px)}
 <div class="view" data-view="accueil">
   <section class="intro" id="intro" aria-label="LSF Énergie">
     <div class="intro-stage">
+      <div class="intro-dim" id="intro-dim" aria-hidden="true"></div>
       <div class="intro-img" id="intro-img" aria-hidden="true"><picture><source media="(max-width:700px)" srcset="visuels/intro-grille-mobile.webp"><img src="visuels/intro-grille.webp" alt="" decoding="async"></picture></div>
       <div class="intro-sq" id="intro-sq">
         <svg viewBox="0 0 72 72" aria-hidden="true"><path id="intro-fill" d="M36 3 C61 3 69 11 69 36 C69 61 61 69 36 69 C11 69 3 61 3 36 C3 11 11 3 36 3 Z" fill="#B0542F"/><g fill="#fff"><rect class="ib ib1" x="21" y="41" width="9" height="13" rx="3"/><rect class="ib ib2" x="31.5" y="31" width="9" height="23" rx="3"/><rect class="ib ib3" x="42" y="21" width="9" height="33" rx="3"/></g></svg>
@@ -2463,8 +2470,8 @@ function route(){
  else {view='accueil';h='accueil'}
  curView=view;
  const heroEl=document.getElementById('top');
- if(view==='solution'){$('#sol-hero-slot').appendChild(heroEl);renderSolution(h);if(role!==SOLKEY[h])setRole(SOLKEY[h]);else renderAnswer();$('#scrollhint').hidden=true}
- else if(view==='accueil'){$('#home-hero-slot').appendChild(heroEl);$('#hero-crumb').innerHTML="Financement de la rénovation énergétique · <b>+1 000 pros</b> · partout en France";renderAnswer();$('#scrollhint').hidden=false}
+ if(view==='solution'){heroEl.classList.remove('in-intro');heroEl.style.opacity='';heroEl.style.transform='';heroEl.style.pointerEvents='';$('#sol-hero-slot').appendChild(heroEl);renderSolution(h);if(role!==SOLKEY[h])setRole(SOLKEY[h]);else renderAnswer();$('#scrollhint').hidden=true}
+ else if(view==='accueil'){if(introOn()){$('#intro .intro-stage').appendChild(heroEl);heroEl.classList.add('in-intro')}else{$('#home-hero-slot').appendChild(heroEl)}$('#hero-crumb').innerHTML="Financement de la rénovation énergétique · <b>+1 000 pros</b> · partout en France";renderAnswer();$('#scrollhint').hidden=false}
  $$('.view').forEach(v=>v.hidden=v.dataset.view!==view);
  $$('[data-page]').forEach(a=>{a.dataset.page===h?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current')});
  closeDD();$$('.dd-btn')[0].classList.toggle('cur',view==='solution');$$('.dd-btn')[1].classList.toggle('cur',view==='fiches'||view==='fiche'||view==='journal'||view==='article');
@@ -2609,46 +2616,45 @@ addEventListener('hashchange',()=>setTimeout(armPerso,80));
 })();
 
 
-/* ===== intro : animation pilotée par le défilement ===== */
+/* ===== intro : animation pilotée par le défilement, qui se termine sur le hero ===== */
+function introOn(){const sec=document.getElementById('intro');return !!sec&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&getComputedStyle(sec).display!=='none'}
 (function(){
- const sec=document.getElementById('intro');if(!sec)return;
- if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
- const sq=document.getElementById('intro-sq'),wm=document.getElementById('intro-wm'),tag=document.getElementById('intro-tag'),hint=document.getElementById('intro-hint'),fill=document.getElementById('intro-fill');
+ const sec=document.getElementById('intro');if(!sec||!introOn())return;
+ const sq=document.getElementById('intro-sq'),wm=document.getElementById('intro-wm'),tag=document.getElementById('intro-tag'),hint=document.getElementById('intro-hint'),fill=document.getElementById('intro-fill'),skip=document.getElementById('intro-skip'),img=document.getElementById('intro-img'),dim=document.getElementById('intro-dim');
  const bars=[...sec.querySelectorAll('.ib')];
  const cl=(x,a,b)=>Math.max(0,Math.min(1,(x-a)/(b-a)));
  const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
- const mix=(a,b,t)=>'#'+[0,2,4].map(i=>{const x=parseInt(a.substr(i,2),16),y=parseInt(b.substr(i,2),16);return Math.round(x+(y-x)*t).toString(16).padStart(2,'0')}).join('');
  let tick=false;
  function upd(){tick=false;if(curView!=='accueil')return;
   const r=sec.getBoundingClientRect(),range=sec.offsetHeight-innerHeight;const p=Math.max(0,Math.min(1,-r.top/range));
-  // 1. barres qui montent (jauge)
-  bars.forEach((b,i)=>{const t=ease(cl(p,.0+i*.05,.18+i*.05));b.style.transform=`scaleY(${.18+.82*t})`});
-  // 2. le mot-symbole se déploie, le logo se décale à gauche
-  const w=ease(cl(p,.14,.36)),z=ease(cl(p,.48,1));
+  // 1. jauge : les barres montent
+  bars.forEach((b,i)=>{const t=ease(cl(p,i*.04,.13+i*.04));b.style.transform=`scaleY(${.18+.82*t})`;b.style.opacity=1-cl(p,.34,.42)});
+  // 2. le mot-symbole se déploie
+  const w=ease(cl(p,.1,.26)),z=ease(cl(p,.34,.62));
   const sqW=sq.offsetWidth,wmW=wm.offsetWidth,gap=sqW*.32,total=sqW+gap+wmW;
-  const sqX=-(total/2)+sqW/2;                       // position décalée (centre du groupe)
-  const shift=sqX*w*(1-z);                          // revient au centre pendant le zoom
-  const scale=1+z*z*55;
-  sq.style.transform=`translate(calc(-50% + ${shift}px),-50%) scale(${scale})`;
-  wm.style.opacity=w*(1-cl(p,.46,.56));
+  const shift=(-(total/2)+sqW/2)*w*(1-z);
+  sq.style.transform=`translate(calc(-50% + ${shift}px),-50%) scale(${1+z*z*55})`;
+  wm.style.opacity=w*(1-cl(p,.32,.4));
   wm.style.transform=`translate(${-(total/2)+sqW+gap+(1-w)*24}px,-50%)`;
-  tag.style.opacity=ease(cl(p,.22,.38))*(1-cl(p,.46,.54));
-  hint.style.opacity=1-cl(p,.02,.12);
-  // 3. le carré passe du terracotta au pétrole en remplissant l'écran
-  document.getElementById('intro-skip').style.opacity=1-cl(p,.75,.9);
-  // 4. le carré devient une fenêtre : l'image apparaît à travers, puis remplit l'écran
-  const img=document.getElementById('intro-img');
-  if(img){const b=sq.getBoundingClientRect(),W=innerWidth,H=innerHeight;
-   const open=cl(p,.5,.62);
-   fill.style.opacity=1-open;
-   const rad=Math.max(0,b.width*0.3*(1-cl(p,.8,.95)));
-   img.style.clipPath=open>0?`inset(${Math.max(0,b.top)}px ${Math.max(0,W-b.right)}px ${Math.max(0,H-b.bottom)}px ${Math.max(0,b.left)}px round ${rad}px)`:'inset(50% 50% 50% 50%)';
-   img.style.setProperty('--ki',(1.25-0.2*cl(p,.5,1)).toFixed(3));}
-  bars.forEach(b=>b.style.opacity=1-cl(p,.46,.56));
+  tag.style.opacity=ease(cl(p,.16,.28))*(1-cl(p,.32,.4));
+  hint.style.opacity=1-cl(p,.02,.1);
+  // 3. le carré devient une fenêtre sur l'image, qui remplit l'écran
+  const b=sq.getBoundingClientRect(),W=innerWidth,H=innerHeight,open=cl(p,.36,.46);
+  fill.style.opacity=1-open;
+  const rad=Math.max(0,b.width*0.3*(1-cl(p,.54,.62)));
+  img.style.clipPath=open>0?`inset(${Math.max(0,b.top)}px ${Math.max(0,W-b.right)}px ${Math.max(0,H-b.bottom)}px ${Math.max(0,b.left)}px round ${rad}px)`:'inset(50% 50% 50% 50%)';
+  img.style.setProperty('--ki',(1.25-0.2*cl(p,.36,1)).toFixed(3));
+  // 4. le hero « Je suis… » apparaît sur l'image
+  const ho=ease(cl(p,.62,.8));
+  dim.style.opacity=(.72*ho).toFixed(3);
+  const hero=document.getElementById('top');
+  if(hero&&hero.parentElement&&hero.parentElement.classList.contains('intro-stage')){hero.style.opacity=ho.toFixed(3);hero.style.transform=`translateY(${(1-ho)*28}px)`;hero.style.pointerEvents=ho>.6?'auto':'none'}
+  skip.style.opacity=1-cl(p,.6,.72);skip.style.pointerEvents=p>.7?'none':'auto';
  }
  const req=()=>{if(!tick){tick=true;requestAnimationFrame(upd)}};
+ window.__introReq=req;
  addEventListener('scroll',req,{passive:true});addEventListener('resize',req);addEventListener('hashchange',()=>setTimeout(req,60));
- document.getElementById('intro-skip').addEventListener('click',e=>{e.preventDefault();const t=document.getElementById('top');window.scrollTo({top:t.getBoundingClientRect().top+scrollY,behavior:'smooth'})});
+ skip.addEventListener('click',e=>{e.preventDefault();window.scrollTo({top:sec.offsetTop+sec.offsetHeight-innerHeight,behavior:'smooth'})});
  setTimeout(req,30);
 })();
 
