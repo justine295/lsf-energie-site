@@ -1758,6 +1758,13 @@ html.cal-on,html.cal-on body{overflow:hidden}
  .p2-steps>.p2-step.on{opacity:1!important;transform:none!important;background:rgba(240,238,233,.07)}
 }
 @media (max-width:760px){.m-swipe{align-items:stretch!important}.m-swipe>*{align-self:stretch!important}}
+@media (max-width:760px){
+ .perso.m-seq .perso-list li:not(.in){opacity:0!important;transform:translateX(-24px)!important;transition:none}
+ .perso.m-seq .perso-list li:not(.in)::after{transform:scaleX(0)!important}
+ .perso.m-seq .perso-list li:not(.in) code{opacity:0!important}
+ .perso.m-seq.go .perso-list li.in,.perso.m-seq.go .perso-list li.in::after,.perso.m-seq.go .perso-list li.in code{transition-delay:.05s!important}
+ .perso.m-seq:not(.go) .perso-list li.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+}
 </style>
 </head>
 <body>
@@ -3003,6 +3010,15 @@ function armPerso(){
  const r=sec.getBoundingClientRect();
  if(r.height===0||r.top<innerHeight*0.8){sec.classList.remove('anim');return}
  sec.classList.remove('go');sec.classList.add('anim');
+ const lis=[...sec.querySelectorAll('.perso-list li')];lis.forEach(li=>li.classList.remove('in'));
+ if(matchMedia('(max-width:760px)').matches){
+  /* mobile : le 1 se dessine quand il est à l'écran, puis chaque ligne arrive quand on l'atteint */
+  sec.classList.add('m-seq');armPerso.lio&&armPerso.lio.disconnect();
+  const one=sec.querySelector('.perso-one')||sec;
+  const io=armPerso.io=new IntersectionObserver(es=>{if(es[0].isIntersecting){sec.classList.add('go');io.disconnect()}},{threshold:.6});io.observe(one);
+  const lio=armPerso.lio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');lio.unobserve(e.target)}}),{rootMargin:'0px 0px -18% 0px'});lis.forEach(li=>lio.observe(li));
+  return}
+ sec.classList.remove('m-seq');
  const io=armPerso.io=new IntersectionObserver(es=>{if(es[0].isIntersecting){sec.classList.add('go');io.disconnect()}},{threshold:.3});
  io.observe(sec);
 }
