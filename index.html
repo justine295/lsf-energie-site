@@ -1745,6 +1745,10 @@ html.cal-on,html.cal-on body{overflow:hidden}
  .central-list .pn b{font-size:17px}
 }
 @media (max-width:760px){.tb-counters .tb-who{display:none}}
+@media (max-width:760px){
+ .qstrip{display:none}
+ .pb-grid>.pb{border:1px solid rgba(240,238,233,.14)!important;border-radius:18px;padding:22px 20px!important;background:rgba(240,238,233,.04)}
+}
 </style>
 </head>
 <body>
@@ -3145,7 +3149,7 @@ route();hdrTone();setTimeout(armPerso,80);
 <script>
 /* mobile : cartes horizontales + points de position */
 (function(){
- const mq=matchMedia('(max-width:760px)');const SEL=['#stages','.qb-grid','.tb-counters'];
+ const mq=matchMedia('(max-width:760px)');const SEL=['#stages','.qb-grid','.tb-counters','.pb-grid'];
  function setup(){document.querySelectorAll(SEL.join(',')).forEach(el=>{
   if(!mq.matches){el.classList.remove('m-swipe');el.nextElementSibling&&el.nextElementSibling.classList.contains('m-dots')&&el.nextElementSibling.remove();return}
   el.classList.add('m-swipe');
