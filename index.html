@@ -1362,7 +1362,9 @@ section.blk{padding-block:clamp(64px,9vw,120px)}
 .intro-img{will-change:clip-path,filter}
 .cmd.in-intro .wrap{text-align:center;display:flex;flex-direction:column;align-items:center}
 .cmd.in-intro .meta-row{justify-content:center;margin-bottom:22px}
-.cmd.in-intro .meta-row span:last-child{display:none}
+.cmd.in-intro .meta-row{flex-direction:column;align-items:center;gap:14px}
+.cmd.in-intro .meta-row span:last-child{display:inline-flex;align-items:center;gap:8px;padding:6px 14px 6px 10px;border-radius:999px;border:1px solid rgba(233,199,168,.28);background:rgba(233,199,168,.06);color:#F0EEE9;font-size:11.5px;letter-spacing:.12em}
+.cmd.in-intro .meta-row span:last-child::before{content:"";width:14px;height:14px;border-radius:50%;background:var(--sable) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M4 7.2l2 2 4-4.4' fill='none' stroke='%230C2A28' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat}
 .cmd.in-intro .meta-row span:first-child{color:var(--sable);font-size:13px;letter-spacing:.1em}
 .cmd.in-intro .say{max-width:none;margin-inline:auto;text-align:center;font-size:clamp(44px,6.4vw,96px)}
 .cmd.in-intro .say .fixed{color:#fff}
@@ -1536,6 +1538,15 @@ html.intro-playing,html.intro-playing body{overflow:hidden;height:100%}
 .pipe2-shot{border-radius:var(--r-lg);overflow:hidden;box-shadow:0 40px 80px -40px rgba(0,0,0,.7)}
 .pipe2-shot .mk{border-radius:var(--r-lg)}
 @media (max-width:960px){.pipe2-grid{grid-template-columns:1fr}}
+
+/* sélecteur de profil façon Apple : une barre, une pastille qui glisse */
+.role-pills{position:relative;display:inline-flex;flex-wrap:wrap;justify-content:center;gap:2px;padding:5px;border-radius:999px;background:rgba(240,238,233,.06);border:1px solid rgba(240,238,233,.12);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 20px 40px -24px rgba(0,0,0,.6)}
+.role-pills .seg-ind{position:absolute;left:0;top:0;border-radius:999px;background:var(--cta);box-shadow:0 6px 18px -6px rgba(176,84,47,.7),inset 0 1px 0 rgba(255,255,255,.18);opacity:0;transition:transform .45s cubic-bezier(.3,1.2,.4,1),width .45s cubic-bezier(.3,1.2,.4,1),opacity .2s;pointer-events:none;z-index:0}
+.role-pills button{position:relative;z-index:1;border:0!important;background:transparent!important;box-shadow:none;padding:10px 16px!important;font:600 14px var(--sans)!important;letter-spacing:-.01em;color:rgba(240,238,233,.66)!important;transform:none!important;transition:color .3s}
+.role-pills button:hover{color:#fff!important}
+.role-pills button[aria-pressed="true"]{color:#fff!important}
+@media (max-width:760px){.role-pills{border-radius:22px}.role-pills button{padding:8px 12px!important;font-size:13px!important}}
+@media (prefers-reduced-motion:reduce){.role-pills .seg-ind{transition:none}}
 </style>
 </head>
 <body>
@@ -2016,130 +2027,99 @@ html.intro-playing,html.intro-playing body{overflow:hidden;height:100%}
 <div class="view strat" data-view="strategie" hidden>
   <header class="s-hero"><div class="wrap">
     <span class="eyebrow">Note de positionnement · octobre 2026</span>
-    <h1 style="margin-top:16px">Ne pas être le plus rapide. Être celui qui <span style="color:var(--brand)">tient au contrôle.</span></h1>
-    <p class="lead" style="margin-top:22px">Pourquoi cette maquette, ce qu'elle change par rapport au site actuel, comment elle se distingue de Drapo et Rénolib, et le plan pour le Journal.</p>
+    <h1 style="margin-top:16px">Le partenaire financier des acteurs de la <span style="color:var(--brand)">rénovation énergétique.</span></h1>
+    <p class="lead" style="margin-top:22px">Ce que dit le site, à qui, comment il le prouve, et ce qui reste à décider avant la mise en ligne.</p>
   </div></header>
 
   <section class="sec"><div class="wrap">
-    <h2>0. Pourquoi un site-produit</h2>
-    <p>Un site institutionnel explique qui vous êtes. Pour scaler, le site doit <b>faire quelque chose</b> pour le visiteur dès la première seconde, et qualifier le contact pendant qu'il le fait.</p>
-    <p><b>La phrase « Je suis… et je veux… » pilote tout le site.</b> Un seul sélecteur, dans le hero. Choisir un profil change l'objectif proposé, l'outil, le parcours du dossier, les articles, le bouton du header et le formulaire. Le profil est mémorisé. Chaque URL cible (/installateurs, /obliges…) ouvre le site déjà réglé : quatre pages indexables générées depuis un même gabarit.</p>
-    <p><b>La phrase est l'interface.</b> « Je suis [profil] et je veux [objectif]. » Une valeur par défaut est déjà remplie : le visiteur lit une réponse complète avant même de choisir. Dix objectifs, dix réponses, chacune avec son outil : calculateur de trésorerie, diagnostic de dossier, démo des 12 clics, rythme de production pour un obligé, recherche de fiches pour un prescripteur ou un bénéficiaire. Profil et objectif partent avec la demande de contact : le commercial sait à qui il parle avant d'appeler.</p>
-    <p><b>Le parcours d'un dossier se vit au scroll.</b> On suit le dossier CEE-2026-0481 en sept étapes. La carte du dossier se met à jour (contrôles, jour, prime, volume), et chaque étape dit ce qui casse ailleurs et ce que ça change pour le profil choisi. C'est la preuve de l'expertise, montrée plutôt qu'affirmée.</p>
-    <p>Ni Drapo ni Rénolib ne font cela : le premier présente un réseau, le second un logiciel. LSF Énergie présente le dossier lui-même.</p>
-  </div></section>
-
-  <section class="sec"><div class="wrap">
-    <h2>1. Le diagnostic</h2>
-    <p><b>lsf-energie.fr</b> parle d'ingénierie et de sécurité, ce qui est juste, mais les quatre cibles n'apparaissent qu'en milieu de page, en trois cartes. Un obligé ou un syndic ne trouve pas de porte d'entrée à lui. Le site n'a aucun contenu indexable au-delà de la home.</p>
-    <p><b>Pipeline</b> est la meilleure page des deux : promesse chiffrée (J+5 contre J+90), calculateur, tableau comparatif. Elle parle uniquement aux installateurs, et c'est normal pour une landing produit.</p>
-    <p>Point d'alerte : Rénolib affiche déjà « +300 contrôles » et « 7 jours ». Sur la vitesse et l'automatisation, l'écart avec Pipeline se joue à deux jours. Ce n'est pas un territoire de marque, c'est un argument produit. Il faut le garder sur Pipeline et chercher le territoire ailleurs.</p>
-  </div></section>
-
-  <section class="sec"><div class="wrap">
-    <h2>2. Les deux concurrents, et la place libre</h2>
-    <div class="cmp3">
-      <article><span class="ang">Angle : la finance et le volume</span><h3>Drapo</h3><ul><li>« Partenaire financier des professionnels de la transition énergétique »</li><li>Preuve par la taille : 4 000 pros, 50 000 chantiers, 250 M€</li><li>Huit cibles en vitrine, aucune ne domine</li><li>Quasiment pas de contenu éditorial</li></ul></article>
-      <article><span class="ang">Angle : l'outil et la trésorerie artisan</span><h3>Rénolib</h3><ul><li>« Le mandataire CEE qui finance vos primes »</li><li>SaaS pour artisans RGE, 300+ contrôles, paiement à 7 jours</li><li>Parle presque uniquement aux installateurs</li><li>Blog technique solide, déjà positionné sur les fiches</li></ul></article>
-      <article class="us"><span class="ang" style="color:var(--brand)">Angle : la conformité comme produit</span><h3>LSF Énergie</h3><ul><li>« Des CEE qui tiennent au contrôle »</li><li>Preuve par l'ingénieur : chaque dossier relu par une personne qualifiée</li><li>Le seul à parler aux quatre signataires, car un dossier conforme protège chacun d'eux</li><li>Pipeline comme preuve de vitesse, pas comme identité</li></ul></article>
-    </div>
-    <div class="map" style="margin-top:28px" aria-label="Carte de positionnement">
-      <svg viewBox="0 0 900 600" role="img" aria-labelledby="mapt">
-        <title id="mapt">Carte de positionnement : axe horizontal outil vers ingénierie, axe vertical une cible vers toute la chaîne</title>
-        <line x1="80" y1="300" x2="840" y2="300" stroke="var(--line-2)" stroke-width="1.5"/>
-        <line x1="460" y1="50" x2="460" y2="550" stroke="var(--line-2)" stroke-width="1.5"/>
-        <text x="84" y="290" fill="var(--ink-3)" font-family="JetBrains Mono, monospace" font-size="13">AUTOMATISATION</text>
-        <text x="836" y="290" fill="var(--ink-3)" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="end">EXPERTISE HUMAINE</text>
-        <text x="470" y="68" fill="var(--ink-3)" font-family="JetBrains Mono, monospace" font-size="13">TOUTE LA CHAÎNE</text>
-        <text x="470" y="542" fill="var(--ink-3)" font-family="JetBrains Mono, monospace" font-size="13">UNE SEULE CIBLE</text>
-        <circle cx="250" cy="430" r="46" fill="var(--cream-2)"/>
-        <text x="250" y="436" fill="var(--ink)" font-family="Inter, sans-serif" font-size="18" font-weight="700" text-anchor="middle">Rénolib</text>
-        <circle cx="330" cy="200" r="56" fill="var(--cream-2)"/>
-        <text x="330" y="206" fill="var(--ink)" font-family="Inter, sans-serif" font-size="18" font-weight="700" text-anchor="middle">Drapo</text>
-        <circle cx="690" cy="150" r="64" fill="var(--brand)"/>
-        <text x="690" y="148" fill="#fff" font-family="Inter, sans-serif" font-size="20" font-weight="800" text-anchor="middle">LSF Énergie</text>
-        <text x="690" y="170" fill="#fff" font-family="Inter, sans-serif" font-size="13" font-weight="500" text-anchor="middle">+ Pipeline</text>
-        <text x="250" y="498" fill="var(--ink-3)" font-family="Inter, sans-serif" font-size="13" text-anchor="middle">installateurs, logiciel</text>
-        <text x="330" y="276" fill="var(--ink-3)" font-family="Inter, sans-serif" font-size="13" text-anchor="middle">8 cibles, réseau, volume</text>
-        <text x="690" y="236" fill="var(--ink)" font-family="Inter, sans-serif" font-size="13" text-anchor="middle">4 signataires, ingénieurs + outil</text>
-      </svg>
-    </div>
-  </div></section>
-
-  <section class="sec"><div class="wrap">
-    <h2>3. La plateforme de marque</h2>
+    <h2>1. Le positionnement</h2>
     <dl class="plat">
-      <dt>Signature</dt><dd><b>Des CEE qui tiennent au contrôle.</b></dd>
-      <dt>Idée centrale</dt><dd>Un dossier CEE se signe à quatre. Quand il est refusé, les quatre perdent. Nous sommes le maillon qui voit tout le dossier et le rend solide.</dd>
-      <dt>Preuves</dt><dd>Ingénieur nommé sur chaque dossier · 300+ contrôles IA · J+5 · 8 ans de dossiers défendus</dd>
-      <dt>Ton</dt><dd>Celui d'un ingénieur qui parle à un chef de chantier : court, chiffré, sans jargon inutile. On nomme les fiches par leur code, on donne des dates, on dit ce qui casse.</dd>
-      <dt>Identité</dt><dd>Pétrole et terracotta, Inter très gras et serré comme sur Pipeline, JetBrains Mono pour tout ce qui est référence officielle (codes fiches, numéros de dossier, kWh cumac). Logo officiel du design system (carré arrondi, trois barres montantes). Motif du site : la <b>phrase « Je suis… je veux… »</b>, mots soulignés en terracotta, qui pilote tout le site.</dd>
-      <dt>À éviter</dt><dd>« Partenaire », « accompagnement de A à Z », « solution clé en main ». Tout le marché les utilise.</dd>
+      <dt>Accroche</dt><dd><b>Le partenaire financier des acteurs de la rénovation énergétique.</b></dd>
+      <dt>Promesse</dt><dd>Des CEE qui tiennent au contrôle : aucun dossier ne part sans un double contrôle, 300+ points automatisés par IA puis la relecture d'un ingénieur formé à chaque nouvel arrêté.</dd>
+      <dt>Rôle</dt><dd>L'acteur central des CEE. Chaque profil travaille avec LSF Énergie directement, pour ses propres projets, sans dépendre des autres. Pas de chaîne entre les acteurs : une porte d'entrée par métier.</dd>
+      <dt>Ce que chacun reçoit</dt><dd>Un parcours construit pour son métier, un ingénieur d'affaires dédié qui rappelle sous 24 h, un dashboard de suivi en temps réel, 0 abonnement et 0 engagement.</dd>
+      <dt>Preuves</dt><dd>+1 000 professionnels · 8 ans d'expertise · 300+ contrôles IA par dossier · 100 % relus par un ingénieur · prime versée à J+5 · OPQIBI, AFAQ ISO 9001 · partenaires TotalEnergies, Esso, Intermarché, De Dietrich.</dd>
+      <dt>Ton</dt><dd>Court, chiffré, concret. Une preuve par phrase, pas de promesse vague. On écrit toujours « LSF Énergie », jamais « LSF » seul. Les textes communs parlent aux 8 profils, jamais aux seuls installateurs.</dd>
     </dl>
   </div></section>
 
   <section class="sec"><div class="wrap">
-    <h2>4. L'arborescence</h2>
-    <div class="tree"><b>/</b>                              Accueil · « Je suis… » → écosystème → réassurance
-<b>/solutions/</b>
-   ├─ <b>artisans-rge</b>               Réaliser · Pipeline · Devenir partenaire  <i>→ landing Pipeline</i>
-   ├─ <b>bailleurs-coproprietes</b>     Investir
-   ├─ <b>tertiaire</b>                  Investir · privé et public
-   ├─ <b>industriels</b>                Investir
-   ├─ <b>transport</b>                  Investir
-   ├─ <b>fabricants</b>                 Prescrire et équiper
-   ├─ <b>bureaux-etudes</b>             Prescrire et équiper · auditeurs
-   └─ <b>obliges</b>                    Financer
-<b>/ressources/</b>
-   ├─ <b>fiches-cee/</b>                bibliothèque  <i>→ /fiches-cee/bar-th-171 … (≈ 60)</i>
-   └─ <b>journal/</b>                   le Journal du cumac  <i>→ /journal/[article]</i>
-<b>/a-propos</b>                       mécanisme CEE, comparatif, équipe
-<b>/contact</b></div>
+    <h2>2. Les 8 profils</h2>
+    <p>Ordre d'affichage sur tout le site, avec la preuve mise en avant pour chacun.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>#</th><th>Profil</th><th>Preuve en tête</th><th>Ce qu'on lui simplifie</th></tr></thead>
+      <tbody>
+        <tr><td class="num mono">01</td><td><b>Artisans et réseaux RGE</b></td><td class="kw">J+5</td><td>Dossier en 12 clics, prime versée 5 jours après validation, Devenir partenaire en 4 étapes.</td></tr>
+        <tr><td class="num mono">02</td><td><b>Obligés</b></td><td class="kw">300+</td><td>Des volumes relus un par un, documentés pour le PNCEE, un lot témoin à auditer.</td></tr>
+        <tr><td class="num mono">03</td><td><b>Bureaux d'études et auditeurs</b></td><td class="kw">48 h</td><td>Une étude d'éligibilité à leur nom, le reste à charge réel pour leur client.</td></tr>
+        <tr><td class="num mono">04</td><td><b>Fabricants de matériel</b></td><td class="kw">0 facture à refaire</td><td>Leurs références intégrées à Pipeline, une offre CEE commune pour leur réseau.</td></tr>
+        <tr><td class="num mono">05</td><td><b>Bailleurs et copropriétés</b></td><td class="kw">Avant le vote</td><td>Le montant CEE dans les devis présentés en AG ou en comité.</td></tr>
+        <tr><td class="num mono">06</td><td><b>Tertiaire privé et public</b></td><td class="kw">48 h</td><td>Les CEE de chaque bâtiment identifiés et chiffrés avant arbitrage.</td></tr>
+        <tr><td class="num mono">07</td><td><b>Industriels</b></td><td class="kw">Fiche par fiche</td><td>Puissances, usages et mesures vérifiés ; les CEE dans le calcul de ROI.</td></tr>
+        <tr><td class="num mono">08</td><td><b>Transport et logistique</b></td><td class="kw">Fiches TRA</td><td>Les opérations finançables repérées pour leur flotte.</td></tr>
+      </tbody>
+    </table></div>
   </div></section>
 
   <section class="sec"><div class="wrap">
-    <h2>5. Le plan SEO du Journal</h2>
-    <p>Quatre familles de pages, chacune avec un rôle précis. Les <b>fiches</b> captent la recherche technique, les <b>guides</b> répondent aux problèmes, les pages <b>cibles</b> convertissent, l'<b>actualité</b> entretient la fraîcheur et les liens.</p>
-    <div class="tbl" style="margin-bottom:28px"><table>
-      <thead><tr><th>Famille</th><th>Volume au lancement</th><th>Requêtes visées</th><th>Rôle</th></tr></thead>
-      <tbody>
-        <tr><td><b>Fiches CEE</b></td><td class="num">60 pages</td><td class="kw">bar-th-171, bar-en-101 conditions, fiche cee pac…</td><td>Trafic qualifié, longue traîne, liens internes vers les cibles</td></tr>
-        <tr><td><b>Guides problèmes</b></td><td class="num">15 articles</td><td class="kw">dossier cee refusé, délai paiement prime cee…</td><td>Capter l'intention au moment de la douleur</td></tr>
-        <tr><td><b>Pages cibles</b></td><td class="num">7 pages</td><td class="kw">mandataire cee, cee copropriété, achat volume cee…</td><td>Conversion</td></tr>
-        <tr><td><b>Actualité</b></td><td class="num">2 / mois</td><td class="kw">arrêté cee, 6e période cee, coup de pouce…</td><td>Fraîcheur, partages LinkedIn, newsletter</td></tr>
-      </tbody>
-    </table></div>
-    <h3 style="font-size:22px;letter-spacing:-.02em;margin-bottom:14px">Les 12 premiers articles</h3>
+    <h2>3. Face aux concurrents</h2>
+    <div class="cmp3">
+      <article><span class="ang">Angle : le réseau et le volume</span><h3>Drapo</h3><ul><li>« Le partenaire financier des professionnels de la transition énergétique »</li><li>4 000 professionnels, 50 000 chantiers, 250 M€ de primes</li><li>Huit segments, une photo d'équipe en hero, un parcours partenaire en plein écran</li></ul></article>
+      <article><span class="ang">Angle : l'outil pour artisans</span><h3>Rénolib</h3><ul><li>« Le mandataire CEE qui finance vos primes »</li><li>300+ contrôles, paiement à 7 jours</li><li>Parle surtout aux installateurs, blog technique solide</li></ul></article>
+      <article class="us"><span class="ang" style="color:var(--brand)">Angle : la qualité du dossier</span><h3>LSF Énergie</h3><ul><li>Le double contrôle IA + ingénieur, que ni l'un ni l'autre ne revendique</li><li>Un ingénieur d'affaires dédié et un parcours par métier</li><li>Une gamme de produits : Pipeline, Contrôleo, PrimeAuto, Mobilité douce, Conformity, Cofrac, Simulateur CEE</li></ul></article>
+    </div>
+    <p style="margin-top:22px"><b>Point de vigilance.</b> L'accroche « Le partenaire financier des acteurs de la rénovation énergétique » est très proche de celle de Drapo, « Le partenaire financier des professionnels de la transition énergétique ». La différence doit donc se faire immédiatement sur les preuves : double contrôle, J+5, interlocuteur dédié. Si la proximité gêne, une alternative : « Le partenaire financier qui fait tenir vos CEE au contrôle ».</p>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <h2>4. L'architecture</h2>
+    <div class="tree"><b>/</b>                              Accueil
+   intro au défilement : logo → grande phrase → « Je suis [profil] » + 8 pastilles
+   réassurance (+1 000 pros, carte de France, logos) · un parcours sur mesure (8 métiers)
+   parcours d'un dossier (7 étapes, un contrôle à chacune) · double contrôle IA + ingénieur
+   un seul interlocuteur · témoignages · appel à l'action
+<b>/vous-etes/</b>                     8 pages métier
+   ├─ <b>artisans-rge</b>               + Pipeline (tableau de bord) + Devenir partenaire
+   ├─ <b>obliges</b>  <b>bureaux-etudes</b>  <b>fabricants</b>
+   └─ <b>bailleurs-coproprietes</b>  <b>tertiaire</b>  <b>industriels</b>  <b>transport</b>   + fiches en exemples
+<b>/produits</b>                       Simulateur CEE (85 simulateurs) + 6 produits
+<b>/ressources/</b>
+   ├─ <b>fiches-cee</b>                 bibliothèque ; pages fiche après cahiers des charges
+   └─ <b>journal</b>                    articles filtrés par profil
+<b>/contact</b>                        formulaire en 5 questions, rappel sous 24 h</div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <h2>5. L'expérience</h2>
+    <dl class="plat">
+      <dt>Identité</dt><dd>Pétrole, terracotta des boutons (#B0542F, aussi dans le logo), sable. Inter très gras et serré, JetBrains Mono pour les codes officiels. Fond pétrole quadrillé et particules sur les écrans d'ouverture.</dd>
+      <dt>Immersion</dt><dd>Grands chiffres, bandeaux sombres pleine largeur, titres qui s'allument mot par mot, sections fixes qui s'animent au défilement (parcours du dossier, Devenir partenaire). Une animation marquante par section, pas plus.</dd>
+      <dt>Gardé</dt><dd>L'intro pilotée par le défilement, la phrase « Je suis… » avec ses pastilles, les particules, les étapes façon Drapo, le tableau de bord Pipeline, les fiches en exemples concrets.</dd>
+      <dt>Écarté</dt><dd>Les schémas explicatifs, le bandeau défilant et les macarons, les halos, le tableau comparatif, l'image vue à travers le logo, les formulaires sur les pages métier.</dd>
+    </dl>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <h2>6. Le plan de contenu</h2>
+    <p>Trois familles de pages : les <b>pages métier</b> convertissent, les <b>fiches CEE</b> captent la recherche technique, le <b>Journal</b> répond aux questions concrètes et alimente la newsletter.</p>
+    <h3 style="font-size:22px;letter-spacing:-.02em;margin:22px 0 14px">Les 12 premiers articles</h3>
     <div class="tbl"><table>
       <thead><tr><th>#</th><th>Titre</th><th>Requête principale</th><th>Pour</th></tr></thead>
       <tbody id="plan12"></tbody>
     </table></div>
   </div></section>
 
-  <section class="sec"><div class="wrap">
-    <h2>6. Le moteur de croissance</h2>
-    <p>Objectif : scaler. Le site ne doit plus seulement rassurer, il doit produire des contacts qualifiés dans chaque cible, de façon répétable. Chaque cible a sa porte d'entrée, son contenu d'attraction et son offre de conversion.</p>
-    <div class="tbl"><table>
-      <thead><tr><th>Cible</th><th>Attirer</th><th>Convertir</th><th>Faire grandir le compte</th><th>Indicateur</th></tr></thead>
-      <tbody>
-        <tr><td><b>Installateurs RGE</b></td><td>Fiches CEE, guides « dossier refusé », calculateur trésorerie</td><td>Pipeline : 1er dossier accompagné</td><td>Autonomie au 2e dossier, volume mensuel</td><td class="kw">dossiers / mois / installateur</td></tr>
-        <tr><td><b>Obligés</b></td><td>Articles contrôle et conformité, LinkedIn dirigeants</td><td>Lot témoin à auditer</td><td>Contrat cadre de volumes</td><td class="kw">GWh cumac livrés · taux conformité</td></tr>
-        <tr><td><b>Prescripteurs</b></td><td>Guides BET et fabricants, fiches tertiaire et industrie</td><td>Étude d'éligibilité offerte sous 48 h</td><td>Programme partenaire, études co-signées</td><td class="kw">projets apportés / trimestre</td></tr>
-        <tr><td><b>Bénéficiaires</b></td><td>Guides copropriété, tertiaire, simulateur</td><td>Estimation de prime</td><td>Mise en relation installateur du réseau</td><td class="kw">chantiers transmis au réseau</td></tr>
-      </tbody>
-    </table></div>
-    <p style="margin-top:18px">Le levier qui fait scaler : les bénéficiaires et prescripteurs génèrent des chantiers que vous transmettez à vos installateurs, ce qui augmente leur volume dans Pipeline, ce qui alimente les lots des obligés. Le site organise ce cercle, chaque cible nourrit la suivante.</p>
-  </div></section>
-
   <section class="sec" style="border-bottom:0"><div class="wrap">
-    <h2>7. Côté technique</h2>
-    <p>Pipeline semble construit avec Vite. Pour garder la même base et obtenir un blog rapide et bien indexé : <b>Astro</b> avec des collections de contenu en Markdown/MDX. Chaque article et chaque fiche est un fichier, les pages sont générées en HTML statique.</p>
-    <p>Si vous préférez écrire dans une interface plutôt que dans des fichiers, on branche un CMS headless (Sanity, Storyblok ou Decap, gratuit) sur ce même Astro.</p>
-    <p>Indispensables SEO : balisage <span class="pill-s">Article</span> <span class="pill-s">FAQPage</span> <span class="pill-s">BreadcrumbList</span> <span class="pill-s">Organization</span>, sitemap automatique, auteur réel (ingénieur nommé) sur chaque article, date de mise à jour visible, maillage fiche ↔ article ↔ page cible.</p>
+    <h2>7. Avant la mise en ligne</h2>
+    <dl class="plat">
+      <dt>À confirmer</dt><dd>Le délai de versement de la prime : J+5 sur ce site, 10 à 15 jours sur le site actuel. Un seul chiffre, celui que vous tenez réellement.</dd>
+      <dt>Preuves à fournir</dt><dd>Montant de primes versées, nombre de dossiers, taux de conformité au contrôle, un témoignage d'obligé ou de grand compte.</dd>
+      <dt>Contenus</dt><dd>Les cahiers des charges des fiches CEE, les vrais articles du Journal, les mentions légales et la politique de confidentialité, des photos réelles si possible.</dd>
+      <dt>Technique</dt><dd>Passer à de vraies pages (Astro), car Google n'indexe pas les adresses en #. Brancher les formulaires au CRM. Sortir les images intégrées en fichiers WebP. Retirer la barre « Maquette » et le blocage Google.</dd>
+    </dl>
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:24px"><a class="btn btn-cta" href="#accueil">Revenir au site</a><a class="btn btn-ghost" href="#journal">Voir le Journal</a></div>
   </div></section>
 </div>
-
 
 </main>
 
@@ -2343,9 +2323,13 @@ function renderAnswer(){
 }
 const PILL={rge:"Artisans RGE",obl:"Obligés",bet:"Bureaux d'études",fab:"Fabricants",bai:"Bailleurs",ter:"Tertiaire",ind:"Industriels",tra:"Transport"};
 function renderPills(active){const el=document.getElementById('role-pills');if(!el)return;
- if(!el.children.length){el.innerHTML=ROLE_ORDER.map(k=>`<button type="button" data-k="${k}">${PILL[k]}</button>`).join('');
-  [...el.children].forEach(b=>b.onclick=()=>{window.__pickTouched=true;setRole(b.dataset.k)})}
- [...el.children].forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===active))}
+ if(!el.querySelector('button')){el.innerHTML='<span class="seg-ind" aria-hidden="true"></span>'+ROLE_ORDER.map(k=>`<button type="button" data-k="${k}">${PILL[k]}</button>`).join('');
+  el.querySelectorAll('button').forEach(b=>b.onclick=()=>{window.__pickTouched=true;setRole(b.dataset.k)});
+  const re=()=>placeInd(el);if(window.ResizeObserver)new ResizeObserver(re).observe(el);addEventListener('resize',re);document.fonts&&document.fonts.ready.then(re);el.addEventListener('transitionend',re)}
+ el.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===active));
+ requestAnimationFrame(()=>placeInd(el))}
+function placeInd(el){const b=el.querySelector('button[aria-pressed="true"]'),ind=el.querySelector('.seg-ind');if(!b||!ind)return;
+ ind.style.width=b.offsetWidth+'px';ind.style.height=b.offsetHeight+'px';ind.style.transform=`translate(${b.offsetLeft}px,${b.offsetTop}px)`;ind.style.opacity=1}
 function setGoal(i){goal=i;renderAnswer();syncContact()}
 function setRole(k,quiet){
  role=k;goal=0;store.set('lsf-role',k);
