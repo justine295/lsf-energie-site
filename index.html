@@ -1716,7 +1716,7 @@ html.cal-on,html.cal-on body{overflow:hidden}
 
 /* ===== mobile : écrans horizontaux à faire glisser ===== */
 @media (max-width:760px){
- .m-swipe{display:flex!important;flex-wrap:nowrap!important;grid-template-columns:none!important;gap:12px!important;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin-inline:-20px;padding:4px 20px 6px;scroll-padding-inline:20px}
+ .m-swipe{display:flex!important;flex-wrap:nowrap!important;grid-template-columns:none!important;gap:12px!important;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin-inline:-16px;padding:4px 16px 6px;scroll-padding-inline:16px;max-width:none;width:auto}
  .m-swipe::-webkit-scrollbar{display:none}
  .m-swipe>*{flex:0 0 86%;min-width:0;scroll-snap-align:start;scroll-snap-stop:always}
  .m-dots{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:16px}
@@ -1810,6 +1810,87 @@ html.cal-on,html.cal-on body{overflow:hidden}
 .cmd.in-intro .meta-row span:last-child::before{grid-row:auto}
 .cmd.in-intro .meta-row b.mcee{font:600 clamp(16px,1.4vw,20px)/1.2 var(--sans)!important;letter-spacing:-.01em!important;text-transform:none!important;color:var(--on-deep)!important;white-space:nowrap}
 @media (max-width:760px){.cmd.in-intro .meta-row b.mcee{font-size:13.5px!important}.cmd.in-intro .meta-row span:last-child{padding:9px 14px 9px 10px}}
+
+/* ===== obligés : 5 couches de sécurité Pipeline ===== */
+.oc{background:#0A2423;color:var(--on-deep);padding-block:clamp(80px,10vw,140px);position:relative}
+.oc::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(240,238,233,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(240,238,233,.035) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
+.oc .wrap{position:relative}
+.oc-head{display:grid;gap:16px;max-width:820px;margin-bottom:clamp(40px,6vw,72px)}
+.oc-head .eyebrow{color:var(--sable)}
+.oc-head h2{font-size:clamp(38px,5.2vw,74px);font-weight:900;letter-spacing:-.055em;line-height:.96}
+.oc-head h2 em{font-style:normal;color:var(--sable)}
+.oc-head .lead{color:var(--on-deep-2);max-width:60ch}
+.oc-grid{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:clamp(32px,6vw,96px);align-items:start}
+.oc-left{align-self:stretch}
+.oc-card{position:sticky;top:calc(var(--hdr-h,73px) + 40px);background:#F7F6F2;color:#123B3A;border-radius:20px;padding:22px;box-shadow:0 40px 80px -40px rgba(0,0,0,.8);display:grid;gap:14px}
+.oc-ch{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding-bottom:12px;border-bottom:1px solid #E3E1DA}
+.oc-ch b{display:block;font:700 17px var(--mono);letter-spacing:-.01em}
+.oc-ch small{font-size:12.5px;color:#6B706C}
+.oc-st{flex:none;font:600 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:6px 10px;border-radius:999px;background:#FBEFE8;color:#B0542F;transition:background .4s,color .4s}
+.oc-st.fin{background:#DEF0E7;color:#1F7A5A}
+.oc-list{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.oc-list li{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:center;padding:7px 8px;border-radius:10px;font-size:14px;color:#9AA09B;transition:color .4s,background .4s}
+.oc-list li i{width:20px;height:20px;border-radius:50%;border:1.5px solid #D5D3CC;display:grid;place-items:center;transition:background .4s,border-color .4s}
+.oc-list li.done{color:#123B3A}
+.oc-list li.done i{background:#1F7A5A;border-color:#1F7A5A}
+.oc-list li.done i::after{content:"";width:9px;height:5px;border:2px solid #fff;border-top:0;border-right:0;transform:translateY(-1px) rotate(-45deg)}
+.oc-list li.cur{background:#EEF6F1}
+.oc-meter{display:grid;grid-template-columns:1fr auto;gap:6px 10px;align-items:baseline;padding-top:12px;border-top:1px solid #E3E1DA}
+.oc-meter span{font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#6B706C}
+.oc-meter b{font:800 20px var(--sans);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.oc-meter div{grid-column:1/-1;height:6px;background:#E3E1DA;border-radius:6px;overflow:hidden}
+.oc-meter i{display:block;height:100%;width:0;background:#1F7A5A;transition:width .6s var(--ease)}
+.oc-ex{font:600 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#9AA09B}
+.oc-steps{list-style:none;margin:0;padding:0}
+.oc-step{min-height:58vh;display:grid;align-content:center;gap:14px;padding-block:32px;border-top:1px solid rgba(240,238,233,.1);opacity:.25;transform:translateX(12px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.oc-step:first-child{border-top:0}
+.oc-step.on{opacity:1;transform:none}.oc-step.past{opacity:.4;transform:none}
+.oc-k{font:600 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--sable)}
+.oc-step h3{font-size:clamp(28px,3.2vw,42px);font-weight:900;letter-spacing:-.045em;line-height:1.02}
+.oc-step p{color:var(--on-deep-2);font-size:17px;line-height:1.55;max-width:50ch}
+.oc-foot{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:clamp(24px,4vw,56px);margin-top:clamp(48px,7vw,96px);padding-top:32px;border-top:1px solid rgba(240,238,233,.14);align-items:start}
+.oc-fk{margin:0 0 14px;font:600 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--sable)}
+.oc-sect ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 18px}
+.oc-sect li{font-weight:700;font-size:16px;color:var(--on-deep)}
+.oc-sect code{font:700 11px var(--mono);color:var(--sable);margin-right:6px}
+.oc-fs{margin:14px 0 0;color:var(--on-deep-2);font-size:15px}
+.oc-logos{display:flex;flex-wrap:wrap;gap:12px}
+.oc-logos img{height:40px;width:auto;max-width:130px;object-fit:contain;background:#F7F6F2;border-radius:10px;padding:8px 12px}
+.oc-cta p{margin:0 0 16px;color:var(--on-deep);font-size:17px;font-weight:600;line-height:1.4}
+@media (prefers-reduced-motion:reduce){.oc-step{opacity:1;transform:none;transition:none}}
+@media (max-width:900px){.oc-foot{grid-template-columns:1fr}}
+@media (max-width:760px){
+ .oc-grid{grid-template-columns:1fr;gap:18px}
+ .oc-card{position:relative;top:0;padding:18px}
+ .oc-list li{padding:5px 6px;font-size:13.5px}
+ .oc-steps>.oc-step{min-height:0;align-content:start;padding:22px 20px!important;border:1px solid rgba(240,238,233,.14)!important;border-radius:18px;background:rgba(240,238,233,.04);opacity:.45!important;transform:scale(.97)!important;transition:opacity .35s,transform .35s}
+ .oc-steps>.oc-step.on{opacity:1!important;transform:none!important;background:rgba(240,238,233,.07)}
+ .oc-step h3{font-size:25px}.oc-step p{font-size:15.5px}
+ .oc .m-dots{color:var(--on-deep)}
+}
+/* obligés : version claire, fiche pétrole */
+.oc{background:#F0EEE9;color:var(--ink)}
+.oc::before{background-image:linear-gradient(rgba(18,59,58,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(18,59,58,.05) 1px,transparent 1px)}
+.oc-head .eyebrow,.oc-k,.oc-fk,.oc-sect code{color:var(--brand)}
+.oc-head h2 em{color:var(--brand)}
+.oc-head .lead,.oc-step p,.oc-fs{color:var(--ink-2)}
+.oc-step{border-top-color:rgba(18,59,58,.12)}
+.oc-sect li,.oc-cta p{color:var(--ink)}
+.oc-foot{border-top-color:rgba(18,59,58,.18)}
+.oc-logos img{background:#fff;border:1px solid rgba(18,59,58,.1)}
+.oc-card{background:#123B3A;color:#F0EEE9}
+.oc-ch,.oc-meter{border-color:rgba(240,238,233,.14)}
+.oc-ch small,.oc-meter span,.oc-ex{color:rgba(240,238,233,.6)}
+.oc-list li{color:rgba(240,238,233,.38)}
+.oc-list li i{border-color:rgba(240,238,233,.3)}
+.oc-list li.done{color:#F0EEE9}
+.oc-list li.done i{background:#2E9D72;border-color:#2E9D72}
+.oc-list li.cur{background:rgba(240,238,233,.07)}
+.oc-meter div{background:rgba(240,238,233,.14)}.oc-meter i{background:#2E9D72}
+.oc-st{background:rgba(176,84,47,.18);color:#F3C9B4}.oc-st.fin{background:rgba(46,157,114,.2);color:#9FE0C4}
+@media (max-width:760px){.oc-steps>.oc-step{border-color:rgba(18,59,58,.14)!important;background:#fff!important}.oc-steps>.oc-step.on{background:#fff!important}.oc .m-dots{color:var(--ink)}}
+.metrics b{white-space:nowrap}
+@media (max-width:760px){.oc-grid>.oc-steps{margin-inline:-16px}}
 </style>
 </head>
 <body>
@@ -2393,12 +2474,12 @@ const ROLES={
    {ph:"chiffrer les CEE dans mes études",h:"48 h. Fiche par fiche. À votre nom.",p:"Conditions techniques et montant estimé, prêts à intégrer à votre étude.",m:[["48 h","rendu"],["Offerte","pour les projets confiés"],["Votre nom","sur l'étude"]],cta:["Envoyer un projet","#contact"],tool:"etude"},
    {ph:"faire financer mes projets",h:"Les fiches qui financent votre projet.",p:"Choisissez le secteur et les travaux : voici les fiches applicables.",m:[["4 secteurs","couverts"],["48 h","étude chiffrée"],["Suivi","jusqu'au versement"]],cta:["Envoyer un projet","#contact"],tool:"matchAll"}]},
  obl:{fam:"obl",page:"obliges",code:"OBL",label:"un obligé",desc:"Fournisseurs d'énergie et de carburant",audience:"obligé",eb:"Obligés",
-  h:"Des volumes CEE <em>qui passent le contrôle.</em>",lead:"Fournisseurs d'énergie, distributeurs de carburant, délégataires : chaque dossier livré a passé 300+ contrôles et une relecture d'ingénieur. Tracé, documenté, défendable devant le PNCEE.",
+  h:"Des volumes CEE <em>qui passent le contrôle.</em>",lead:"Fournisseurs d'énergie, distributeurs de carburant, délégataires : vos volumes sont produits par une équipe d'ingénieurs spécialistes des CEE, avec un ingénieur dédié à votre compte. Chaque dossier livré a passé 300+ contrôles et une relecture d'ingénieur. Tracé, documenté, défendable devant le PNCEE.",
   pains:[["Un lot suspendu pour non-conformité","100 % relus","300+ contrôles automatiques, puis un ingénieur. La trace reste dans le dossier."],["Des volumes qu'on découvre au dépôt","En direct","GWh cumac, dossiers en cours, conformité par secteur et par installateur."],["Des installateurs inconnus","RGE vérifié","Qualification contrôlée à chaque dossier, historique de conformité visible."]],
-  faq:[["Sur quels secteurs livrez-vous ?","Résidentiel, tertiaire, industrie, réseaux et transport, sur opérations standardisées."],["Peut-on auditer vos dossiers ?","Oui. Nous proposons un lot témoin à auditer avant tout engagement."]],
+  faq:[["Qui suit nos volumes ?","Un ingénieur d'affaires dédié, spécialiste des CEE : votre interlocuteur unique, du cadrage à la livraison. Il s'appuie sur nos ingénieurs spécialisés par secteur, formés à chaque nouvel arrêté."],["Sur quels secteurs livrez-vous ?","Résidentiel, tertiaire, industrie, agriculture et transport, sur opérations standardisées. Chaque secteur a ses ingénieurs référents."],["Comment savoir qu'un dossier est conforme ?","Chaque dossier traverse cinq couches de contrôle dans Pipeline : identité des signataires, entreprise et RGE, 300+ contrôles live, audit noté sur grille et relecture d'ingénieur, contrôle COFRAC. Tout est tracé et exportable."],["Peut-on auditer vos dossiers ?","Oui. Nous livrons un lot témoin à auditer avant tout engagement."]],
   goals:[
-   {ph:"des volumes qui passent le contrôle",h:"Chaque dossier relu avant d'entrer dans vos lots.",p:"Mesurez votre exposition actuelle. Chez LSF Énergie, aucun dossier n'est livré sans relecture d'ingénieur.",m:[["100 %","relus"],["300+","contrôles par dossier"],["Lot témoin","à auditer"]],cta:["Recevoir un lot témoin","#contact"],tool:"riskObl"},
-   {ph:"tenir mon objectif de période",h:"Votre objectif, converti en dossiers par mois.",p:"Calculez le rythme nécessaire. Nous dimensionnons la production du réseau dessus.",m:[["GWh cumac","suivis en direct"],["5","secteurs"],["Mensuel","reporting"]],cta:["Parler volumes","#contact"],tool:"pacing"},
+   {ph:"des volumes qui passent le contrôle",h:"Chaque dossier relu avant d'entrer dans vos lots.",p:"Mesurez votre exposition actuelle. Chez LSF Énergie, aucun dossier n'est livré sans relecture d'ingénieur.",m:[["100 %","relus par un ingénieur"],["300+","contrôles par dossier"],["1","ingénieur dédié"]],cta:["Recevoir un lot témoin","#contact"],tool:"riskObl"},
+   {ph:"tenir mon objectif de période",h:"Votre objectif, converti en dossiers par mois.",p:"Calculez le rythme nécessaire. Nous dimensionnons la production du réseau dessus.",m:[["Live","GWh cumac suivis"],["5","secteurs couverts"],["1","ingénieur dédié"]],cta:["Parler volumes","#contact"],tool:"pacing"},
    {ph:"savoir d'où viennent mes CEE",h:"1 kWh cumac = 1 dossier, 1 installateur, 1 ingénieur.",p:"Volumes, dossiers, conformité par installateur et par secteur, en continu.",m:[["Live","suivi"],["RGE","vérifié"],["Export","prêt pour le registre"]],cta:["Voir une démo","#contact"],tool:"lot"}]},
  tra:{fam:"ben",page:"transport",code:"TRA",label:"un transporteur",desc:"Flottes, logistique, transport de voyageurs",audience:"transporteur",eb:"Transport et logistique",
   h:"Moins de gazole. <em>Financé par les CEE.</em>",lead:"Transporteurs, logisticiens, transport de voyageurs : équipements des véhicules, formation des conducteurs, organisation logistique. Le transport a ses propres fiches CEE. Peu de gens les connaissent.",
@@ -2682,7 +2763,7 @@ const FAQ_COMMON=[
  ["Qui sera mon interlocuteur ?","Un ingénieur d'affaires dédié, du premier appel au versement de la prime. Il connaît votre activité et suit chacun de vos dossiers."],
  ["Comment suivre mes dossiers ?","Dans votre dashboard de suivi : statut de chaque dossier, pièces, interlocuteur, en temps réel jusqu'au versement."]];
 const FLOW={
- obl:{eb:"Comment ça se passe",h:"4 étapes. <em>Des volumes défendables.</em>",lead:"On commence par un lot témoin à auditer. Vous jugez la qualité avant de vous engager.",tags:["Cadrage","Lot témoin","Livraison","Dashboard"],steps:[["Cadrage de vos besoins","Volumes, secteurs, calendrier de dépôt : votre ingénieur d'affaires dédié construit le plan avec vous."],["Un lot témoin à auditer","Un échantillon de dossiers, contrôlés par IA et relus par un ingénieur. Vous auditez avant tout engagement."],["Livraison continue","Les dossiers et les volumes arrivent au fil de l'eau, documentés pour le contrôle du PNCEE."],["Dashboard de suivi","GWh cumac, conformité par secteur et par installateur, en temps réel."]],cta2:["Voir nos produits","#produits"]},
+ obl:{eb:"Comment ça se passe",h:"4 étapes. <em>Des volumes défendables.</em>",lead:"Un ingénieur dédié vous accompagne de bout en bout. On commence par un lot témoin : vous jugez la qualité avant de vous engager.",tags:["Cadrage","Lot témoin","Livraison","Dashboard"],steps:[["Cadrage de vos besoins","Volumes, secteurs, calendrier de dépôt : votre ingénieur d'affaires dédié construit le plan avec vous."],["Un lot témoin à auditer","Un échantillon de dossiers, contrôlés par IA et relus par un ingénieur. Vous auditez avant tout engagement."],["Livraison continue","Les dossiers, relus un par un par nos ingénieurs, arrivent au fil de l'eau, documentés pour le contrôle du PNCEE."],["Dashboard de suivi","GWh cumac, conformité par secteur et par installateur, en temps réel."]],cta2:["Voir nos produits","#produits"]},
  pre:{eb:"Comment ça se passe",h:"4 étapes. <em>Votre projet financé.</em>",lead:"Vous envoyez le projet, nous revenons sous 48 h avec les fiches et le montant. À votre nom.",tags:["Envoi","48 h","Intégration","Suivi"],steps:[["Envoyez le projet","Plans, CCTP, gammes ou simple descriptif : votre ingénieur d'affaires dédié prend le relais."],["Étude d'éligibilité sous 48 h","Fiche par fiche : conditions techniques et montant CEE estimé."],["Le financement dans votre offre","Vous intégrez le montant à votre étude ou à votre argumentaire. Votre client voit son vrai reste à charge."],["Suivi jusqu'au versement","Chaque projet suivi dans votre dashboard, dossier monté dans Pipeline et relu par un ingénieur."]],cta2:["Voir nos produits","#produits"]},
  ben:{eb:"Comment ça se passe",h:"4 étapes. <em>Vos travaux financés.</em>",lead:"Vous connaissez le montant CEE avant de signer. Puis on suit tout jusqu'au versement.",tags:["Votre projet","48 h","Avant signature","Versement"],steps:[["Présentez votre projet","Bâtiments, travaux envisagés : votre ingénieur d'affaires dédié vous rappelle."],["Étude chiffrée sous 48 h","Les fiches qui s'appliquent et le montant CEE estimé, avant toute décision."],["L'offre CEE avant la signature","Des installateurs RGE du réseau, l'offre CEE remise avant votre engagement : la condition pour que la prime soit versée."],["Versement suivi en temps réel","Chaque dossier dans votre dashboard, contrôlé par IA et relu par un ingénieur, jusqu'au versement."]],cta2:["Voir nos produits","#produits"]}
 };
@@ -2758,6 +2839,50 @@ const PIPEBAND=`<section class="blk deep pipe2"><div class="wrap"><div class="pi
   </div>
   <span class="mk-ex">Exemple illustratif · données fictives</span>
 </div></div></div></div></section>`;
+const OBLSEC=`<section class="oc" id="conformite-obliges"><div class="wrap">
+ <div class="oc-head"><span class="eyebrow">Pipeline · piloté par nos ingénieurs</span><h2>Des dossiers 100&nbsp;% conformes. <em>Vérifiables, couche par couche.</em></h2><p class="lead">Avant d'entrer dans vos lots, chaque dossier traverse cinq couches de sécurité dans Pipeline. Automatiques quand c'est possible, humaines quand c'est nécessaire, toutes tracées.</p></div>
+ <div class="oc-grid">
+  <div class="oc-left"><div class="oc-card" aria-label="Exemple illustratif d'un dossier contrôlé dans Pipeline">
+   <div class="oc-ch"><div><b>OP-2026-0412</b><small>BAT-TH-116 · Tertiaire · 62 310 €</small></div><span class="oc-st" id="oc-st">En contrôle</span></div>
+   <ul class="oc-list">
+    <li data-l="0"><i></i><span>Signature électronique des pièces</span></li>
+    <li data-l="0"><i></i><span>Contrôle par contact niv. 4 · identité vérifiée</span></li>
+    <li data-l="0"><i></i><span>Questionnaire propre à la fiche BAT-TH-116</span></li>
+    <li data-l="1"><i></i><span>SIRET et RGE valides à la date des travaux</span></li>
+    <li data-l="2"><i></i><span>Devis, facture, AH recoupés · 312 / 312</span></li>
+    <li data-l="2"><i></i><span>Photos géolocalisées et horodatées</span></li>
+    <li data-l="3"><i></i><span>Audit · grille de contrôle validée</span></li>
+    <li data-l="3"><i></i><span>Relu par l'ingénieur dédié</span></li>
+    <li data-l="4"><i></i><span>Contrôle COFRAC · résultat satisfaisant</span></li>
+    <li data-l="4"><i></i><span>Piste d'audit complète, exportable</span></li>
+   </ul>
+   <div class="oc-meter"><span>Conformité</span><b id="oc-n">0 / 9</b><div><i id="oc-bar"></i></div></div>
+   <span class="oc-ex">Exemple illustratif · données fictives</span>
+  </div></div>
+  <ol class="oc-steps">
+   <li class="oc-step" data-i="0"><span class="oc-k">Couche 01 · Identité et contact</span><h3>Le bénéficiaire existe. Les travaux aussi.</h3><p>Pièces signées électroniquement. Contrôle par contact de niveau 4, avec vérification d'identité du bénéficiaire. Et un questionnaire personnalisé pour chaque fiche : on pose les questions que le contrôleur posera.</p></li>
+   <li class="oc-step" data-i="1"><span class="oc-k">Couche 02 · Entreprise</span><h3>L'installateur est vérifié à chaque dossier.</h3><p>SIRET et qualification RGE contrôlés automatiquement, à la date des travaux. Pas une fois à l'inscription : à chaque opération.</p></li>
+   <li class="oc-step" data-i="2"><span class="oc-k">Couche 03 · Contrôles live</span><h3>300+ points vérifiés pendant la saisie.</h3><p>Devis, facture, attestation sur l'honneur et cadre de contribution recoupés entre eux : montants, dates, références produit, mentions exigées par la fiche. Photos avant et après géolocalisées et horodatées. Une incohérence bloque le dossier tout de suite, pas au dépôt.</p></li>
+   <li class="oc-step" data-i="3"><span class="oc-k">Couche 04 · Audit et ingénieur</span><h3>Noté sur une grille, relu par un ingénieur.</h3><p>Chaque dossier est audité et noté selon une grille de contrôle vérifiée, puis relu par l'ingénieur dédié qui le suit du premier document au dépôt. Formé à chaque nouvel arrêté.</p></li>
+   <li class="oc-step" data-i="4"><span class="oc-k">Couche 05 · COFRAC et traçabilité</span><h3>Le contrôle COFRAC part du dossier.</h3><p>Pipeline commande le contrôle à un organisme accrédité COFRAC et le résultat remonte par API, directement dans le dossier. Chaque action est horodatée : la piste d'audit s'exporte pour votre audit ou un contrôle du PNCEE.</p></li>
+  </ol>
+ </div>
+ <div class="oc-foot">
+  <div class="oc-sect"><p class="oc-fk">Experts de vos secteurs</p><ul><li><code>BAR</code>Résidentiel</li><li><code>BAT</code>Tertiaire</li><li><code>IND</code>Industrie</li><li><code>AGRI</code>Agriculture</li><li><code>TRA</code>Transport</li></ul><p class="oc-fs">Une équipe d'ingénieurs CEE, avec des référents par secteur qui suivent chaque fiche et chaque arrêté. Et un ingénieur dédié à votre compte, votre interlocuteur unique.</p></div>
+  <div class="oc-part"><p class="oc-fk">Ils nous font confiance</p><div class="oc-logos" id="oc-logos"></div></div>
+  <div class="oc-cta"><p>Jugez sur pièces : nous vous livrons un lot témoin à auditer, avant tout engagement.</p><a class="btn btn-cta" href="#contact">Recevoir un lot témoin <span class="arr">→</span></a></div>
+ </div>
+</div></section>`;
+function armObl(){const sec=document.getElementById('conformite-obliges');if(!sec)return;
+ const steps=[...sec.querySelectorAll('.oc-step')],rows=[...sec.querySelectorAll('.oc-list li')];
+ const lg=document.getElementById('oc-logos');if(lg&&!lg.children.length){['Esso / North Atlantic','Intermarché','TotalEnergies'].forEach(a=>{const im=document.querySelector('.tb-logos img[alt="'+a+'"]');if(im){const c=im.cloneNode();c.removeAttribute('loading');lg.appendChild(c)}})}
+ const set=i=>{steps.forEach((x,k)=>{x.classList.toggle('on',k===i);x.classList.toggle('past',k<i)});let n=0;rows.forEach(r=>{const ok=+r.dataset.l<=i;r.classList.toggle('done',ok);r.classList.toggle('cur',+r.dataset.l===i);if(ok)n++});
+  document.getElementById('oc-n').textContent=n+' / '+rows.length;document.getElementById('oc-bar').style.width=(n/rows.length*100)+'%';
+  const st=document.getElementById('oc-st');const done=i===steps.length-1;st.textContent=done?'Conforme · prêt pour le lot':'En contrôle';st.classList.toggle('fin',done)};
+ set(0);sec.__set=set;
+ if(matchMedia('(max-width:760px)').matches){window.__mswipe&&setTimeout(window.__mswipe,60);return}
+ if(!('IntersectionObserver' in window)){set(steps.length-1);return}
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)set(+e.target.dataset.i)}),{rootMargin:'-45% 0px -45% 0px'});steps.forEach(x=>io.observe(x))}
 function renderSolution(page){
  const p=PAGES[page],k=SOLKEY[page];
  const subs=p.sub?`<section class="blk" style="padding-bottom:0"><div class="wrap"><div class="blk-head"><span class="eyebrow">Trois profils</span><h2>Votre situation, <em>vos fiches.</em></h2></div><div class="subseg">${p.sub.map(s=>`<article><span class="eyebrow">${s[1]}</span><h3>${s[0]}</h3><ul>${s[2].map(x=>`<li>${x}</li>`).join('')}</ul><code>${s[3]}</code></article>`).join('')}</div></div></section>`:'';
@@ -2767,6 +2892,7 @@ function renderSolution(page){
  <section class="blk deep proofband"><div class="wrap"><div class="pb-head"><span class="eyebrow">${p.code} · ${p.eb}</span><h2>${p.h}</h2><p class="lead">${p.lead}</p></div>
  <div class="pb-grid">${p.pains.map(x=>`<div class="pb"><span class="pb-l">Avant</span><s class="pb-was">${x[0]}</s><b class="pb-now">${x[1]}</b><p>${x[2]}</p></div>`).join('')}</div></div></section>
  <section class="qstrip"><div class="wrap"><span class="qs-b"><b>300+</b> points contrôlés par IA</span><span class="qs-plus">+</span><span class="qs-b"><b>100 %</b> relus par un ingénieur</span><span class="qs-plus">+</span><span class="qs-b"><b>1</b> interlocuteur dédié</span><span class="qs-plus">+</span><span class="qs-b"><b>1</b> dashboard de suivi en temps réel</span></div></section>
+ ${k==='obl'?OBLSEC:''}
  ${FEX[k]?fexHTML(k):subs}
 ${k==='rge'?PIPEBAND+PARTNER:flowHTML(FLOW[p.fam])}
  <section class="blk sol-faq"><div class="wrap sf-grid"><div class="blk-head"><span class="eyebrow">Questions fréquentes</span><h2>Ce qu'on <em>nous demande.</em></h2></div>
@@ -2774,7 +2900,7 @@ ${k==='rge'?PIPEBAND+PARTNER:flowHTML(FLOW[p.fam])}
  ${rel.length?`<section class="blk"><div class="wrap"><div class="blk-head"><span class="eyebrow">À lire</span><h2>Dans le Journal.</h2></div><div class="posts">${rel.map(card).join('')}</div></div></section>`:''}
  <section class="blk cta-end"><div class="wrap cta-band"><h2>${({ins:"Un dossier en cours ? Faites-le relire par un ingénieur.",obl:"Des volumes à sécuriser ? Parlons de votre objectif.",pre:"Un projet à financer ? Envoyez-le-nous.",ben:"Des travaux en vue ? Chiffrons vos CEE."})[p.fam]}</h2><a class="btn btn-cta" href="#contact">Parler à un ingénieur <span class="arr">→</span></a></div></section>`;
  $('#hero-crumb').innerHTML=`<a href="#accueil">Accueil</a> / Vous êtes / ${p.eb.split(',')[0]}`;
- armSteps();armPartner();
+ armSteps();armPartner();armObl();
 }
 function armPartner(){const sec=document.getElementById('devenir-partenaire');if(!sec)return;const items=[...sec.querySelectorAll('.p2-step')];
  const set=i=>{items.forEach((x,k)=>{x.classList.toggle('on',k===i);x.classList.toggle('past',k<i)});const c=document.getElementById('p2-cur');if(c)c.textContent='0'+(i+1);const b=document.getElementById('p2-bar');if(b)b.style.width=((i+1)/items.length*100)+'%'};
@@ -3130,16 +3256,17 @@ route();hdrTone();setTimeout(armPerso,80);
 <script>
 /* mobile : cartes horizontales + points de position */
 (function(){
- const mq=matchMedia('(max-width:760px)');const SEL=['#stages','.qb-grid','.pb-grid','.p2-steps'];
+ const mq=matchMedia('(max-width:760px)');const SEL=['#stages','.qb-grid','.pb-grid','.p2-steps','.oc-steps'];
  function setup(){document.querySelectorAll(SEL.join(',')).forEach(el=>{
   if(!mq.matches){el.classList.remove('m-swipe');el.nextElementSibling&&el.nextElementSibling.classList.contains('m-dots')&&el.nextElementSibling.remove();return}
   el.classList.add('m-swipe');
   const kids=()=>[...el.children].filter(k=>getComputedStyle(k).display!=='none');
   let dots=el.nextElementSibling;if(!dots||!dots.classList.contains('m-dots')){dots=document.createElement('div');dots.className='m-dots';el.after(dots)}
   const n=kids().length;if(dots.children.length!==n)dots.innerHTML='<i></i>'.repeat(n);
-  const upd=()=>{const ks=kids();const x=el.scrollLeft;let best=0,bd=1e9;ks.forEach((k,i)=>{const d=Math.abs(k.offsetLeft-el.offsetLeft-x-20);if(d<bd){bd=d;best=i}});
+  const upd=()=>{const ks=kids();const x=el.scrollLeft;let best=0,bd=1e9;ks.forEach((k,i)=>{const d=Math.abs(k.offsetLeft-el.offsetLeft-x-16);if(d<bd){bd=d;best=i}});
    [...dots.children].forEach((d,i)=>d.classList.toggle('on',i===best));
    if(el.id==='stages'&&typeof window.__setStage==='function')window.__setStage(+ks[best].dataset.i);
+   if(el.classList.contains('oc-steps')){const sc=el.closest('section');sc&&sc.__set&&sc.__set(best)}
    if(el.classList.contains('p2-steps')){const sc=el.closest('section');sc&&sc.__set&&sc.__set(best)}};
   if(!el.__sw){el.__sw=1;el.addEventListener('scroll',()=>{cancelAnimationFrame(el.__r);el.__r=requestAnimationFrame(upd)},{passive:true})}
   upd()})}
