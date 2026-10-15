@@ -1916,6 +1916,20 @@ a.oc-pr:hover{transform:translateY(-2px)}
 .oc-refs .oc-fk{margin:0}
 .oc-refs ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .oc-refs li{font:600 13px var(--sans);color:var(--ink);background:#fff;border:1px solid rgba(18,59,58,.12);border-radius:999px;padding:8px 14px}
+/* obligés : accompagnement */
+.oc-acc{margin-top:clamp(56px,8vw,110px);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.6fr);gap:clamp(28px,5vw,72px);align-items:start;padding-top:clamp(28px,4vw,44px);border-top:2px solid var(--ink)}
+.oc-acc-h{display:grid;gap:12px}.oc-acc-h .oc-fk{margin:0}
+.oc-acc-h h3{font-size:clamp(32px,4vw,54px);font-weight:900;letter-spacing:-.05em;line-height:.97;color:var(--ink)}
+.oc-acc-h h3 em{font-style:normal;color:var(--brand)}
+.oc-acc-h p{margin:0;color:var(--ink-2);font-size:17px;max-width:36ch}
+.oc-acc ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.oc-acc li{background:#fff;border-radius:18px;padding:22px;display:grid;gap:8px;align-content:start;box-shadow:0 20px 40px -32px rgba(18,59,58,.35)}
+.oc-acc code{font:700 12px var(--mono);color:var(--brand)}
+.oc-acc li b{font-size:20px;font-weight:800;letter-spacing:-.03em;color:var(--ink)}
+.oc-acc li span{font-size:15px;line-height:1.5;color:var(--ink-2)}
+@media (max-width:860px){.oc-acc{grid-template-columns:1fr}}
+@media (max-width:600px){.oc-acc ol{grid-template-columns:1fr;gap:10px}.oc-acc li{padding:18px}}
+@media (min-width:1101px){.oc-acc{grid-template-columns:minmax(0,.7fr) minmax(0,2fr)}.oc-acc ol{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
 <body>
@@ -2499,7 +2513,7 @@ const ROLES={
    {ph:"chiffrer les CEE dans mes études",h:"48 h. Fiche par fiche. À votre nom.",p:"Conditions techniques et montant estimé, prêts à intégrer à votre étude.",m:[["48 h","rendu"],["Offerte","pour les projets confiés"],["Votre nom","sur l'étude"]],cta:["Envoyer un projet","#contact"],tool:"etude"},
    {ph:"faire financer mes projets",h:"Les fiches qui financent votre projet.",p:"Choisissez le secteur et les travaux : voici les fiches applicables.",m:[["4 secteurs","couverts"],["48 h","étude chiffrée"],["Suivi","jusqu'au versement"]],cta:["Envoyer un projet","#contact"],tool:"matchAll"}]},
  obl:{fam:"obl",page:"obliges",code:"OBL",label:"un obligé",desc:"Fournisseurs d'énergie et de carburant",audience:"obligé",eb:"Obligés",
-  h:"Des volumes CEE <em>qui passent le contrôle.</em>",lead:"Fournisseurs d'énergie, distributeurs de carburant, délégataires : vos volumes sont produits par une équipe d'ingénieurs spécialistes des CEE, avec un ingénieur dédié à votre compte. Chaque dossier livré a passé 300+ contrôles et une relecture d'ingénieur. Tracé, documenté, défendable devant le PNCEE.",
+  h:"Des volumes CEE <em>qui passent le contrôle.</em>",lead:"Fournisseurs d'énergie, distributeurs de carburant, délégataires : vos volumes sont produits par une équipe d'ingénieurs spécialistes des CEE, avec un ingénieur dédié qui vous accompagne de bout en bout. Chaque dossier livré a passé 300+ contrôles et une relecture d'ingénieur. Tracé, documenté, défendable devant le PNCEE.",
   pl:"Le risque",pains:[["Un lot suspendu pour non-conformité","300+","points de contrôle sur chaque dossier, automatiques et en live. Chaque contrôle laisse sa trace dans le dossier."],["Des volumes qu'on découvre au dépôt","Réservés au devis","Chaque volume est réservé à la signature du devis, dans un contrat plafonné, et restitué si le dossier tombe. Volumes engagés et validés visibles en temps réel dans votre espace obligé."],["Un dossier impossible à justifier","Piste d'audit","Signatures qualifiées, photos horodatées et géolocalisées, documents versionnés et archivés. En cas de contrôle du PNCEE, chaque pièce est datée et retrouvable."]],
   faq:[["Qui suit nos volumes ?","Un ingénieur d'affaires dédié, spécialiste des CEE : votre interlocuteur unique, du cadrage à la livraison. Il s'appuie sur nos ingénieurs spécialisés par secteur, formés à chaque nouvel arrêté. Et vous suivez volumes engagés et validés, conformité et dossiers en cours en temps réel, dans votre espace obligé."],["Sur quels secteurs livrez-vous ?","Résidentiel, tertiaire, industrie, agriculture et transport, sur opérations standardisées. Chaque secteur a ses ingénieurs référents."],["Comment savoir qu'un dossier est conforme ?","Chaque dossier traverse cinq couches de contrôle dans Pipeline : installateur audité et surveillé, bénéficiaire identifié dès le devis, 300+ contrôles live, contrôle COFRAC, puis contrôle par contact avec un questionnaire propre à chaque opération. Le dépôt reste bloqué tant que les contrôles requis ne sont pas validés, et chaque pièce est datée et archivée."],["Peut-on auditer vos dossiers ?","Oui. Nous livrons un lot témoin à auditer avant tout engagement."]],
   goals:[
@@ -2890,6 +2904,16 @@ const OBLSEC=`<section class="oc" id="conformite-obliges"><div class="wrap">
    <li class="oc-step" data-i="2"><span class="oc-k">Couche 03 · Contrôles live</span><h3>300+ points vérifiés pendant la saisie.</h3><p>Le dossier est guidé fiche par fiche : une étape incomplète ne passe pas, une pièce manquante bloque la signature. Le devis porte la mention de rôle actif et incitatif, la TVA est contrôlée, le cadre de contribution est généré avant les travaux. Une facture devenue obsolète est détectée. Les photos avant et après sont horodatées et géolocalisées. Une non-conformité est arrêtée en amont, pas découverte au dépôt.</p><div class="oc-by"><span>Assuré par</span><a class="oc-pr pip" href="#produits">Pipeline<i>.</i></a><a class="oc-pr cfy" href="#produits"><i>✦</i>Conformity IA</a><span class="oc-pr ood">Photos <b>Fidealis</b></span></div></li>
    <li class="oc-step" data-i="3"><span class="oc-k">Couche 04 · COFRAC et preuves</span><h3>Les contrôles terrain, pilotés depuis le dossier.</h3><p>La visite technique et le contrôle COFRAC sont commandés et suivis dans le dossier, formulaire de visite pré-rempli. Signatures qualifiées et horodatées, photos horodatées et géolocalisées, documents versionnés et archivés : en cas de contrôle du PNCEE, chaque pièce est datée et retrouvable, y compris depuis votre espace obligé.</p><div class="oc-by"><span>Assuré par</span><a class="oc-pr cof" href="#produits"><i>✓</i>Cofrac</a><a class="oc-pr pip" href="#produits">Pipeline<i>.</i></a></div></li>
    <li class="oc-step" data-i="4"><span class="oc-k">Couche 05 · Contrôle par contact</span><h3>Le bénéficiaire confirme. Le dépôt attend sa réponse.</h3><p>Après les travaux, le bénéficiaire répond à un questionnaire personnalisé pour chaque opération CEE, et son identité est vérifiée par contrôle biométrique. On pose les questions que le contrôleur posera, avant lui. Tant que ce contrôle n'est pas validé, le dossier ne part pas au registre.</p><div class="oc-by"><span>Assuré par</span><a class="oc-pr ctl" href="#produits">Contrôleo</a><span class="oc-pr ood">Biométrie <b>EuroDatas</b></span></div></li>
+  </ol>
+ </div>
+ <div class="oc-acc"><div class="oc-acc-h"><span class="oc-fk">Accompagnement</span><h3>Des volumes, <em>et quelqu'un à vos côtés.</em></h3><p>Votre ingénieur dédié vous accompagne de bout en bout, du cadrage de la période jusqu'au contrôle.</p></div>
+  <ol>
+   <li><code>01</code><b>Cadrage de vos objectifs</b><span>Volumes, secteurs, fiches et calendrier de dépôt, construits avec vous pour tenir la période.</span></li>
+   <li><code>02</code><b>Un réseau accompagné</b><span>Les installateurs sont formés fiche par fiche : leur premier dossier est monté avec nos ingénieurs.</span></li>
+   <li><code>03</code><b>Veille réglementaire</b><span>Chaque arrêté, chaque évolution de fiche intégrés dans Pipeline avant d'être ouverts aux installateurs.</span></li>
+   <li><code>04</code><b>Prêts pour le contrôle</b><span>Lot témoin avant engagement, pièces datées et retrouvables, votre ingénieur à vos côtés en cas de contrôle du PNCEE.</span></li>
+   <li><code>05</code><b>Vos obligations légales</b><span>Obligation de la période, part précarité, contrôles obligatoires sur site et par contact : nous vous aidons à les tenir, dossier par dossier.</span></li>
+   <li><code>06</code><b>Un engagement pour la transition</b><span>Chaque CEE livré finance une rénovation réelle et vérifiée. Votre obligation devient un engagement mesurable pour la transition énergétique.</span></li>
   </ol>
  </div>
  <div class="oc-refs"><span class="oc-fk">Connecté aux référentiels officiels</span><ul><li>INSEE</li><li>Pappers</li><li>Base Adresse Nationale</li><li>Cadastre</li><li>BDNB</li><li>ADEME · PAC agréées</li><li>France Chaleur Urbaine</li><li>Barèmes ANAH</li></ul></div>
