@@ -1891,6 +1891,17 @@ html.cal-on,html.cal-on body{overflow:hidden}
 @media (max-width:760px){.oc-steps>.oc-step{border-color:rgba(18,59,58,.14)!important;background:#fff!important}.oc-steps>.oc-step.on{background:#fff!important}.oc .m-dots{color:var(--ink)}}
 .metrics b{white-space:nowrap}
 @media (max-width:760px){.oc-grid>.oc-steps{margin-inline:-16px}}
+/* obligés : produits qui assurent chaque couche */
+.oc-by{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:4px}
+.oc-by>span:first-child{font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-right:2px}
+.oc-pr{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px;border-radius:10px;text-decoration:none;font:700 14px var(--sans);letter-spacing:-.01em;white-space:nowrap;transition:transform .2s var(--ease)}
+a.oc-pr:hover{transform:translateY(-2px)}
+.oc-pr.pip{background:#14303A;color:#F3DCC4;font:800 16px "Space Grotesk",var(--sans);letter-spacing:-.03em}.oc-pr.pip i{font-style:normal;color:#C25B34}
+.oc-pr.ctl{background:#26304E;color:#fff}
+.oc-pr.cfy{background:#1F5A50;color:#fff;font-family:"Space Grotesk",var(--sans)}.oc-pr.cfy i{font-style:normal;color:#F3DCC4;font-size:12px}
+.oc-pr.cof{background:#2E7D6B;color:#fff}.oc-pr.cof i{font-style:normal;font-size:12px;width:18px;height:18px;border-radius:5px;background:rgba(255,255,255,.18);display:grid;place-items:center}
+.oc-pr.ood{background:#fff;color:var(--ink-2);border:1px solid rgba(18,59,58,.16);font-weight:500}.oc-pr.ood b{font-weight:800;color:var(--ink)}
+@media (max-width:760px){.oc-step .oc-by{margin-top:auto;padding-top:6px}.oc-pr{height:32px;padding:0 12px;font-size:13px}.oc-pr.pip{font-size:15px}}
 </style>
 </head>
 <body>
@@ -2860,11 +2871,11 @@ const OBLSEC=`<section class="oc" id="conformite-obliges"><div class="wrap">
    <span class="oc-ex">Exemple illustratif · données fictives</span>
   </div></div>
   <ol class="oc-steps">
-   <li class="oc-step" data-i="0"><span class="oc-k">Couche 01 · Identité et contact</span><h3>Le bénéficiaire existe. Les travaux aussi.</h3><p>Pièces signées électroniquement. Contrôle par contact de niveau 4, avec vérification d'identité du bénéficiaire. Et un questionnaire personnalisé pour chaque fiche : on pose les questions que le contrôleur posera.</p></li>
-   <li class="oc-step" data-i="1"><span class="oc-k">Couche 02 · Entreprise</span><h3>L'installateur est vérifié à chaque dossier.</h3><p>SIRET et qualification RGE contrôlés automatiquement, à la date des travaux. Pas une fois à l'inscription : à chaque opération.</p></li>
-   <li class="oc-step" data-i="2"><span class="oc-k">Couche 03 · Contrôles live</span><h3>300+ points vérifiés pendant la saisie.</h3><p>Devis, facture, attestation sur l'honneur et cadre de contribution recoupés entre eux : montants, dates, références produit, mentions exigées par la fiche. Photos avant et après géolocalisées et horodatées. Une incohérence bloque le dossier tout de suite, pas au dépôt.</p></li>
-   <li class="oc-step" data-i="3"><span class="oc-k">Couche 04 · Audit et ingénieur</span><h3>Noté sur une grille, relu par un ingénieur.</h3><p>Chaque dossier est audité et noté selon une grille de contrôle vérifiée, puis relu par l'ingénieur dédié qui le suit du premier document au dépôt. Formé à chaque nouvel arrêté.</p></li>
-   <li class="oc-step" data-i="4"><span class="oc-k">Couche 05 · COFRAC et traçabilité</span><h3>Le contrôle COFRAC part du dossier.</h3><p>Pipeline commande le contrôle à un organisme accrédité COFRAC et le résultat remonte par API, directement dans le dossier. Chaque action est horodatée : la piste d'audit s'exporte pour votre audit ou un contrôle du PNCEE.</p></li>
+   <li class="oc-step" data-i="0"><span class="oc-k">Couche 01 · Identité et contact</span><h3>Le bénéficiaire existe. Les travaux aussi.</h3><p>Pièces signées électroniquement. Contrôle par contact de niveau 4, avec vérification d'identité du bénéficiaire. Et un questionnaire personnalisé pour chaque fiche : on pose les questions que le contrôleur posera.</p><div class="oc-by"><span>Assuré par</span><a class="oc-pr ctl" href="#produits">Contrôleo</a><span class="oc-pr ood">Signature <b>Oodrive</b></span></div></li>
+   <li class="oc-step" data-i="1"><span class="oc-k">Couche 02 · Entreprise</span><h3>L'installateur est vérifié à chaque dossier.</h3><p>SIRET et qualification RGE contrôlés automatiquement, à la date des travaux. Pas une fois à l'inscription : à chaque opération.</p><div class="oc-by"><span>Assuré par</span><a class="oc-pr pip" href="#produits">Pipeline<i>.</i></a></div></li>
+   <li class="oc-step" data-i="2"><span class="oc-k">Couche 03 · Contrôles live</span><h3>300+ points vérifiés pendant la saisie.</h3><p>Devis, facture, attestation sur l'honneur et cadre de contribution recoupés entre eux : montants, dates, références produit, mentions exigées par la fiche. Photos avant et après géolocalisées et horodatées. Une incohérence bloque le dossier tout de suite, pas au dépôt.</p><div class="oc-by"><span>Assuré par</span><a class="oc-pr pip" href="#produits">Pipeline<i>.</i></a><a class="oc-pr cfy" href="#produits"><i>✦</i>Conformity IA</a></div></li>
+   <li class="oc-step" data-i="3"><span class="oc-k">Couche 04 · Audit et ingénieur</span><h3>Noté sur une grille, relu par un ingénieur.</h3><p>Chaque dossier est audité et noté selon une grille de contrôle vérifiée, puis relu par l'ingénieur dédié qui le suit du premier document au dépôt. Formé à chaque nouvel arrêté.</p><div class="oc-by"><span>Assuré par</span><a class="oc-pr cfy" href="#produits"><i>✦</i>Conformity IA</a></div></li>
+   <li class="oc-step" data-i="4"><span class="oc-k">Couche 05 · COFRAC et traçabilité</span><h3>Le contrôle COFRAC part du dossier.</h3><p>Pipeline commande le contrôle à un organisme accrédité COFRAC et le résultat remonte par API, directement dans le dossier. Chaque action est horodatée : la piste d'audit s'exporte pour votre audit ou un contrôle du PNCEE.</p><div class="oc-by"><span>Assuré par</span><a class="oc-pr cof" href="#produits"><i>✓</i>Cofrac</a><a class="oc-pr pip" href="#produits">Pipeline<i>.</i></a></div></li>
   </ol>
  </div>
  <div class="oc-foot">
