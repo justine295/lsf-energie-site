@@ -1974,6 +1974,10 @@ body[data-view="contact"] .cf-wrap{min-height:calc(100vh - var(--hdr-h,73px))}
 @media (max-width:600px){.otr-logos{grid-template-columns:1.6fr 1fr 1fr}.otr-logos img[alt^="Esso"]{padding-inline:2px}}
 @media (max-width:600px){.otr-logos{grid-template-columns:1fr 1fr;row-gap:18px}.otr-logos img[alt^="Esso"]{grid-column:1/-1;height:72px;padding-inline:24px}.otr-logos img:nth-child(2){border-left:0}.otr-logos img:not([alt^="Esso"]){height:64px}}
 @media (max-width:600px){.otr-logos.in img[alt^="Esso"]{transform:none}.otr{overflow:hidden}}
+/* logos : jamais au-delà de la résolution du fichier */
+.otr-logos img{max-width:320px;justify-self:center}
+.otr-logos.in img[alt^="Esso"]{transform:none}
+.otr-logos{grid-template-columns:1.2fr 1fr 1fr}
 </style>
 </head>
 <body>
