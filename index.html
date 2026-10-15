@@ -1953,6 +1953,21 @@ a.oc-pr:hover{transform:translateY(-2px)}
 /* contact : toute la page en pétrole */
 html:has(body[data-view="contact"]),body[data-view="contact"]{background:#0C2A28}
 body[data-view="contact"] .cf-wrap{min-height:calc(100vh - var(--hdr-h,73px))}
+/* obligés : ils nous font confiance, bandeau */
+.otr{background:#fff;padding-block:clamp(48px,7vw,96px);border-bottom:1px solid var(--line)}
+.otr .wrap{display:grid;gap:clamp(28px,4vw,48px)}
+.otr-h{text-align:center;display:grid;gap:10px;justify-items:center}
+.otr-k{font:600 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--brand)}
+.otr-h h2{font-size:clamp(40px,6vw,84px);font-weight:900;letter-spacing:-.055em;line-height:.95;color:var(--ink)}
+.otr-h h2 em{font-style:normal;color:var(--brand)}
+.otr-logos{display:grid;grid-template-columns:repeat(3,1fr);align-items:center;max-width:1040px;width:100%;margin-inline:auto}
+.otr-logos img{width:100%;height:clamp(64px,8vw,112px);object-fit:contain;padding-inline:clamp(16px,4vw,56px);background:none;border:0;border-radius:0}
+.otr-logos img+img{border-left:1px solid var(--line)}
+.otr-logos img{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.otr-logos.in img{opacity:1;transform:none}
+.otr-logos.in img:nth-child(2){transition-delay:.15s}.otr-logos.in img:nth-child(3){transition-delay:.3s}
+@media (prefers-reduced-motion:reduce){.otr-logos img{opacity:1;transform:none;transition:none}}
+@media (max-width:600px){.otr-logos img{height:56px;padding-inline:10px}}
 </style>
 </head>
 <body>
@@ -2902,7 +2917,10 @@ const PIPEBAND=`<section class="blk deep pipe2"><div class="wrap"><div class="pi
   </div>
   <span class="mk-ex">Exemple illustratif · données fictives</span>
 </div></div></div></div></section>`;
-const OBLTRUST=`<section class="otr" aria-label="Obligés partenaires"><div class="wrap"><div class="oc-trust"><div><span class="oc-fk">Obligés partenaires</span><h3>Ils nous font <em>confiance.</em></h3></div><div class="oc-logos" id="oc-logos"></div></div></div></section>`;
+const OBLTRUST=`<section class="otr" aria-label="Obligés partenaires"><div class="wrap">
+ <div class="otr-h"><span class="otr-k">Obligés partenaires</span><h2>Ils nous font <em>confiance.</em></h2></div>
+ <div class="otr-logos" id="oc-logos"></div>
+</div></section>`;
 const OBLACC=`<section class="oacc" id="accompagnement-obliges"><div class="wrap">
  <div class="oacc-h"><span class="eyebrow">Accompagnement</span><h2>Des volumes, <em>et quelqu'un à vos côtés.</em></h2><p class="lead">Votre ingénieur dédié, du cadrage au contrôle. Sans abonnement, sans engagement.</p></div>
  <ol class="oacc-l">
@@ -2950,7 +2968,7 @@ const OBLSEC=`<section class="oc" id="conformite-obliges"><div class="wrap">
 </div></section>`;
 function armObl(){const sec=document.getElementById('conformite-obliges');if(!sec)return;
  const steps=[...sec.querySelectorAll('.oc-step')],rows=[...sec.querySelectorAll('.oc-list li')];
- const lg=document.getElementById('oc-logos');if(lg&&!lg.children.length){['Esso / North Atlantic','Intermarché','TotalEnergies'].forEach(a=>{const im=document.querySelector('.tb-logos img[alt="'+a+'"]');if(im){const c=im.cloneNode();c.removeAttribute('loading');lg.appendChild(c)}})}
+ const lg=document.getElementById('oc-logos');if(lg&&'IntersectionObserver' in window){lg.classList.remove('in');const lio=new IntersectionObserver(es=>{if(es[0].isIntersecting){lg.classList.add('in');lio.disconnect()}},{threshold:.4});lio.observe(lg)}if(lg&&!lg.children.length){['Esso / North Atlantic','Intermarché','TotalEnergies'].forEach(a=>{const im=document.querySelector('.tb-logos img[alt="'+a+'"]');if(im){const c=im.cloneNode();c.removeAttribute('loading');lg.appendChild(c)}})}
  const set=i=>{steps.forEach((x,k)=>{x.classList.toggle('on',k===i);x.classList.toggle('past',k<i)});let n=0;rows.forEach(r=>{const ok=+r.dataset.l<=i;r.classList.toggle('done',ok);r.classList.toggle('cur',+r.dataset.l===i);if(ok)n++});
   document.getElementById('oc-n').textContent=n+' / '+rows.length;document.getElementById('oc-bar').style.width=(n/rows.length*100)+'%';
   const st=document.getElementById('oc-st');const done=i===steps.length-1;st.textContent=done?'Conforme · prêt pour le lot':'En contrôle';st.classList.toggle('fin',done)};
