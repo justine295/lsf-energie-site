@@ -1902,6 +1902,16 @@ a.oc-pr:hover{transform:translateY(-2px)}
 .oc-pr.cof{background:#2E7D6B;color:#fff}.oc-pr.cof i{font-style:normal;font-size:12px;width:18px;height:18px;border-radius:5px;background:rgba(255,255,255,.18);display:grid;place-items:center}
 .oc-pr.ood{background:#fff;color:var(--ink-2);border:1px solid rgba(18,59,58,.16);font-weight:500}.oc-pr.ood b{font-weight:800;color:var(--ink)}
 @media (max-width:760px){.oc-step .oc-by{margin-top:auto;padding-top:6px}.oc-pr{height:32px;padding:0 12px;font-size:13px}.oc-pr.pip{font-size:15px}}
+/* obligés : ils nous font confiance, en grand */
+.oc-foot{grid-template-columns:1.3fr 1fr}
+.oc-trust{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.6fr);gap:clamp(24px,5vw,72px);align-items:center;margin-top:clamp(56px,8vw,110px);padding:clamp(28px,4vw,48px);background:#fff;border-radius:24px;box-shadow:0 30px 60px -40px rgba(18,59,58,.35)}
+.oc-trust .oc-fk{display:block;margin-bottom:10px}
+.oc-trust h3{font-size:clamp(34px,4.4vw,60px);font-weight:900;letter-spacing:-.05em;line-height:.95;color:var(--ink)}
+.oc-trust h3 em{font-style:normal;color:var(--brand)}
+.oc-trust .oc-logos{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,24px)}
+.oc-trust .oc-logos img{width:100%;height:clamp(84px,9vw,120px);max-width:none;object-fit:contain;background:#F7F6F2;border:0;border-radius:16px;padding:clamp(14px,2vw,26px)}
+@media (max-width:860px){.oc-trust{grid-template-columns:1fr}.oc-foot{grid-template-columns:1fr}}
+@media (max-width:600px){.oc-trust .oc-logos{grid-template-columns:1fr}.oc-trust .oc-logos img{height:84px}}
 </style>
 </head>
 <body>
@@ -2486,10 +2496,10 @@ const ROLES={
    {ph:"faire financer mes projets",h:"Les fiches qui financent votre projet.",p:"Choisissez le secteur et les travaux : voici les fiches applicables.",m:[["4 secteurs","couverts"],["48 h","étude chiffrée"],["Suivi","jusqu'au versement"]],cta:["Envoyer un projet","#contact"],tool:"matchAll"}]},
  obl:{fam:"obl",page:"obliges",code:"OBL",label:"un obligé",desc:"Fournisseurs d'énergie et de carburant",audience:"obligé",eb:"Obligés",
   h:"Des volumes CEE <em>qui passent le contrôle.</em>",lead:"Fournisseurs d'énergie, distributeurs de carburant, délégataires : vos volumes sont produits par une équipe d'ingénieurs spécialistes des CEE, avec un ingénieur dédié à votre compte. Chaque dossier livré a passé 300+ contrôles et une relecture d'ingénieur. Tracé, documenté, défendable devant le PNCEE.",
-  pains:[["Un lot suspendu pour non-conformité","100 % relus","300+ contrôles automatiques, puis un ingénieur. La trace reste dans le dossier."],["Des volumes qu'on découvre au dépôt","En direct","GWh cumac, dossiers en cours, conformité par secteur et par installateur."],["Des installateurs inconnus","RGE vérifié","Qualification contrôlée à chaque dossier, historique de conformité visible."]],
-  faq:[["Qui suit nos volumes ?","Un ingénieur d'affaires dédié, spécialiste des CEE : votre interlocuteur unique, du cadrage à la livraison. Il s'appuie sur nos ingénieurs spécialisés par secteur, formés à chaque nouvel arrêté."],["Sur quels secteurs livrez-vous ?","Résidentiel, tertiaire, industrie, agriculture et transport, sur opérations standardisées. Chaque secteur a ses ingénieurs référents."],["Comment savoir qu'un dossier est conforme ?","Chaque dossier traverse quatre couches de contrôle dans Pipeline : installateur audité et surveillé, bénéficiaire identifié dès le devis et contrôlé par contact, 300+ contrôles live, contrôle COFRAC. Tout est tracé et exportable."],["Peut-on auditer vos dossiers ?","Oui. Nous livrons un lot témoin à auditer avant tout engagement."]],
+  pains:[["Un lot suspendu pour non-conformité","300+","points de contrôle sur chaque dossier, automatiques et en live. Chaque contrôle laisse sa trace dans le dossier."],["Des volumes qu'on découvre au dépôt","En direct","GWh cumac, dossiers en cours, conformité par secteur et par installateur."],["Des installateurs inconnus","RGE vérifié","Qualification contrôlée à chaque dossier, historique de conformité visible."]],
+  faq:[["Qui suit nos volumes ?","Un ingénieur d'affaires dédié, spécialiste des CEE : votre interlocuteur unique, du cadrage à la livraison. Il s'appuie sur nos ingénieurs spécialisés par secteur, formés à chaque nouvel arrêté."],["Sur quels secteurs livrez-vous ?","Résidentiel, tertiaire, industrie, agriculture et transport, sur opérations standardisées. Chaque secteur a ses ingénieurs référents."],["Comment savoir qu'un dossier est conforme ?","Chaque dossier traverse cinq couches de contrôle dans Pipeline : installateur audité et surveillé, bénéficiaire identifié dès le devis, 300+ contrôles live, contrôle COFRAC, puis contrôle par contact avec un questionnaire propre à chaque opération. Tout est tracé et exportable."],["Peut-on auditer vos dossiers ?","Oui. Nous livrons un lot témoin à auditer avant tout engagement."]],
   goals:[
-   {ph:"des volumes qui passent le contrôle",h:"Chaque dossier relu avant d'entrer dans vos lots.",p:"Mesurez votre exposition actuelle. Chez LSF Énergie, aucun dossier n'est livré sans relecture d'ingénieur.",m:[["100 %","relus par un ingénieur"],["300+","contrôles par dossier"],["1","ingénieur dédié"]],cta:["Recevoir un lot témoin","#contact"],tool:"riskObl"},
+   {ph:"des volumes qui passent le contrôle",h:"Chaque dossier relu avant d'entrer dans vos lots.",p:"Mesurez votre exposition actuelle. Chez LSF Énergie, aucun dossier n'est livré sans relecture d'ingénieur.",m:[["300+","points de contrôle par dossier"],["100 %","relus par un ingénieur"],["1","ingénieur dédié"]],cta:["Recevoir un lot témoin","#contact"],tool:"riskObl"},
    {ph:"tenir mon objectif de période",h:"Votre objectif, converti en dossiers par mois.",p:"Calculez le rythme nécessaire. Nous dimensionnons la production du réseau dessus.",m:[["Live","GWh cumac suivis"],["5","secteurs couverts"],["1","ingénieur dédié"]],cta:["Parler volumes","#contact"],tool:"pacing"},
    {ph:"savoir d'où viennent mes CEE",h:"1 kWh cumac = 1 dossier, 1 installateur, 1 ingénieur.",p:"Volumes, dossiers, conformité par installateur et par secteur, en continu.",m:[["Live","suivi"],["RGE","vérifié"],["Export","prêt pour le registre"]],cta:["Voir une démo","#contact"],tool:"lot"}]},
  tra:{fam:"ben",page:"transport",code:"TRA",label:"un transporteur",desc:"Flottes, logistique, transport de voyageurs",audience:"transporteur",eb:"Transport et logistique",
@@ -2851,7 +2861,7 @@ const PIPEBAND=`<section class="blk deep pipe2"><div class="wrap"><div class="pi
   <span class="mk-ex">Exemple illustratif · données fictives</span>
 </div></div></div></div></section>`;
 const OBLSEC=`<section class="oc" id="conformite-obliges"><div class="wrap">
- <div class="oc-head"><span class="eyebrow">Pipeline · piloté par nos ingénieurs</span><h2>Des dossiers 100&nbsp;% conformes. <em>Vérifiables, couche par couche.</em></h2><p class="lead">Avant d'entrer dans vos lots, chaque dossier traverse quatre couches de sécurité dans Pipeline. Automatiques quand c'est possible, humaines quand c'est nécessaire, toutes tracées.</p></div>
+ <div class="oc-head"><span class="eyebrow">Pipeline · piloté par nos ingénieurs</span><h2>Des dossiers 100&nbsp;% conformes. <em>Vérifiables, couche par couche.</em></h2><p class="lead">Avant d'entrer dans vos lots, chaque dossier traverse cinq couches de sécurité dans Pipeline. Automatiques quand c'est possible, humaines quand c'est nécessaire, toutes tracées.</p></div>
  <div class="oc-grid">
   <div class="oc-left"><div class="oc-card" aria-label="Exemple illustratif d'un dossier contrôlé dans Pipeline">
    <div class="oc-ch"><div><b>OP-2026-0412</b><small>BAT-TH-116 · Tertiaire · 62 310 €</small></div><span class="oc-st" id="oc-st">En contrôle</span></div>
@@ -2860,25 +2870,27 @@ const OBLSEC=`<section class="oc" id="conformite-obliges"><div class="wrap">
     <li data-l="0"><i></i><span>SIRET et RGE valides · alertes actives</span></li>
     <li data-l="1"><i></i><span>Identité vérifiée dès le devis · pièce + contrôle visuel</span></li>
     <li data-l="1"><i></i><span>Pièces signées électroniquement</span></li>
-    <li data-l="1"><i></i><span>Questionnaire propre à la fiche BAT-TH-116</span></li>
     <li data-l="2"><i></i><span>Devis, facture, AH recoupés · 312 / 312</span></li>
     <li data-l="2"><i></i><span>Photos géolocalisées et horodatées</span></li>
     <li data-l="3"><i></i><span>Contrôle COFRAC · résultat satisfaisant</span></li>
     <li data-l="3"><i></i><span>Piste d'audit complète, exportable</span></li>
+    <li data-l="4"><i></i><span>Contrôle par contact · identité vérifiée</span></li>
+    <li data-l="4"><i></i><span>Questionnaire propre à l'opération BAT-TH-116</span></li>
    </ul>
    <div class="oc-meter"><span>Conformité</span><b id="oc-n">0 / 9</b><div><i id="oc-bar"></i></div></div>
    <span class="oc-ex">Exemple illustratif · données fictives</span>
   </div></div>
   <ol class="oc-steps">
    <li class="oc-step" data-i="0"><span class="oc-k">Couche 01 · Installateur</span><h3>L'installateur est audité avant son premier dossier.</h3><p>Chaque installateur passe un audit d'entrée et reçoit un score qualité, établi sur une grille de critères vérifiés. Ensuite, la surveillance est continue : SIRET et qualification RGE contrôlés à chaque dossier, avec une alerte automatique dès qu'un document expire ou qu'un écart apparaît.</p><div class="oc-by"><span>Assuré par</span><a class="oc-pr pip" href="#produits">Pipeline<i>.</i></a></div></li>
-   <li class="oc-step" data-i="1"><span class="oc-k">Couche 02 · Bénéficiaire</span><h3>Le bénéficiaire existe. Les travaux aussi.</h3><p>Dès la signature du devis, le bénéficiaire est identifié : pièce d'identité et contrôle visuel. Les pièces sont signées électroniquement. Puis un contrôle par contact, avec un questionnaire personnalisé pour chaque fiche : on pose les questions que le contrôleur posera.</p><div class="oc-by"><span>Assuré par</span><a class="oc-pr ctl" href="#produits">Contrôleo</a><span class="oc-pr ood">Signature <b>Oodrive</b></span></div></li>
+   <li class="oc-step" data-i="1"><span class="oc-k">Couche 02 · Bénéficiaire</span><h3>Le bénéficiaire existe. Les travaux aussi.</h3><p>Dès la signature du devis, le bénéficiaire est identifié : pièce d'identité et contrôle visuel. Devis, attestation et pièces du dossier sont ensuite signés électroniquement. Un bénéficiaire fictif ne passe pas.</p><div class="oc-by"><span>Assuré par</span><a class="oc-pr pip" href="#produits">Pipeline<i>.</i></a><span class="oc-pr ood">Signature <b>Oodrive</b></span></div></li>
    <li class="oc-step" data-i="2"><span class="oc-k">Couche 03 · Contrôles live</span><h3>300+ points vérifiés pendant la saisie.</h3><p>Devis, facture, attestation sur l'honneur et cadre de contribution recoupés entre eux : montants, dates, références produit, mentions exigées par la fiche. Photos avant et après géolocalisées et horodatées. Une incohérence bloque le dossier tout de suite, pas au dépôt.</p><div class="oc-by"><span>Assuré par</span><a class="oc-pr pip" href="#produits">Pipeline<i>.</i></a><a class="oc-pr cfy" href="#produits"><i>✦</i>Conformity IA</a></div></li>
    <li class="oc-step" data-i="3"><span class="oc-k">Couche 04 · COFRAC et traçabilité</span><h3>Le contrôle COFRAC part du dossier.</h3><p>Pipeline commande le contrôle à un organisme accrédité COFRAC et le résultat remonte par API, directement dans le dossier. Chaque action est horodatée : la piste d'audit s'exporte pour votre audit ou un contrôle du PNCEE.</p><div class="oc-by"><span>Assuré par</span><a class="oc-pr cof" href="#produits"><i>✓</i>Cofrac</a><a class="oc-pr pip" href="#produits">Pipeline<i>.</i></a></div></li>
+   <li class="oc-step" data-i="4"><span class="oc-k">Couche 05 · Contrôle par contact</span><h3>On rappelle le bénéficiaire. Avec les bonnes questions.</h3><p>Après les travaux, le bénéficiaire est recontacté : vérification d'identité, puis un questionnaire personnalisé pour chaque opération CEE. On pose les questions que le contrôleur posera, avant lui. Les réponses sont centralisées dans le dossier.</p><div class="oc-by"><span>Assuré par</span><a class="oc-pr ctl" href="#produits">Contrôleo</a></div></li>
   </ol>
  </div>
+ <div class="oc-trust"><div><span class="oc-fk">Obligés partenaires</span><h3>Ils nous font <em>confiance.</em></h3></div><div class="oc-logos" id="oc-logos"></div></div>
  <div class="oc-foot">
   <div class="oc-sect"><p class="oc-fk">Experts de vos secteurs</p><ul><li><code>BAR</code>Résidentiel</li><li><code>BAT</code>Tertiaire</li><li><code>IND</code>Industrie</li><li><code>AGRI</code>Agriculture</li><li><code>TRA</code>Transport</li></ul><p class="oc-fs">Une équipe d'ingénieurs CEE, avec des référents par secteur qui suivent chaque fiche et chaque arrêté. Et un ingénieur dédié à votre compte, votre interlocuteur unique.</p></div>
-  <div class="oc-part"><p class="oc-fk">Ils nous font confiance</p><div class="oc-logos" id="oc-logos"></div></div>
   <div class="oc-cta"><p>Jugez sur pièces : nous vous livrons un lot témoin à auditer, avant tout engagement.</p><a class="btn btn-cta" href="#contact">Recevoir un lot témoin <span class="arr">→</span></a></div>
  </div>
 </div></section>`;
