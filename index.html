@@ -2563,7 +2563,7 @@ const ROLES={
  obl:{fam:"obl",page:"obliges",code:"OBL",label:"un obligé",desc:"Fournisseurs d'énergie et de carburant",audience:"obligé",eb:"Obligés",
   h:"Des volumes CEE <em>qui passent le contrôle.</em>",lead:"Une équipe d\'ingénieurs CEE, un ingénieur dédié. Chaque dossier contrôlé, relu, traçable.",
   pl:"Le risque",pains:[["Des volumes qu'on découvre au dépôt","Réservés au devis","Volume réservé à la signature, libéré si le dossier n'aboutit pas."],["Un lot suspendu pour non-conformité","Arrêtée en amont","Bloquée à la saisie, pas découverte au dépôt."],["Un dossier impossible à justifier","Tout est archivé","Chaque pièce datée et conservée, prête à présenter au PNCEE."]],
-  faq:[["Qui suit nos volumes ?","Un ingénieur dédié, appuyé par des référents par secteur. Suivi en direct dans votre espace obligé."],["Sur quels secteurs livrez-vous ?","Résidentiel, tertiaire, industrie, agriculture et transport."],["Comment savoir qu'un dossier est conforme ?","Cinq couches de contrôle dans Pipeline. Pas de validation, pas de dépôt."],["Peut-on auditer vos dossiers ?","Oui : un lot témoin, avant tout engagement."]],
+  faq:[["Qui suit nos volumes ?","Un ingénieur dédié, appuyé par des référents par secteur. Suivi en direct dans votre espace obligé."],["Sur quels secteurs livrez-vous ?","Résidentiel, tertiaire, industrie, agriculture et transport."],["Comment savoir qu'un dossier est conforme ?","Six couches de contrôle dans Pipeline. Pas de validation, pas de dépôt."],["Peut-on auditer vos dossiers ?","Oui : un lot témoin, avant tout engagement."]],
   goals:[
    {ph:"des volumes qui passent le contrôle",h:"300+ points de contrôle avant d'entrer dans vos lots.",p:"Six pratiques appliquées à chaque dossier, du devis au dépôt.",m:[["8 ans","d'expertise CEE"],["100 %","relus par un ingénieur"],["1","ingénieur dédié"]],cta:["Recevoir un lot témoin","#contact"],tool:"riskObl"},
    {ph:"tenir mon objectif de période",h:"Votre objectif, converti en dossiers par mois.",p:"Calculez le rythme nécessaire. Nous dimensionnons la production du réseau dessus.",m:[["Plafonné","volume réservé au devis"],["5","secteurs couverts"],["1","ingénieur dédié"]],cta:["Parler volumes","#contact"],tool:"pacing"},
@@ -2943,7 +2943,7 @@ const OBLACC=`<section class="oacc" id="accompagnement-obliges"><div class="wrap
  </ol>
 </div></section>`;
 const OBLSEC=`<section class="oc" id="conformite-obliges"><div class="wrap">
- <div class="oc-head"><span class="eyebrow">Pipeline · piloté par nos ingénieurs</span><h2>Des dossiers 100&nbsp;% conformes. <em>Vérifiables, couche par couche.</em></h2><p class="lead">Cinq couches de sécurité dans Pipeline, avant d\'entrer dans vos lots.</p></div>
+ <div class="oc-head"><span class="eyebrow">Pipeline · piloté par nos ingénieurs</span><h2>Des dossiers 100&nbsp;% conformes. <em>Vérifiables, couche par couche.</em></h2><p class="lead">Six couches de sécurité dans Pipeline, avant d\'entrer dans vos lots.</p></div>
  <div class="oc-grid">
   <div class="oc-left"><div class="oc-card" aria-label="Exemple illustratif d'un dossier contrôlé dans Pipeline">
    <div class="oc-ch"><div><b>OP-2026-0412</b><small>BAT-TH-116 · Tertiaire · 62 310 €</small></div><span class="oc-st" id="oc-st">En contrôle</span></div>
@@ -2952,12 +2952,13 @@ const OBLSEC=`<section class="oc" id="conformite-obliges"><div class="wrap">
     <li data-l="0"><i></i><span>SIRET et RGE valides · alertes actives</span></li>
     <li data-l="1"><i></i><span>Identité vérifiée dès le devis · PVID certifié ANSSI</span></li>
     <li data-l="1"><i></i><span>SIREN actif · précarité justifiée (ANAH)</span></li>
-    <li data-l="2"><i></i><span>Rôle actif et incitatif prouvé avant travaux</span></li>
-    <li data-l="2"><i></i><span>Pièces complètes · photos horodatées et géolocalisées</span></li>
-    <li data-l="3"><i></i><span>Contrôle COFRAC · résultat satisfaisant</span></li>
-    <li data-l="3"><i></i><span>Pièces datées, versionnées, archivées</span></li>
-    <li data-l="4"><i></i><span>Contrôle par contact validé · dépôt débloqué</span></li>
-    <li data-l="4"><i></i><span>Questionnaire propre à l'opération BAT-TH-116</span></li>
+    <li data-l="2"><i></i><span>Équipement référencé · caractéristiques conformes</span></li>
+    <li data-l="3"><i></i><span>Rôle actif et incitatif prouvé avant travaux</span></li>
+    <li data-l="3"><i></i><span>Pièces complètes · photos horodatées et géolocalisées</span></li>
+    <li data-l="4"><i></i><span>Contrôle COFRAC · résultat satisfaisant</span></li>
+    <li data-l="4"><i></i><span>Pièces datées, versionnées, archivées</span></li>
+    <li data-l="5"><i></i><span>Contrôle par contact validé · dépôt débloqué</span></li>
+    <li data-l="5"><i></i><span>Questionnaire propre à l'opération BAT-TH-116</span></li>
    </ul>
    <div class="oc-meter"><span>Conformité</span><b id="oc-n">0 / 9</b><div><i id="oc-bar"></i></div></div>
    <span class="oc-ex">Exemple illustratif · données fictives</span>
@@ -2965,9 +2966,10 @@ const OBLSEC=`<section class="oc" id="conformite-obliges"><div class="wrap">
   <ol class="oc-steps">
    <li class="oc-step" data-i="0"><span class="oc-k">Couche 01 · Installateur</span><h3>Installateur audité avant son premier dossier.</h3><p>Audit d'entrée, score qualité, puis alertes automatiques sur le RGE.</p><div class="oc-by"><span>Assuré par</span><a class="oc-pr pip" href="#produits">Pipeline<i>.</i></a><span class="oc-pr ood">Données entreprise <b>Pappers</b></span></div></li>
    <li class="oc-step" data-i="1"><span class="oc-k">Couche 02 · Bénéficiaire</span><h3>Bénéficiaire identifié dès le devis.</h3><p>Vérification d'identité à distance certifiée PVID par l'ANSSI : le niveau de vérification le plus élevé. SIREN et précarité (ANAH) vérifiés à la source.</p><div class="oc-by"><span>Assuré par</span><a class="oc-pr pip" href="#produits">Pipeline<i>.</i></a><span class="oc-pr ood">Signature <b>Oodrive</b></span><span class="oc-pr ood">Données entreprise <b>INSEE · Pappers</b></span></div></li>
-   <li class="oc-step" data-i="2"><span class="oc-k">Couche 03 · Contrôles live</span><h3>300+ points vérifiés pendant la saisie.</h3><p>Pièces, mentions, rôle actif et incitatif, photos horodatées et géolocalisées. Une non-conformité bloque le dossier.</p><div class="oc-by"><span>Assuré par</span><a class="oc-pr pip" href="#produits">Pipeline<i>.</i></a><a class="oc-pr cfy" href="#produits"><i>✦</i>Conformity IA</a><span class="oc-pr ood">Photos <b>Fidealis</b></span></div></li>
-   <li class="oc-step" data-i="3"><span class="oc-k">Couche 04 · COFRAC et preuves</span><h3>Contrôles terrain pilotés depuis le dossier.</h3><p>Visite technique et COFRAC commandés et suivis. Chaque pièce datée et archivée.</p><div class="oc-by"><span>Assuré par</span><a class="oc-pr cof" href="#produits"><i>✓</i>Cofrac</a><a class="oc-pr pip" href="#produits">Pipeline<i>.</i></a></div></li>
-   <li class="oc-step" data-i="4"><span class="oc-k">Couche 05 · Contrôle par contact</span><h3>Contrôle par contact avant dépôt.</h3><p>Questionnaire propre à chaque opération, identité vérifiée. Pas de validation, pas de dépôt.</p><div class="oc-by"><span>Assuré par</span><a class="oc-pr ctl" href="#produits">Contrôleo</a><span class="oc-pr ood">Biométrie <b>EuroDatas</b></span></div></li>
+   <li class="oc-step" data-i="2"><span class="oc-k">Couche 03 · Matériel</span><h3>Un matériel conforme à la fiche.</h3><p>Le devis est construit depuis une base d'équipements aux caractéristiques réglementaires : marque, référence, performance. Les PAC sont vérifiées dans le référentiel ADEME, mis à jour chaque semaine.</p><div class="oc-by"><span>Assuré par</span><a class="oc-pr pip" href="#produits">Pipeline<i>.</i></a><span class="oc-pr ood">Référentiel <b>ADEME</b></span></div></li>
+   <li class="oc-step" data-i="3"><span class="oc-k">Couche 04 · Contrôles live</span><h3>300+ points vérifiés pendant la saisie.</h3><p>Pièces, mentions, rôle actif et incitatif, photos horodatées et géolocalisées. Une non-conformité bloque le dossier.</p><div class="oc-by"><span>Assuré par</span><a class="oc-pr pip" href="#produits">Pipeline<i>.</i></a><a class="oc-pr cfy" href="#produits"><i>✦</i>Conformity IA</a><span class="oc-pr ood">Photos <b>Fidealis</b></span></div></li>
+   <li class="oc-step" data-i="4"><span class="oc-k">Couche 05 · COFRAC et preuves</span><h3>Contrôles terrain pilotés depuis le dossier.</h3><p>Visite technique et COFRAC commandés et suivis. Chaque pièce datée et archivée.</p><div class="oc-by"><span>Assuré par</span><a class="oc-pr cof" href="#produits"><i>✓</i>Cofrac</a><a class="oc-pr pip" href="#produits">Pipeline<i>.</i></a></div></li>
+   <li class="oc-step" data-i="5"><span class="oc-k">Couche 06 · Contrôle par contact</span><h3>Contrôle par contact avant dépôt.</h3><p>Questionnaire propre à chaque opération, identité vérifiée. Pas de validation, pas de dépôt.</p><div class="oc-by"><span>Assuré par</span><a class="oc-pr ctl" href="#produits">Contrôleo</a><span class="oc-pr ood">Biométrie <b>EuroDatas</b></span></div></li>
   </ol>
  </div>
  <div class="oc-refs"><span class="oc-fk">Connecté aux référentiels officiels</span><ul><li>INSEE</li><li>Pappers</li><li>Base Adresse Nationale</li><li>Cadastre</li><li>BDNB</li><li>ADEME · PAC agréées</li><li>France Chaleur Urbaine</li><li>Barèmes ANAH</li></ul></div>
