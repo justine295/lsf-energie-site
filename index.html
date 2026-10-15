@@ -1968,6 +1968,12 @@ body[data-view="contact"] .cf-wrap{min-height:calc(100vh - var(--hdr-h,73px))}
 .otr-logos.in img:nth-child(2){transition-delay:.15s}.otr-logos.in img:nth-child(3){transition-delay:.3s}
 @media (prefers-reduced-motion:reduce){.otr-logos img{opacity:1;transform:none;transition:none}}
 @media (max-width:600px){.otr-logos img{height:56px;padding-inline:10px}}
+.otr-logos{grid-template-columns:1.5fr 1fr 1fr}
+.otr-logos img[alt^="Esso"]{padding-inline:clamp(4px,1.5vw,20px);transform-origin:center}
+.otr-logos.in img[alt^="Esso"]{transform:scale(1.12)}
+@media (max-width:600px){.otr-logos{grid-template-columns:1.6fr 1fr 1fr}.otr-logos img[alt^="Esso"]{padding-inline:2px}}
+@media (max-width:600px){.otr-logos{grid-template-columns:1fr 1fr;row-gap:18px}.otr-logos img[alt^="Esso"]{grid-column:1/-1;height:72px;padding-inline:24px}.otr-logos img:nth-child(2){border-left:0}.otr-logos img:not([alt^="Esso"]){height:64px}}
+@media (max-width:600px){.otr-logos.in img[alt^="Esso"]{transform:none}.otr{overflow:hidden}}
 </style>
 </head>
 <body>
