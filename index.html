@@ -608,7 +608,7 @@ section.blk{padding-block:clamp(64px,9vw,120px)}
 .dossier .who span.me{box-shadow:inset 0 0 0 1.5px var(--sable)}
 .dossier .ex{color:var(--on-deep-2)}
 .stages{display:grid;gap:0;margin:0;padding:0}
-.stage{list-style:none;min-height:min(62vh,560px);display:grid;align-content:center;gap:14px;padding-block:32px;border-top:1px solid var(--line);opacity:.35;transition:opacity .4s var(--ease)}
+.stage{list-style:none;min-height:min(42vh,380px);display:grid;align-content:center;gap:14px;padding-block:32px;border-top:1px solid var(--line);opacity:.35;transition:opacity .4s var(--ease)}
 .stage.act{opacity:1}
 .stage:first-child{border-top:0}
 .stage .who{display:flex;gap:6px;flex-wrap:wrap}
@@ -1258,7 +1258,7 @@ section.blk{padding-block:clamp(64px,9vw,120px)}
 .p2-zero{font:600 13px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--sable)}
 .partner2 .btn-ghost{color:var(--on-deep);box-shadow:inset 0 0 0 1.5px rgba(240,238,233,.3)}
 .p2-steps{list-style:none;margin:0;padding:0}
-.p2-step{min-height:62vh;display:grid;align-content:center;gap:14px;padding-block:32px;border-top:1px solid rgba(240,238,233,.1);opacity:.22;transform:translateX(12px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.p2-step{min-height:38vh;display:grid;align-content:center;gap:14px;padding-block:32px;border-top:1px solid rgba(240,238,233,.1);opacity:.22;transform:translateX(12px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
 .p2-step:first-child{border-top:0}
 .p2-step.on{opacity:1;transform:none}
 .p2-step.past{opacity:.4;transform:none}
@@ -2004,13 +2004,11 @@ body[data-view="contact"] .cf-wrap{min-height:calc(100vh - var(--hdr-h,73px))}
 @media (max-width:900px){.gu-l{grid-template-columns:1fr 1fr;row-gap:24px}}
 @media (max-width:600px){.gu-bar{flex-direction:column;height:auto}.gu-bar i{width:100%!important;height:0;padding-block:0;transition:height .8s cubic-bezier(.7,0,.2,1),padding .8s}.gu-bar.in i{height:64px;padding-block:10px}.gu-l{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.gu-bar i{width:var(--w);transition:none}}
+@media (max-width:760px){.gu-l>li{background:#fff;border:1px solid var(--line);border-top:2px solid var(--ink);border-radius:16px;padding:18px}.gu .m-dots,.fex .m-dots{color:var(--ink)}}
 </style>
 </head>
 <body>
 
-<div class="proto"><div class="wrap">
-  <span>Maquette V4 · écosystème CEE · site multi-pages</span>
-</div></div>
 
 <header class="hdr">
   <div class="wrap">
@@ -2095,8 +2093,7 @@ body[data-view="contact"] .cf-wrap{min-height:calc(100vh - var(--hdr-h,73px))}
         </div>
         <div class="tb-c">
           <p class="tb-big num">8&nbsp;ans</p>
-          <p class="tb-lead">d'expertise CEE, chaque dossier relu par un ingénieur</p>
-          <dl class="tb-mini"><div><dt>Contrôles IA</dt><dd class="num">300+</dd></div><div><dt>Versement</dt><dd class="num">J+5</dd></div></dl>
+          <p class="tb-lead">d'expertise CEE, sur le résidentiel, le tertiaire, l'industrie, l'agriculture et le transport</p>
         </div>
       </div>
       <div class="tb-eng" aria-label="Ce que fait l'ingénierie LSF Énergie">
@@ -2122,7 +2119,7 @@ body[data-view="contact"] .cf-wrap{min-height:calc(100vh - var(--hdr-h,73px))}
       <div class="central-h">
         <span class="eyebrow">L'acteur central des CEE</span>
         <h2>Un parcours sur mesure. <em>Pour chaque interlocuteur.</em></h2>
-        <p class="lead">Artisan, bailleur, industriel, obligé… chacun a son parcours, ses outils et son ingénieur d'affaires dédié. Voici ce que nous apportons à chacun.</p>
+        <p class="lead">Artisan, bailleur, industriel, obligé… chacun a son parcours et ses outils. Voici ce que nous apportons à chacun.</p>
         <a class="btn btn-cta" href="#contact" style="justify-self:start">Parler à un ingénieur <span class="arr">→</span></a>
       </div>
       <ul class="central-list"><li><a href="#artisans-rge"><em class="pf">J+5</em><span class="pn"><code>RGE</code><b>Artisans et réseaux RGE</b></span><span class="pt">Votre prime versée 5 jours après validation, pas 90. Le dossier se monte en 12 clics.</span><i class="cl-go">Votre parcours →</i></a></li><li><a href="#obliges"><em class="pf">300+</em><span class="pn"><code>OBL</code><b>Obligés</b></span><span class="pt">Points contrôlés par IA sur chaque dossier, puis une relecture d'ingénieur. Des volumes défendables devant le PNCEE.</span><i class="cl-go">Votre parcours →</i></a></li><li><a href="#bureaux-etudes"><em class="pf">48 h</em><span class="pn"><code>BET</code><b>Bureaux d'études et auditeurs</b></span><span class="pt">Une étude d'éligibilité à votre nom. Votre client voit son reste à charge réel.</span><i class="cl-go">Votre parcours →</i></a></li><li><a href="#fabricants"><em class="pf">0 facture à refaire</em><span class="pn"><code>FAB</code><b>Fabricants de matériel</b></span><span class="pt">Vos références et performances intégrées à Pipeline : vos installateurs facturent avec les bonnes mentions.</span><i class="cl-go">Votre parcours →</i></a></li><li><a href="#bailleurs-coproprietes"><em class="pf">Avant le vote</em><span class="pn"><code>BAI</code><b>Bailleurs et copropriétés</b></span><span class="pt">Le montant CEE figure dans les devis présentés en AG ou en comité. Aucune surprise après.</span><i class="cl-go">Votre parcours →</i></a></li><li><a href="#tertiaire"><em class="pf">48 h</em><span class="pn"><code>TER</code><b>Tertiaire privé et public</b></span><span class="pt">Une étude d'éligibilité chiffrée, bâtiment par bâtiment, fiche par fiche.</span><i class="cl-go">Votre parcours →</i></a></li><li><a href="#industriels"><em class="pf">Fiche par fiche</em><span class="pn"><code>IND</code><b>Industriels</b></span><span class="pt">Nos ingénieurs vérifient puissances, usages et mesures exigés. Les CEE entrent dans votre calcul de ROI.</span><i class="cl-go">Votre parcours →</i></a></li><li><a href="#transport"><em class="pf">Fiches TRA</em><span class="pn"><code>TRA</code><b>Transport et logistique</b></span><span class="pt">Conduite économe, équipements des véhicules : les opérations finançables repérées pour votre flotte.</span><i class="cl-go">Votre parcours →</i></a></li></ul>
@@ -2193,8 +2190,8 @@ body[data-view="contact"] .cf-wrap{min-height:calc(100vh - var(--hdr-h,73px))}
         <span class="eyebrow">Parcours personnalisé</span>
         <h2>Un seul interlocuteur. <em>Du premier appel à la prime versée.</em></h2>
         <ol class="perso-list">
-          <li><code>01</code><div><b>Un parcours par métier</b><p>Artisan, bailleur, industriel, obligé : 8 parcours, 8 façons de travailler. Le vôtre est construit sur vos chantiers et vos volumes.</p></div></li>
-          <li><code>02</code><div><b>Un ingénieur d'affaires dédié</b><p>Il vous rappelle sous 24 h, connaît votre activité et vous suit sur chaque dossier.</p></div></li>
+          <li><code>01</code><div><b>Un ingénieur d'affaires dédié</b><p>Il vous rappelle sous 24 h, connaît votre activité et vous suit sur chaque dossier.</p></div></li>
+          <li><code>02</code><div><b>Une équipe derrière lui</b><p>Des ingénieurs référents par secteur, formés à chaque nouvel arrêté.</p></div></li>
           <li><code>03</code><div><b>Un dashboard de suivi</b><p>Chaque dossier, son statut, son interlocuteur : tout est visible en temps réel, jusqu'au versement.</p></div></li>
         </ol>
       </div>
@@ -2504,7 +2501,7 @@ body[data-view="contact"] .cf-wrap{min-height:calc(100vh - var(--hdr-h,73px))}
       <div><h5>Ressources</h5><ul><li><a href="#fiches">Fiches CEE</a></li><li><a href="#journal">Le Journal</a></li></ul></div>
       <div><h5>LSF Énergie</h5><ul><li><a href="tel:+33183756588">01 83 75 65 88</a></li><li><a href="mailto:partenaires@lsf-energie.fr">partenaires@lsf-energie.fr</a></li><li><span>58 avenue de Wagram<br>75017 Paris</span></li><li><a href="https://calendly.com/equipe_partenaires_lsf_energie/parler-a-un-ingenieur" data-calendly>Prendre rendez-vous →</a></li></ul></div>
     </div>
-    <div class="base"><span>© 2026 LSF Energie SAS</span><span>Maquette de travail, contenus à valider</span></div>
+    <div class="base"><span>© 2026 LSF Energie SAS</span></div>
   </div>
 </footer>
 
@@ -2878,8 +2875,8 @@ const FAQ_COMMON=[
 const FAQ_OBL=[];
 const FLOW={
  obl:{eb:"Comment ça se passe",h:"4 étapes. <em>Des volumes défendables.</em>",lead:"Un ingénieur dédié vous accompagne de bout en bout. On commence par un lot témoin : vous jugez la qualité avant de vous engager.",tags:["Cadrage","Lot témoin","Livraison","Espace obligé"],steps:[["Cadrage de vos besoins","Volumes, secteurs, calendrier de dépôt : votre ingénieur d'affaires dédié construit le plan avec vous."],["Un lot témoin à auditer","Un échantillon de dossiers, contrôlés par IA et relus par un ingénieur. Vous auditez avant tout engagement."],["Livraison continue","Les dossiers, relus un par un par nos ingénieurs, arrivent au fil de l'eau, documentés pour le contrôle du PNCEE."],["Votre espace obligé","Volumes engagés et validés, conformité, dossiers en cours : tout se suit en temps réel. Et votre ingénieur dédié pour en parler."]],cta2:["Voir nos produits","#produits"]},
- pre:{eb:"Comment ça se passe",h:"4 étapes. <em>Votre projet financé.</em>",lead:"Vous envoyez le projet, nous revenons sous 48 h avec les fiches et le montant. À votre nom.",tags:["Envoi","48 h","Intégration","Suivi"],steps:[["Envoyez le projet","Plans, CCTP, gammes ou simple descriptif : votre ingénieur d'affaires dédié prend le relais."],["Étude d'éligibilité sous 48 h","Fiche par fiche : conditions techniques et montant CEE estimé."],["Le financement dans votre offre","Vous intégrez le montant à votre étude ou à votre argumentaire. Votre client voit son vrai reste à charge."],["Suivi jusqu'au versement","Chaque projet suivi dans votre dashboard, dossier monté dans Pipeline et relu par un ingénieur."]],cta2:["Voir nos produits","#produits"]},
- ben:{eb:"Comment ça se passe",h:"4 étapes. <em>Vos travaux financés.</em>",lead:"Vous connaissez le montant CEE avant de signer. Puis on suit tout jusqu'au versement.",tags:["Votre projet","48 h","Avant signature","Versement"],steps:[["Présentez votre projet","Bâtiments, travaux envisagés : votre ingénieur d'affaires dédié vous rappelle."],["Étude chiffrée sous 48 h","Les fiches qui s'appliquent et le montant CEE estimé, avant toute décision."],["L'offre CEE avant la signature","Des installateurs RGE du réseau, l'offre CEE remise avant votre engagement : la condition pour que la prime soit versée."],["Versement suivi en temps réel","Chaque dossier dans votre dashboard, contrôlé par IA et relu par un ingénieur, jusqu'au versement."]],cta2:["Voir nos produits","#produits"]}
+ pre:{eb:"Comment ça se passe",h:"4 étapes. <em>De l'étude au versement.</em>",lead:"Vous envoyez le projet, nous revenons sous 48 h avec les fiches et le montant. À votre nom.",tags:["Envoi","48 h","Intégration","Suivi"],steps:[["Envoyez le projet","Plans, CCTP, gammes ou simple descriptif : votre ingénieur d'affaires dédié prend le relais."],["Étude d'éligibilité sous 48 h","Fiche par fiche : conditions techniques et montant CEE estimé."],["Le financement dans votre offre","Vous intégrez le montant à votre étude ou à votre argumentaire. Votre client voit son vrai reste à charge."],["Suivi jusqu'au versement","Chaque projet suivi dans votre dashboard, dossier monté dans Pipeline et relu par un ingénieur."]],cta2:["Voir nos produits","#produits"]},
+ ben:{eb:"Comment ça se passe",h:"4 étapes. <em>Du projet au versement.</em>",lead:"Vous connaissez le montant CEE avant de signer. Puis on suit tout jusqu'au versement.",tags:["Votre projet","48 h","Avant signature","Versement"],steps:[["Présentez votre projet","Bâtiments, travaux envisagés : votre ingénieur d'affaires dédié vous rappelle."],["Étude chiffrée sous 48 h","Les fiches qui s'appliquent et le montant CEE estimé, avant toute décision."],["L'offre CEE avant la signature","Des installateurs RGE du réseau, l'offre CEE remise avant votre engagement : la condition pour que la prime soit versée."],["Versement suivi en temps réel","Chaque dossier dans votre dashboard, contrôlé par IA et relu par un ingénieur, jusqu'au versement."]],cta2:["Voir nos produits","#produits"]}
 };
 function flowHTML(f){return `<section class="partner2" id="devenir-partenaire"><div class="wrap p2-grid">
  <div class="p2-left"><div class="p2-stick">
@@ -3039,14 +3036,14 @@ function renderSolution(page){
  $('#sol-body').innerHTML=`${k==='obl'?OBLTRUST:''}
  <section class="blk deep proofband"><div class="wrap"><div class="pb-head"><span class="eyebrow">${p.code} · ${p.eb}</span><h2>${p.h}</h2><p class="lead">${p.lead}</p></div>
  <div class="pb-grid">${p.pains.map(x=>`<div class="pb"><span class="pb-l">${p.pl||'Avant'}</span><s class="pb-was">${x[0]}</s><b class="pb-now">${x[1]}</b><p>${x[2]}</p></div>`).join('')}</div></div></section>
- ${k==='obl'?'':`<section class="qstrip"><div class="wrap"><span class="qs-b"><b>300+</b> points contrôlés par IA</span><span class="qs-plus">+</span><span class="qs-b"><b>100 %</b> relus par un ingénieur</span><span class="qs-plus">+</span><span class="qs-b"><b>1</b> interlocuteur dédié</span><span class="qs-plus">+</span><span class="qs-b"><b>1</b> dashboard de suivi en temps réel</span></div></section>`}
+
  ${k==='obl'?OBLSEC:''}
  ${FEX[k]?fexHTML(k):subs}
  ${k!=='obl'?GUICHET:''}
 ${k==='rge'?PIPEBAND+PARTNER:k==='obl'?OBLACC:flowHTML(FLOW[p.fam])}
  <section class="blk sol-faq"><div class="wrap sf-grid"><div class="blk-head"><span class="eyebrow">Questions fréquentes</span><h2>Ce qu'on <em>nous demande.</em></h2></div>
  <div class="faq">${(k==='obl'?FAQ_OBL:FAQ_COMMON).concat(p.faq).map((f,i)=>`<details${i?'':' open'}><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join('')}</div></div></section>
- ${rel.length&&k!=='obl'?`<section class="blk"><div class="wrap"><div class="blk-head"><span class="eyebrow">À lire</span><h2>Dans le Journal.</h2></div><div class="posts">${rel.map(card).join('')}</div></div></section>`:''}
+ ${false?`<section class="blk"><div class="wrap"><div class="blk-head"><span class="eyebrow">À lire</span><h2>Dans le Journal.</h2></div><div class="posts">${rel.map(card).join('')}</div></div></section>`:''}
  <section class="blk cta-end"><div class="wrap cta-band"><h2>${({ins:"Un dossier en cours ? Faites-le relire par un ingénieur.",obl:"Des volumes à sécuriser ? Parlons de votre objectif.",pre:"Un projet à financer ? Envoyez-le-nous.",ben:"Des travaux en vue ? Chiffrons vos CEE."})[p.fam]}</h2><a class="btn btn-cta" href="#contact">Parler à un ingénieur <span class="arr">→</span></a></div></section>`;
  $('#hero-crumb').innerHTML=`<a href="#accueil">Accueil</a> / Vous êtes / ${p.eb.split(',')[0]}`;
  armSteps();armPartner();armObl();armGuichet();
@@ -3062,7 +3059,7 @@ const LIVE=["Devis","Offre CEE","Signature","Travaux","Facture","Attestation","R
 const PARTNER=`<section class="partner2" id="devenir-partenaire"><div class="wrap p2-grid">
  <div class="p2-left"><div class="p2-stick">
   <span class="eyebrow">Devenir partenaire</span>
-  <h2>4 étapes. <em>Payé à J+5.</em></h2>
+  <h2>4 étapes. <em>Autonome dès le deuxième dossier.</em></h2>
   <p class="p2-lead">Le premier dossier, on le monte ensemble. Dès le deuxième, vous êtes autonome.</p>
   <div class="p2-prog" aria-hidden="true"><b id="p2-cur">01</b><span>/ 04</span><div class="p2-bar"><i id="p2-bar"></i></div></div>
   <p class="p2-zero">0 abonnement · 0 engagement</p>
@@ -3406,7 +3403,7 @@ route();hdrTone();setTimeout(armPerso,80);
 <script>
 /* mobile : cartes horizontales + points de position */
 (function(){
- const mq=matchMedia('(max-width:760px)');const SEL=['#stages','.qb-grid','.pb-grid','.p2-steps','.oc-steps','.oacc-l'];
+ const mq=matchMedia('(max-width:760px)');const SEL=['#stages','.qb-grid','.pb-grid','.p2-steps','.oc-steps','.oacc-l','.gu-l','.fex-grid'];
  function setup(){document.querySelectorAll(SEL.join(',')).forEach(el=>{
   if(!mq.matches){el.classList.remove('m-swipe');el.nextElementSibling&&el.nextElementSibling.classList.contains('m-dots')&&el.nextElementSibling.remove();return}
   el.classList.add('m-swipe');
