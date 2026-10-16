@@ -1978,6 +1978,32 @@ body[data-view="contact"] .cf-wrap{min-height:calc(100vh - var(--hdr-h,73px))}
 .otr-logos img{max-width:320px;justify-self:center}
 .otr-logos.in img[alt^="Esso"]{transform:none}
 .otr-logos{grid-template-columns:1.2fr 1fr 1fr}
+/* guichet unique */
+.gu{background:#fff;padding-block:clamp(72px,9vw,120px);border-top:1px solid var(--line)}
+.gu-head{display:grid;gap:14px;max-width:900px;margin-bottom:clamp(32px,5vw,56px)}
+.gu-head .eyebrow{color:var(--brand)}
+.gu-head h2{font-size:clamp(34px,4.8vw,66px);font-weight:900;letter-spacing:-.055em;line-height:.97;color:var(--ink)}
+.gu-head h2 em{font-style:normal;color:var(--brand)}
+.gu-plan{background:#0C2A28;color:var(--on-deep);border-radius:22px;padding:clamp(20px,3vw,32px);display:grid;gap:16px}
+.gu-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.gu-top span{font:600 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--on-deep-2)}
+.gu-top b{font-size:clamp(20px,2.2vw,28px);font-weight:800;letter-spacing:-.03em;color:var(--sable)}
+.gu-bar{display:flex;height:clamp(72px,8vw,96px);border-radius:14px;overflow:hidden;background:rgba(240,238,233,.08)}
+.gu-bar i{font-style:normal;width:0;flex:none;display:grid;align-content:center;gap:2px;padding-inline:14px;overflow:hidden;white-space:nowrap;transition:width 1s cubic-bezier(.7,0,.2,1)}
+.gu-bar.in i{width:var(--w)}
+.gu-bar.in i.a{transition-delay:.35s}.gu-bar.in i.k{transition-delay:.7s}
+.gu-bar i em{font-style:normal;font:600 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;opacity:.85}
+.gu-bar i b{font-size:clamp(16px,1.8vw,22px);font-weight:800;letter-spacing:-.02em}
+.gu-bar i.c{background:var(--cta);color:#fff}.gu-bar i.a{background:#E9C7A8;color:#123B3A}.gu-bar i.k{background:#2E7D6B;color:#fff}
+.gu-note{margin:0;font-size:15px;color:var(--on-deep-2)}.gu-note span{font:600 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;opacity:.7;margin-left:6px}
+.gu-l{list-style:none;margin:clamp(24px,4vw,40px) 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.gu-l li{display:grid;gap:8px;align-content:start;padding-top:16px;border-top:2px solid var(--ink)}
+.gu-l code{font:700 12px var(--mono);color:var(--brand)}
+.gu-l b{font-size:20px;font-weight:800;letter-spacing:-.03em;color:var(--ink)}
+.gu-l span{font-size:15px;line-height:1.5;color:var(--ink-2)}
+@media (max-width:900px){.gu-l{grid-template-columns:1fr 1fr;row-gap:24px}}
+@media (max-width:600px){.gu-bar{flex-direction:column;height:auto}.gu-bar i{width:100%!important;height:0;padding-block:0;transition:height .8s cubic-bezier(.7,0,.2,1),padding .8s}.gu-bar.in i{height:64px;padding-block:10px}.gu-l{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.gu-bar i{width:var(--w);transition:none}}
 </style>
 </head>
 <body>
@@ -2988,6 +3014,23 @@ function armObl(){const sec=document.getElementById('conformite-obliges');if(!se
  if(matchMedia('(max-width:760px)').matches){window.__mswipe&&setTimeout(window.__mswipe,60);return}
  if(!('IntersectionObserver' in window)){set(steps.length-1);return}
  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)set(+e.target.dataset.i)}),{rootMargin:'-45% 0px -45% 0px'});steps.forEach(x=>io.observe(x))}
+const GUICHET=`<section class="gu" id="guichet-unique"><div class="wrap">
+ <div class="gu-head"><span class="eyebrow">Guichet unique</span><h2>On ne vend pas une prime. <em>On débloque le financement complet du projet.</em></h2></div>
+ <div class="gu-plan" aria-label="Exemple illustratif d'un plan de financement">
+  <div class="gu-top"><span>Exemple · rénovation de 120 000 €</span><b>Projet financé</b></div>
+  <div class="gu-bar"><i class="c" style="--w:38%"><em>Prime CEE</em><b>46 000 €</b></i><i class="a" style="--w:24%"><em>Aides publiques</em><b>28 000 €</b></i><i class="k" style="--w:38%"><em>Crédit</em><b>46 000 €</b></i></div>
+  <p class="gu-note">Avance de fonds : les travaux démarrent sans attendre le versement. <span>Exemple illustratif.</span></p>
+ </div>
+ <ol class="gu-l">
+  <li><code>01</code><b>Avance de fonds</b><span>Lancez les travaux sans attendre le versement de la prime.</span></li>
+  <li><code>02</code><b>Prime CEE</b><span>Notre cœur de métier, sécurisée et validée par nos ingénieurs.</span></li>
+  <li><code>03</code><b>Crédit et financement</b><span>Des solutions pour couvrir le reste à charge.</span></li>
+  <li><code>04</code><b>Aides publiques</b><span>MaPrimeRénov', aides locales, dispositifs sectoriels : cumulés au mieux de vos droits.</span></li>
+ </ol>
+</div></section>`;
+function armGuichet(){const sec=document.getElementById('guichet-unique');if(!sec)return;const bar=sec.querySelector('.gu-bar');bar.classList.remove('in');
+ if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){bar.classList.add('in');return}
+ const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){bar.classList.add('in');io.disconnect()}},{threshold:.5});io.observe(bar)}
 function renderSolution(page){
  const p=PAGES[page],k=SOLKEY[page];
  const subs=p.sub?`<section class="blk" style="padding-bottom:0"><div class="wrap"><div class="blk-head"><span class="eyebrow">Trois profils</span><h2>Votre situation, <em>vos fiches.</em></h2></div><div class="subseg">${p.sub.map(s=>`<article><span class="eyebrow">${s[1]}</span><h3>${s[0]}</h3><ul>${s[2].map(x=>`<li>${x}</li>`).join('')}</ul><code>${s[3]}</code></article>`).join('')}</div></div></section>`:'';
@@ -2999,13 +3042,14 @@ function renderSolution(page){
  ${k==='obl'?'':`<section class="qstrip"><div class="wrap"><span class="qs-b"><b>300+</b> points contrôlés par IA</span><span class="qs-plus">+</span><span class="qs-b"><b>100 %</b> relus par un ingénieur</span><span class="qs-plus">+</span><span class="qs-b"><b>1</b> interlocuteur dédié</span><span class="qs-plus">+</span><span class="qs-b"><b>1</b> dashboard de suivi en temps réel</span></div></section>`}
  ${k==='obl'?OBLSEC:''}
  ${FEX[k]?fexHTML(k):subs}
+ ${k!=='obl'?GUICHET:''}
 ${k==='rge'?PIPEBAND+PARTNER:k==='obl'?OBLACC:flowHTML(FLOW[p.fam])}
  <section class="blk sol-faq"><div class="wrap sf-grid"><div class="blk-head"><span class="eyebrow">Questions fréquentes</span><h2>Ce qu'on <em>nous demande.</em></h2></div>
  <div class="faq">${(k==='obl'?FAQ_OBL:FAQ_COMMON).concat(p.faq).map((f,i)=>`<details${i?'':' open'}><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join('')}</div></div></section>
  ${rel.length&&k!=='obl'?`<section class="blk"><div class="wrap"><div class="blk-head"><span class="eyebrow">À lire</span><h2>Dans le Journal.</h2></div><div class="posts">${rel.map(card).join('')}</div></div></section>`:''}
  <section class="blk cta-end"><div class="wrap cta-band"><h2>${({ins:"Un dossier en cours ? Faites-le relire par un ingénieur.",obl:"Des volumes à sécuriser ? Parlons de votre objectif.",pre:"Un projet à financer ? Envoyez-le-nous.",ben:"Des travaux en vue ? Chiffrons vos CEE."})[p.fam]}</h2><a class="btn btn-cta" href="#contact">Parler à un ingénieur <span class="arr">→</span></a></div></section>`;
  $('#hero-crumb').innerHTML=`<a href="#accueil">Accueil</a> / Vous êtes / ${p.eb.split(',')[0]}`;
- armSteps();armPartner();armObl();
+ armSteps();armPartner();armObl();armGuichet();
 }
 function armPartner(){const sec=document.getElementById('devenir-partenaire');if(!sec)return;const items=[...sec.querySelectorAll('.p2-step')];
  const set=i=>{items.forEach((x,k)=>{x.classList.toggle('on',k===i);x.classList.toggle('past',k<i)});const c=document.getElementById('p2-cur');if(c)c.textContent='0'+(i+1);const b=document.getElementById('p2-bar');if(b)b.style.width=((i+1)/items.length*100)+'%'};
